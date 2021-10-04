@@ -226,8 +226,33 @@ class Pages extends BaseController
 		// dd($userlain);
 			echo view('Pages/ProfileUserLain', $data);
 		}
-
-
+	}
+	public function SettingProfile()
+	{
+		$data = [
+			'title' => 'Profile',
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		 // dd($data['kategori']);
+		echo view('Pages/Setting/Profile', $data);
+	}
+	public function SettingAkun()
+	{
+		$data = [
+			'title' => 'Akun',
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		 // dd($data['kategori']);
+		echo view('Pages/Setting/Akun', $data);
+	}
+	public function SettingPassword()
+	{
+		$data = [
+			'title' => 'Password',
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		 // dd($data['kategori']);
+		echo view('Pages/Setting/Password', $data);
 	}
 	public function Toko()
   {

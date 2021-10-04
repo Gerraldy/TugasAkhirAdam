@@ -91,7 +91,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                               <a class="dropdown-item" href="<?= base_url('/public/Pages/MyProfile') ?>">Profil</a>
-                              <a class="dropdown-item" id="setting" href="#">Settings</a>
+                              <a class="dropdown-item" id="setting" href="<?=base_url('/public/Pages/SettingProfile') ?>">Akun</a>
                               <a class="dropdown-item" href="<?= base_url('/public/Auth/Logout') ?>">Logout</a>
                             </div>
                           </li>
@@ -315,17 +315,6 @@
                   $("#art").kendoButton();
                   $("#meme").click(function(){
                     $("#modal-create-meme").modal("show");
-                  });
-                  $("#setting").click(function(){
-                    $("#modal-setting-profile").modal("show");
-                  });
-                  $("#edit-akun").click(function(){
-                    $("#modal-setting-profile").modal("hide");
-                    $("#modal-edit-akun").modal("show");
-                  });
-                  $("#btncancel").click(function(){
-                    $("#modal-edit-akun").modal("hide");
-                    $("#modal-setting-profile").modal("show");
                   });
 
                   $("#tgl-lahir").kendoDatePicker();
