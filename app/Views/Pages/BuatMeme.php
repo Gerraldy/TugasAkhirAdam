@@ -31,16 +31,21 @@
     </div>
   </div>
   <div class="row mt-3">
-    <div class="col-6">
-      <div class="">
-        <canvas id="canvas" style="border:1px solid #000000; min-height: 400px;width:100%"></canvas>
+    <div class="col-7">
+      <div class="" style="">
+        <canvas id="myCanvas" style="">
+
+        </canvas>
+        <div id="draggable" class="ui-widget-content" style="width: 150px; height: 150px; padding: 0.5px;">
+          <p>Drag me around</p>
+        </div>
       </div>
     </div>
-    <div class="col-6">
+    <div class="col-5">
       <div class="">
         <button id="subscribe" class="subscribe k-button w-100">SUBSCRIBE</button>
-
-        <button id="upload" class="upload k-button w-100 mt-2" >Upload Meme</button>
+        <input type="file" class="w-100" id="upload" accept = "image/*" >
+        <!-- <button id="upload" type="file" accept="image/*" class="upload k-button w-100 mt-2" >Upload Meme</button> -->
 
         <div class="mt-2">
            <div id="carousel">
@@ -79,7 +84,7 @@
             <div class="slide">
                 <img src="<?=base_url('/public/Gambar/memepolos/drake.jpg') ?>"/>
             </div>
-            
+
             <div class="slide">
                 <img src="<?=base_url('/public/Gambar/memepolos/drake.jpg') ?>"/>
             </div>
@@ -94,7 +99,7 @@
               <img src="<?= base_url('public/gambar/gearhitam.png') ?>" class="img-fluid" style="width:10%">
             </div>
             <div class="col-12">
-              <input id="kata1" class="kata" style="width: 70%;" />
+              <input id="kata2" class="kata" style="width: 70%;" />
               <input type="color" id="palette-picker2" style="width:10%" value="#cc2222" data-role="colorpicker" data-palette="basic">
               <img src="<?= base_url('public/gambar/gearhitam.png') ?>" class="img-fluid" style="width:10%">
             </div>
@@ -123,8 +128,41 @@
   </div>
 </div>
 <script>
-    $(document).ready(function () {
+$( function() {
+  $( "#draggable" ).draggable();
+  $( "#draggable" ).resizable();
+} );
+  let imgInput = document.getElementById('upload');
+  imgInput.addEventListener('change', function(e) {
+    if(e.target.files) {
+      let imageFile = e.target.files[0]; //here we get the image file
+      var reader = new FileReader();
+      reader.readAsDataURL(imageFile);
+      reader.onloadend = function (e) {
+        var myImage = new Image(); // Creates image object
+        myImage.src = e.target.result; // Assigns converted image to image object
+        myImage.onload = function(ev) {
+          var myCanvas = document.getElementById("myCanvas"); // Creates a canvas object
+          var myContext = myCanvas.getContext("2d"); // Creates a contect object
+         // myImage.width = myCanvas.width; // Assigns image's width to canvas
+          // myImage.height = myCanvas.height; // Assigns image's height to canvas
 
-    });
+          if (myImage.width > 550) {
+            myImage.width = 550;
+          }
+          myCanvas.height = myImage.height;
+          myCanvas.width = myImage.width;
+
+
+          // var scale = Math.min(myCanvas.width / myImage.width, myCanvas.height / myImage.height);
+          // var x = (myCanvas.width / 2) - (myImage.width / 2) * scale;
+          // var y = (myCanvas.height / 2) - (myImage.height / 2) * scale;
+
+          myContext.drawImage(myImage, 0,0, myImage.width, myImage.height); // Draws the image on canvas
+          let imgData = myCanvas.toDataURL("image/jpeg",1.0); // Assigns image base64 string in jpeg format to a variable
+        }
+      }
+    }
+  });
 </script>
 <?= $this->endSection();  ?>

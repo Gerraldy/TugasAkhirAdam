@@ -10,6 +10,7 @@ use CodeIgniter\Model;
 use App\Models\UnlikeModel;
 use App\Models\LikeModel;
 use App\Models\KomentarModel;
+use App\Models\SavePostinganModel;
 
 use App\Models\TokoModel;
 use App\Models\TokoKategoriModel;
@@ -23,6 +24,7 @@ class Pages extends BaseController
 	protected $UnlikeModel;
 	protected $LikeModel;
 	protected $KomentarModel;
+	protected $SavePostinganModel;
 
 	protected $TokoModel;
 	protected $TokoKategoriModel;
@@ -36,6 +38,7 @@ class Pages extends BaseController
 		$this->UnlikeModel = new UnlikeModel();
 		$this->LikeModel = new LikeModel();
 		$this->KomentarModel = new KomentarModel();
+		$this->SavePostinganModel = new SavePostinganModel();
 
 		$this->TokoModel = new TokoModel();
 		$this->TokoKategoriModel = new TokoKategoriModel();
@@ -105,7 +108,20 @@ class Pages extends BaseController
 		];
 		 // dd($data["slug"]);
 		echo view('Pages/Komentar', $data);
+	}
 
+	public function SavePost()
+	{
+		$iduser = session()->get("user");
+		$slug = $this->request->getGet("slug");
+		$postingan = $this->PostModel->where("slug", $slug)->first();
+
+		$post['ID_Postingan'] = $postingan['ID_Postingan'];
+		$post['ID_Memers'] = $iduser;
+
+		$this->SavePostinganModel->save($post);
+		//dd($post);
+		return redirect()->to(base_url('public/'));
 	}
 
 	public function PostKategori()
@@ -265,7 +281,10 @@ class Pages extends BaseController
     echo view('Pages/Toko', $data);
   }
 
-
+	public function percobaan()
+	{
+		echo view('Pages/percobaan');
+	}
 
 	//--------------------------------------------------------------------
 

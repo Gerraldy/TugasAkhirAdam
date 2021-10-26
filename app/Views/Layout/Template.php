@@ -15,6 +15,7 @@
     <link href="<?=base_url('public/css/styles.css')?>" rel="stylesheet" />
     <script src="<?= base_url('public/js/jquery.magnific-popup.js') ?>"></script>
     <script src="<?= base_url('public/js/scripts.js') ?>"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 
     <!-- <script src="https://kendo.cdn.telerik.com/2021.1.119/js/jquery.min.js"></script> -->
     <script src="https://kendo.cdn.telerik.com/2021.1.119/js/kendo.all.min.js"></script>
@@ -91,7 +92,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                               <a class="dropdown-item" href="<?= base_url('/public/Pages/MyProfile') ?>">Profil</a>
-                              <a class="dropdown-item" id="setting" href="<?=base_url('/public/Pages/SettingProfile') ?>">Akun</a>
+                              <a class="dropdown-item" id="setting" href="<?=base_url('/public/Pages/SettingProfile') ?>">Setting</a>
                               <a class="dropdown-item" href="<?= base_url('/public/Auth/Logout') ?>">Logout</a>
                             </div>
                           </li>

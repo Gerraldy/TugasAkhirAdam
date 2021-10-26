@@ -18,16 +18,13 @@
 
 <div class="container" style="max-width:800px; margin:auto">
   <div class="row">
-      <div class="col-12" style="">
+      <div class="col-10" style="">
         <text style="font-size:12px; color:grey"><?= $namaKategori['Nama_Kategori'] ?></text>
         <div class="col-12" style="">
           <h4><?=$slug['Judul'] ?></h4>
           <div class="" style="">
             <div class=" section-foto" style="position:relative;">
               <img src="<?= base_url('public/uploads/gambar_post/'.$slug['Nama_Gambar']) ?>" class="img-fluid">
-              <div class="section-btn-dropdown" style="">
-                <button class="option btn btn-block">. . . </button>
-              </div>
             </div>
             <div class="" style="">
               <div class="container-button-like" style="display:inline-block">
@@ -71,6 +68,13 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="pt-5" style="">
+        <button class="k-button btn btn-block">Save</button>
+        <button class="k-button btn btn-block">Lapor</button>
+        <button class="k-button btn btn-block">Tidak Masuk Akal</button>
       </div>
     </div>
   </div>

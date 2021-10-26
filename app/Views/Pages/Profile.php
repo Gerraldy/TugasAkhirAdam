@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 
-<div class="container"  style="margin:auto">
+<div class="container" style="margin:auto">
   <div class="row">
     <div class="col-1">
       <img src="<?= base_url('public/gambar/profile.png') ?>" style="height:75px;weight:50px;">
@@ -20,17 +20,17 @@
   </div>
   <div class="row" style="position:relative; top:10px">
     <div class="col-1">
-      <button class="k-button" id="home" name="button" style="width:70px">Home</button>
+      <button class="k-button" id="showHome" name="button" style="width:70px">Home</button>
     </div>
     <div class="col-1">
-      <button class="k-button" id="post" name="button" style="width:70px">Post</button>
+      <button onclick="HideDiv()" class="k-button" id="showPost" name="button" style="width:70px">Post</button>
     </div>
     <div class="col-10">
-      <button class="k-button" id="save" name="button" style="width:70px">Save</button>
+      <button class="k-button" id="showSave" name="button" style="width:70px">Save</button>
     </div>
   </div>
   <hr style="height:3px;color:black;background-color:black">
-  <div class="row">
+  <div class="row" id="home">
     <div class="col">
       <div class="" style="height:250px">
         <div class="container" style="max-width:800px; margin:auto">
@@ -85,7 +85,7 @@
               </div>
             </div>
             <hr>
-          <?php endforeach; ?>
+            <?php endforeach; ?>
           </div>
       </div>
     </div>
@@ -94,6 +94,16 @@
 
 <script>
     $(document).ready(function () {
+      $("#showPost").click(function(){
+        $("#home").hide();
+      });
+      $("#showHome").click(function(){
+        $("#home").show();
+      });
+      $("#showSave").click(function(){
+        $("#home").hide();
+      });
+
       $(".btn-dislike").click(function(){
         let id_post = $(this).data("id");
         let t = $(this);

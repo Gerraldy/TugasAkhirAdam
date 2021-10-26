@@ -17,15 +17,12 @@
 <div class="container" style="max-width:800px; margin:auto">
   <?php foreach($postingan as $p) : ?>
   <div class="row">
-      <div class="col-12" style="">
+      <div class="col-10" style="">
         <text style="font-size:12px; color:grey"><?= $p['Nama_Kategori'] ?></text>
         <div class="col-12" style="">
           <h4><b><?= $p['Judul'] ?></b></h4>
           <div class="section-foto" style="position:relative;">
             <img src="<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>" class="img-fluid">
-            <div class=" section-btn-dropdown" style="">
-              <button class="option btn btn-block">. . . </button>
-            </div>
           </div>
           <br>
           <div class="section-button-like" style="">
@@ -64,13 +61,19 @@
           </div>
         </div>
       </div>
+      <div class="col-2">
+        <div class="pt-5" style="">
+          <a href="<?= base_url('public/Pages/SavePost?slug='.$p['Slug']) ?>"><button class="k-button btn btn-block">Save</button></a>
+          <button class="k-button btn btn-block">Lapor</button>
+          <button class="k-button btn btn-block">Tidak Masuk Akal</button>
+        </div>
+      </div>
     </div>
     <hr>
   <?php endforeach; ?>
   </div>
 <script>
     $(document).ready(function () {
-      $(".option").kendoButton();
       $(".like").kendoButton();
       $(".dislike").kendoButton();
       $(".comment").kendoButton();
