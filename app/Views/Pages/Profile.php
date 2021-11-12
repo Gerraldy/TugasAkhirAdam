@@ -90,18 +90,82 @@
       </div>
     </div>
   </div>
+
+  <div class="row" id="save">
+    <div class="col">
+      <div class="" style="height:250px">
+        <div class="container" style="max-width:800px; margin:auto">
+          <?php foreach($savepost as $p) : ?>
+          <div class="row">
+              <div class="col-12" style="">
+                <text style="font-size:12px; color:grey"><?= $p['Nama_Kategori']?></text>
+                <div class="col-12" style="">
+                  <h4><b><?= $p['Judul'] ?></b></h4>
+                  <div class="section-foto" style="position:relative;">
+                    <img src="<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>" class="img-fluid">
+                    <div class=" section-btn-dropdown" style="">
+                      <button class="option btn btn-block">. . . </button>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="section-button-like" style="">
+                    <div class="container-button-like" style="display:inline-block">
+                        <button class="btn-like btn btn-block" data-id=<?= $p['ID_Postingan'] ?>>
+                          <?php if (!isset($p["Like"])): ?>
+                            <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
+                          <?php else: ?>
+                            <img src="<?= base_url('public/gambar/sudahlike.png') ?>" style="height:20px;weight:20px;">
+                          <?php endif; ?>
+                          <text>
+                            <?= $p['Suka'] ?>
+                          </text>
+                        </button>
+                    </div>
+                    <div class="container-button-dislike" style="display:inline-block">
+                        <button id="" class="btn btn-block btn-dislike" data-id=<?= $p['ID_Postingan'] ?>>
+                          <?php if (!isset($p["Dislike"])): ?>
+                            <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
+                          <?php else: ?>
+                            <img src="<?= base_url('public/gambar/sudahdislike.jpg') ?>" style="height:20px;weight:20px;">
+                          <?php endif; ?>
+                          <text>
+                            <?= $p['Tidak_Suka'] ?>
+                          </text>
+                        </button>
+
+                    </div>
+                    <div class="" style="display:inline-block">
+                      <a href="<?= base_url('public/Pages/Komentar?slug='.$p['Slug']."&id_kategori=".$p['ID_Kategori']."&id_postingan=".$p['ID_Postingan'])?>">
+                        <button class="comment btn btn-block">
+                          <img src="<?= base_url('public/gambar/komentarhitam.png') ?>" style="height:20px;weight:20px;">
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <?php endforeach; ?>
+          </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
     $(document).ready(function () {
+      $('#save').css('display', 'none');
       $("#showPost").click(function(){
         $("#home").hide();
       });
       $("#showHome").click(function(){
         $("#home").show();
+        $("#save").hide();
       });
       $("#showSave").click(function(){
         $("#home").hide();
+        $("#save").show();
       });
 
       $(".btn-dislike").click(function(){

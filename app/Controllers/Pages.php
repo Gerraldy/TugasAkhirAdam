@@ -192,6 +192,7 @@ class Pages extends BaseController
 		$unlike = $this->UnlikeModel->findAll();
 		$like = $this->LikeModel->findAll();
 		$postingan = $this->PostModel->getPostProfile($id);
+		$savepost = $this->SavePostinganModel->getSavePost($id);
 		for ($i=0; $i < count($postingan); $i++) {
 			// echo "a";
 			foreach ($unlike as $key) {
@@ -209,10 +210,11 @@ class Pages extends BaseController
 			'title' => "Profile!",
 			'profile' => $user,
 			'postingan' => $postingan,
+			'savepost' => $savepost,
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
 
-		// dd($data['postingan']);
+	//	 dd($data['savepost']);
     echo view('Pages/Profile', $data);
   }
 	public function Profile()
