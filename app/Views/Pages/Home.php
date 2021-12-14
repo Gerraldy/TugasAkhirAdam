@@ -14,7 +14,36 @@
     right:0;
   }
 </style>
-<div class="container" style="max-width:800px; margin:auto">
+<div class="container p-2" style="max-width:800px; margin:auto">
+  <div class="m-2 p-3 " style="background-color:grey">
+    <div class="row">
+      <div class="col-3">
+        <form class="" id="formSearch" action="index.html" method="get">
+          <input id="search" class="k-textbox nav-link" style="width:100%; display:inline-block" placeholder="Cari Meme Disini!">
+        </form>
+      </div>
+      <div class="col-3">
+        <a class="nav-link" href="<?= base_url('/public/Pages/Topic1') ?>" style="color:white"><img src="<?= base_url('public/gambar/virus.png')?>" style="height:20px;weight:20px;">Covid19</a>
+      </div>
+      <div class="col-2">
+        <a class="nav-link" href="<?= base_url('/public/Pages/Topic2') ?>" style="color:white"><img src="<?= base_url('public/gambar/pemerintah.png')?>" style="height:20px;weight:20px;">Chat</a>
+      </div>
+      <div class="col-2">
+        <a class="nav-link" href="<?= base_url('/public/Pages/Topic3') ?>" style="color:white"><img src="<?= base_url('public/gambar/vaksin.png')?>" style="height:20px;weight:20px;">Vaksin</a>
+      </div>
+      <div class="col-2">
+        <a class="nav-link" href="<?= base_url('/public/Pages/Topic4') ?>" style="color:white"><img src="<?= base_url('public/gambar/kopi.png')?>" style="height:20px;weight:20px;">Cafe</a>
+      </div>
+    </div>
+
+  </div>
+  <div class="w3-content w3-display-container" style="max-width:1000px">
+    <img class="mySlides w3-animate-fading" src="<?= base_url('/public/gambar/anime.jpg')?>" style="width:100%">
+    <img class="mySlides w3-animate-fading" src="<?= base_url('/public/gambar/cafe.jpg')?>" style="width:100%">
+    <img class="mySlides w3-animate-fading" src="<?= base_url('/public/gambar/startup.jpg')?>" style="width:100%">
+    <img class="mySlides w3-animate-fading" src="<?= base_url('/public/gambar/pemerintah.jpg')?>" style="width:100%">
+  </div>
+  <hr>
   <?php foreach($postingan as $p) : ?>
   <div class="row">
       <div class="col-10" style="">
@@ -134,6 +163,38 @@
         });
       });
     });
+
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+      var i;
+      var x = document.getElementsByClassName("mySlides");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      myIndex++;
+      if (myIndex > x.length) {myIndex = 1}
+      x[myIndex-1].style.display = "block";
+      setTimeout(carousel, 7000); // Change image every 2 seconds
+    }
+
+    var data = [
+              "ngakak",
+              "game",
+              "anime",
+              "hewan",
+              "sport",
+              "jodoh",
+              "art"
+          ];
+          $("#search").keypress(function(){
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+              if(keycode == '13'){
+                  $("#formSearch")[0].submit();
+                  alert();
+              }
+          });
 </script>
 
 <?= $this->endSection();  ?>

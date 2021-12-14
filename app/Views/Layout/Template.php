@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="<?= base_url('public/kendoStyle/kendo.common.min.css'); ?>" >
     <link rel="stylesheet" href="<?= base_url('public/kendoStyle/kendo.default.min.css'); ?>" >
     <link rel="stylesheet" href="<?= base_url('public/css/magnific-popup.css'); ?>" >
+    <link rel="stylesheet" href="<?= base_url('public/css/w3.css'); ?>">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -27,6 +29,21 @@
             document.write(decodeURIComponent('%3Cscript src="/path/to/local/kendo.all.min.js" %3E%3C/script%3E'));
 
         }
+
+        $( function() {
+            var tag = [
+              "ngakak",
+              "game",
+              "anime",
+              "hewan",
+              "sport",
+              "jodoh",
+              "art"
+            ];
+            $( "#search" ).autocomplete({
+              source: tag
+            });
+          } );
     </script>
     <title><?=$title ?></title>
   </head>
@@ -52,7 +69,7 @@
                <div class="sidebar-heading border-bottom bg-light">Kategori</div>
                <div class="list-group list-group-flush" style="">
                  <?php foreach ($kategori as $k): ?>
-                   <a class="list-group-item list-group-item-action list-group-item-light p-3" href="<?=base_url('/public/Pages/getPostKategori/'.$k['ID_Kategori']) ?>"><?=$k['Nama_Kategori']?> <img src="<?= base_url('public/gambar/'.$k['url_gambar']) ?>" style="height:20px;weight:20px;"></a>
+                   <a class="list-group-item list-group-item-action list-group-item-light p-1" href="<?=base_url('/public/Pages/getPostKategori/'.$k['ID_Kategori']) ?>"><img src="<?= base_url('public/gambar/'.$k['url_gambar']) ?>" style="height:20px;weight:20px;"> <?=$k['Nama_Kategori']?> </a>
                  <?php endforeach; ?>
 
                    <!-- <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a> -->
@@ -61,34 +78,23 @@
            <!-- Page content wrapper-->
            <div id="page-content-wrapper">
                <!-- Top navigation-->
-               <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+               <nav class="navbar navbar-expand-lg navbar-light bg-dark border-bottom p-5" style="background-color:blue">
                  <div class="container-fluid">
                    <div class="navbar-collapse">
                      <button class="btn navbar-nav" style="margin-right:10px" id="sidebarToggle">=</button>
                      <a class="navbar-nav" href="<?= base_url('/public') ?>">
-                       <img src="<?= base_url('/public/gambar/Logo.png') ?>" alt="Avatar" class="avatar" style="width: 125px; border-radius: 10%;"></a>
-                     <div class="navbar-nav mx-4">
-                       <a class="nav-link" href="<?= base_url('/public/Pages/Topic1') ?>">Covid19</a>
-                       <a class="nav-link" href="<?= base_url('/public/Pages/Topic2') ?>">Pemerintah</a>
-                       <a class="nav-link" href="<?= base_url('/public/Pages/Topic3') ?>">Vaksin</a>
-                       <a class="nav-link" href="<?= base_url('/public/Pages/Topic4') ?>">Cafe</a>
-                     </div>
+                       <img src="<?= base_url('/public/gambar/Logo.png') ?>" alt="Avatar" class="avatar" style="width: 150px; border-radius: 10%;"></a>
                    </div>
                     <div class="row">
                       <div class="collapse navbar-collapse navbar-nav" style="width:500px">
-                        <form class="" id="formSearch" action="index.html" method="get">
-                          <input id="search" class="k-textbox nav-link" style="width:100%; display:inline-block" placeholder="Cari Meme Disini!">
-                        </form>
-
-
-                        <a href="<?= base_url('/public/Pages/Toko') ?>" class="mx-2"><img src="<?= base_url('public/gambar/kantong.png') ?>" style="height:30px;weight:30px;"></a>
-                        <img src="<?= base_url('public/gambar/moon.png') ?>" class="mx-2" style="height:20px;weight:20px;padding-left:10px">
-                        <img src="<?= base_url('public/gambar/notif.png') ?>" class="mx-2" style="height:25px;weight:25px;padding-left:10px">
-                        <img src="<?= base_url('public/gambar/meme.png') ?>" id="meme" style="height:25px;weight:35px;padding-left:10px">
+                        <a href="<?= base_url('/public/Pages/Toko') ?>" class="mx-2"><img src="<?= base_url('public/gambar/kantong.png') ?>" style="height:30px;weight:30px; background-color:white; border-radius:10%"></a>
+                        <img src="<?= base_url('public/gambar/moon.png') ?>" class="mx-2" style="height:30px;weight:30px;padding-left:0px; background-color:white; border-radius:10%">
+                        <img src="<?= base_url('public/gambar/notif.png') ?>" class="mx-2" style="height:30px;weight:30px;padding-left:0px; background-color:white; border-radius:10%">
+                        <img src="<?= base_url('public/gambar/meme.png') ?>" class="mx-2" id="meme" style="height:30px;weight:30px;padding-left:0px; background-color:white; border-radius:10%">
                         <?php if (session()->get('user') != null): ?>
                           <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <img src="<?= base_url('public/gambar/profile.png') ?>" style="height:25px;weight:25px;padding-left:10px">
+                            <a class="nav-link dropdown-toggle mx-2" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <img src="<?= base_url('public/gambar/profile.png') ?>" style="height:30px;weight:30px;padding-left:0px; background-color:white; border-radius:10%">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                               <a class="dropdown-item" href="<?= base_url('/public/Pages/MyProfile') ?>">Profil</a>
@@ -110,14 +116,15 @@
                      <?= $this->renderSection('content'); ?>
                    </div>
                    <div class="col-2">
-                       <div class="" style="position: fixed; top: 55px; width: 150px;height: 320px; right: 0px;background-color:#555">
+                       <!-- <div class="" style="position: fixed; top: 55px; width: 150px;height: 320px; right: 0px;background-color:#555">
                          <h2>IKLAN</h2>
-                       </div>
+                       </div> -->
                    </div>
                  </div>
                </div>
            </div>
        </div>
+
 
 <!-- Modal Upload MEME -->
 <div class="modal fade" id="modal-create-meme" role="dialog">

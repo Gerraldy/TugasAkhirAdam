@@ -42,9 +42,9 @@
                   <h4><b><?= $p['Judul'] ?></b></h4>
                   <div class="section-foto" style="position:relative;">
                     <img src="<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>" class="img-fluid">
-                    <div class=" section-btn-dropdown" style="">
+                    <!-- <div class=" section-btn-dropdown" style="">
                       <button class="option btn btn-block">. . . </button>
-                    </div>
+                    </div> -->
                   </div>
                   <br>
                   <div class="section-button-like" style="">
@@ -103,9 +103,9 @@
                   <h4><b><?= $p['Judul'] ?></b></h4>
                   <div class="section-foto" style="position:relative;">
                     <img src="<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>" class="img-fluid">
-                    <div class=" section-btn-dropdown" style="">
+                    <!-- <div class=" section-btn-dropdown" style="">
                       <button class="option btn btn-block">. . . </button>
-                    </div>
+                    </div> -->
                   </div>
                   <br>
                   <div class="section-button-like" style="">
