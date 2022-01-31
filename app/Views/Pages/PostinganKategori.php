@@ -18,7 +18,7 @@
   <?php foreach($postinganKategori as $p) : ?>
   <div class="row">
       <div class="col-12" style="">
-        <text style="font-size:12px; color:grey"><?= $nama_kategori['Nama_Kategori'] ?></text>
+        <text style="font-size:12px; color:grey"></text>
         <div class="col-12" style="">
           <h4><b><?= $p['Judul'] ?></b></h4>
           <div class="section-foto" style="position:relative;">

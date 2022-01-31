@@ -15,11 +15,11 @@
   }
 </style>
 <div class="container p-2" style="max-width:800px; margin:auto">
-  <div class="m-2 p-3 " style="background-color:grey">
+  <div class="m-2 p-3 " style="background-color:#696969">
     <div class="row">
       <div class="col-3">
-        <form class="" id="formSearch" action="index.html" method="get">
-          <input id="search" class="k-textbox nav-link" style="width:100%; display:inline-block" placeholder="Cari Meme Disini!">
+        <form class="" id="formSearch" action="<?= base_url('/public/Pages/Cari') ?>" method="get">
+          <input id="search" name="cari" class="k-textbox nav-link" style="width:100%; display:inline-block" placeholder="Cari Meme Disini!">
         </form>
       </div>
       <div class="col-3">
@@ -186,7 +186,8 @@
               "hewan",
               "sport",
               "jodoh",
-              "art"
+              "art",
+              "NSFW"
           ];
           $("#search").keypress(function(){
             var keycode = (event.keyCode ? event.keyCode : event.which);

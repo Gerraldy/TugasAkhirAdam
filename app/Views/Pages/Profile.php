@@ -158,6 +158,7 @@
       $('#save').css('display', 'none');
       $("#showPost").click(function(){
         $("#home").hide();
+        $("#save").hide();
       });
       $("#showHome").click(function(){
         $("#home").show();

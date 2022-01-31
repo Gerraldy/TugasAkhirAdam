@@ -91,6 +91,21 @@ class Pages extends BaseController
 		//dd($data['postinganKategori']);
 		echo view('Pages/PostinganKategori', $data);
 	}
+
+	public function Cari()
+	{
+		$cari = $this->request->getGet('cari');
+		$idkategori = $this->KategoriModel->select("ID_Kategori")->where("Nama_Kategori",$cari)->first();
+		$data = [
+			'title' => $cari,
+			'postinganKategori' => $this->PostModel->getPostKategori($idkategori),
+		  //'nama_kategori' => $this->PostModel->getNamaKategori($idkategori),
+		  'kategori' => $this->KategoriModel->namaKategori()
+		];
+	//	dd($data['postinganKategori']);
+		echo view('Pages/PostinganKategori', $data);
+	}
+
 	public function Komentar()
 	{
 		$slug = $this->request->getGet("slug");
@@ -223,6 +238,7 @@ class Pages extends BaseController
 		$getuser = $this->MemersModel->where("Nama", $namauser)->first();
 		$iduser = $getuser['ID_Memers'];
 		$user = session()->get("user");
+		$savepost = $this->SavePostinganModel->getSavePost($iduser);
 		if ($iduser == $user) {
 			$id = session()->get('user');
 			$user = $this->MemersModel->where('ID_Memers',$id)->first();
@@ -230,15 +246,18 @@ class Pages extends BaseController
 				'title' => "Profile!",
 				'profile' => $user,
 				'postingan' => $this->PostModel->getPostProfile($id),
+				'savepost' => $savepost,
 				'kategori' => $this->KategoriModel->namaKategori()
 			];
 	    echo view('Pages/Profile', $data);
 		}else {
 			$userlain = $this->MemersModel->where('ID_Memers', $iduser)->first();
+			$savepost = $this->SavePostinganModel->getSavePost($iduser);
 			$data = [
 				'title' => $namauser." - MemeTube",
 				'kategori' => $this->KategoriModel->namaKategori(),
 				'postingan' => $this->PostModel->getPostProfile($iduser),
+				'savepost' => $savepost,
 				'profile' => $userlain
 			];
 		// dd($userlain);

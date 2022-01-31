@@ -38,7 +38,8 @@
               "hewan",
               "sport",
               "jodoh",
-              "art"
+              "art",
+              "NSFW"
             ];
             $( "#search" ).autocomplete({
               source: tag
