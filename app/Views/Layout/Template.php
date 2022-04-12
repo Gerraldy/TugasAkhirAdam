@@ -10,10 +10,17 @@
     <link rel="stylesheet" href="<?= base_url('public/kendoStyle/kendo.default.min.css'); ?>" >
     <link rel="stylesheet" href="<?= base_url('public/css/magnific-popup.css'); ?>" >
     <link rel="stylesheet" href="<?= base_url('public/css/w3.css'); ?>">
+    <link href="<?=base_url('public/css/jquery-ui.min.css')?>" rel="stylesheet" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+
+    <link href="<?=base_url('public/navbar/css/styles.css') ?>" rel="stylesheet" />
+    <script src="<?=base_url('public/navbar/js/scripts.js') ?>"></script>
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script src="<?= base_url('public/js/bootstrap.min.js') ?>"></script>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
     <link href="<?=base_url('public/css/styles.css')?>" rel="stylesheet" />
     <script src="<?= base_url('public/js/jquery.magnific-popup.js') ?>"></script>
     <script src="<?= base_url('public/js/scripts.js') ?>"></script>
@@ -64,25 +71,23 @@
             padding-bottom: 1em;
         }
     </style>
-    <div class="d-flex" id="wrapper" style="">
+    <!-- d-flex -->
+    <div class="" id="wrapper" style="">
            <!-- Sidebar-->
-           <div class="border-end bg-white" id="sidebar-wrapper" style="">
+           <!-- <div class="border-end bg-white" id="sidebar-wrapper" style="">
                <div class="sidebar-heading border-bottom bg-light">Kategori</div>
                <div class="list-group list-group-flush" style="">
                  <?php foreach ($kategori as $k): ?>
                    <a class="list-group-item list-group-item-action list-group-item-light p-1" href="<?=base_url('/public/Pages/getPostKategori/'.$k['ID_Kategori']) ?>"><img src="<?= base_url('public/gambar/'.$k['url_gambar']) ?>" style="height:20px;weight:20px;"> <?=$k['Nama_Kategori']?> </a>
                  <?php endforeach; ?>
-
-                   <!-- <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a> -->
                </div>
-           </div>
+           </div> -->
            <!-- Page content wrapper-->
            <div id="page-content-wrapper">
                <!-- Top navigation-->
-               <nav class="navbar navbar-expand-lg navbar-light bg-dark border-bottom p-5" style="background-color:blue">
-                 <div class="container-fluid">
+               <!-- <nav class="navbar navbar-expand-lg navbar-light bg-dark border-bottom p-1" style="background-color:blue;">
+                 <div class="container-fluid" style="">
                    <div class="navbar-collapse">
-                     <button class="btn navbar-nav" style="margin-right:10px" id="sidebarToggle">=</button>
                      <a class="navbar-nav" href="<?= base_url('/public') ?>">
                        <img src="<?= base_url('/public/gambar/Logo.png') ?>" alt="Avatar" class="avatar" style="width: 150px; border-radius: 10%;"></a>
                    </div>
@@ -99,6 +104,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                               <a class="dropdown-item" href="<?= base_url('/public/Pages/MyProfile') ?>">Profil</a>
+                              <a class="dropdown-item" href="#">Tokoku</a>
                               <a class="dropdown-item" id="setting" href="<?=base_url('/public/Pages/SettingProfile') ?>">Setting</a>
                               <a class="dropdown-item" href="<?= base_url('/public/Auth/Logout') ?>">Logout</a>
                             </div>
@@ -109,17 +115,58 @@
                       </div>
                     </div>
                  </div>
+               </nav> -->
+
+               <nav class="navbar navbar-expand-lg navbar-dark fixed-top p-1" id="mainNav">
+                   <div class="container">
+                     <a class="navbar-nav" href="<?= base_url('/public') ?>">
+                       <img src="<?= base_url('/public/gambar/Logo.png') ?>" alt="Avatar" class="avatar" style="width: 150px; border-radius: 10%;"></a>
+                       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                           Menu
+                           <i class="fas fa-bars ms-1"></i>
+                       </button>
+                       <div class="collapse navbar-collapse" id="navbarResponsive">
+                           <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                               <li class="nav-item"><a href="<?= base_url('/public/Pages/Toko') ?>" class="nav-link">TOKO</a></li>
+                               <li class="nav-item"><a class="nav-link" href="#" id="meme">BUAT MEME</a></li>
+                               <?php if (session()->get('user') != null): ?>
+                                 <li class="nav-item dropdown">
+                                   <a class="nav-link dropdown-toggle mx-2" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                     AKUN
+                                   </a>
+                                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                     <a class="dropdown-item" href="<?= base_url('/public/Pages/MyProfile') ?>">Profil</a>
+                                     <a class="dropdown-item" href="#">Tokoku</a>
+                                     <a class="dropdown-item" id="setting" href="<?=base_url('/public/Pages/SettingProfile') ?>">Setting</a>
+                                     <a class="dropdown-item" href="<?= base_url('/public/Auth/Logout') ?>">Logout</a>
+                                   </div>
+                                 </li>
+                               <?php else: ?>
+                                 <a href="<?= base_url('/public/Pages/Login') ?>" class="mx-2" style="text-decoration:none"><button id="gologin" class="k-button" style="padding: 3px 10px;;">Login</button></a>
+                               <?php endif; ?>
+                           </ul>
+                       </div>
+
+                   </div>
                </nav>
+
                <!-- Page content-->
-               <div class="container-fluid">
+               <div class="container-fluid pt-5" style="margin:auto; background-color:black">
                  <div class="row">
-                   <div class="col-10">
+                   <div class="col-2">
+                     <div class="" style="position:fixed; width:auto">
+                       <?php foreach ($kategori as $k): ?>
+                         <a class="list-group-item list-group-item-light" href="<?=base_url('/public/Pages/getPostKategori/'.$k['ID_Kategori']) ?>" style="margin:auto; height:100%"><img src="<?= base_url('public/gambar/'.$k['url_gambar']) ?>" style="height:20px;weight:20px;"> <?=$k['Nama_Kategori']?> </a>
+                       <?php endforeach; ?>
+                     </div>
+
+                   </div>
+                   <div class="col-8" style="">
                      <?= $this->renderSection('content'); ?>
                    </div>
                    <div class="col-2">
-                       <!-- <div class="" style="position: fixed; top: 55px; width: 150px;height: 320px; right: 0px;background-color:#555">
                          <h2>IKLAN</h2>
-                       </div> -->
+
                    </div>
                  </div>
                </div>

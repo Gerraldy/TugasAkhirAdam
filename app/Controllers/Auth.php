@@ -4,13 +4,16 @@ namespace App\Controllers;
 
 use App\Models\MemersModel;
 
+
 class Auth extends BaseController
 {
   protected $MemersModel;
 
+
   public function __construct()
   {
     $this->MemersModel = new MemersModel();
+
   }
 
   public function register()
@@ -63,6 +66,11 @@ class Auth extends BaseController
       ]);
       //dd($user['Username']);
       return redirect()->to(base_url('public/'));
+    }elseif ($email=='admin' && $password=='admin') {
+
+
+      //dd($data['laporanpost']);
+       echo view('Pages/Admin/AdminDashboard');
     }else {
       $session->setFlashdata('gagal-masuk',"1");
       return redirect()->to(base_url('public/Auth/Login'));

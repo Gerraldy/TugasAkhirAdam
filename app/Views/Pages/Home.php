@@ -14,8 +14,8 @@
     right:0;
   }
 </style>
-<div class="container p-2" style="max-width:800px; margin:auto">
-  <div class="m-2 p-3 " style="background-color:#696969">
+<div class="container" style="max-width:800px; margin:auto">
+  <div class="m-2 p-3 " style="background-color:">
     <div class="row">
       <div class="col-3">
         <form class="" id="formSearch" action="<?= base_url('/public/Pages/Cari') ?>" method="get">
@@ -38,10 +38,11 @@
 
   </div>
   <div class="w3-content w3-display-container" style="max-width:1000px">
-    <img class="mySlides w3-animate-fading" src="<?= base_url('/public/gambar/anime.jpg')?>" style="width:100%">
-    <img class="mySlides w3-animate-fading" src="<?= base_url('/public/gambar/cafe.jpg')?>" style="width:100%">
-    <img class="mySlides w3-animate-fading" src="<?= base_url('/public/gambar/startup.jpg')?>" style="width:100%">
-    <img class="mySlides w3-animate-fading" src="<?= base_url('/public/gambar/pemerintah.jpg')?>" style="width:100%">
+    <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[0]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[0]['Nama_Gambar']) ?>" style="width:100%"></a>
+    <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[1]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[1]['Nama_Gambar']) ?>" style="width:100%"></a>
+  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[2]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[2]['Nama_Gambar']) ?>" style="width:100%"></a>
+  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[3]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[3]['Nama_Gambar']) ?>" style="width:100%"></a>
+  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[4]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[4]['Nama_Gambar']) ?>" style="width:100%"></a>
   </div>
   <hr>
   <?php foreach($postingan as $p) : ?>

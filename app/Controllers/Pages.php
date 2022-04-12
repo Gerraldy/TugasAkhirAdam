@@ -76,7 +76,7 @@ class Pages extends BaseController
       'postingan' => $postingan,
 			'kategori' => $this->KategoriModel->namaKategori()
  		 ];
-
+		 // dd($data['postingan']);
 		echo view('Pages/Home', $data);
 	}
 	public function getPostKategori($idKategoriPost)
@@ -300,6 +300,29 @@ class Pages extends BaseController
 		];
 		// dd($data['toko_kategori']);
     echo view('Pages/Toko', $data);
+  }
+
+	public function TokoHome()
+  {
+		$data = [
+			'title' => "Home!",
+			'toko_kategori' => $this->TokoKategoriModel->namaKategoriToko(),
+			'toko_produk' => "hehe",
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		// dd($data['toko_kategori']);
+    echo view('Pages/TokoHome', $data);
+  }
+
+	public function TokoUser()
+  {
+		$data = [
+			'title' => "Tokoku!",
+			'toko_kategori' => $this->TokoKategoriModel->namaKategoriToko(),
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		// dd($data['toko_kategori']);
+    echo view('Pages/TokoUser', $data);
   }
 
 	public function percobaan()

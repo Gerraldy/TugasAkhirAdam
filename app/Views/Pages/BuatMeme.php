@@ -32,13 +32,17 @@
   </div>
   <div class="row mt-3">
     <div class="col-7">
+      <div id="meme-bg-target">
+          <!-- <img src="default.jpg" id="img-meme-bg" class="img-meme-bg" /> -->
+          <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>" id="img-meme-bg" class="img-meme-bg" />
+      </div>
       <div class="" style="">
         <canvas id="myCanvas" style="">
 
         </canvas>
-        <div id="draggable" class="ui-widget-content" style="width: 150px; height: 150px; padding: 0.5px;">
+        <!-- <div id="draggable" class="ui-widget-content" style="width: 150px; height: 150px; padding: 0.5px;">
           <p>Drag me around</p>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="col-5">
@@ -46,47 +50,31 @@
         <button id="subscribe" class="subscribe k-button w-100">SUBSCRIBE</button>
         <input type="file" class="w-100" id="upload" accept = "image/*" >
         <!-- <button id="upload" type="file" accept="image/*" class="upload k-button w-100 mt-2" >Upload Meme</button> -->
-
+        <input type="button" name="add_text" value="Add Text" class="btn-add" onClick="createTextArea()" />
         <div class="mt-2">
            <div id="carousel">
             <div class="slide">
-                <img src="<?=base_url('/public/Gambar/memepolos/drake.jpg') ?>"/>
+                <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>"/>
             </div>
 
             <div class="slide">
-                <img src="<?=base_url('/public/Gambar/memepolos/drake.jpg') ?>"/>
+                <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>"/>
             </div>
 
             <div class="slide">
-                <img src="<?=base_url('/public/Gambar/memepolos/drake.jpg') ?>"/>
+                <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>"/>
             </div>
 
             <div class="slide">
-                <img src="<?=base_url('/public/Gambar/memepolos/drake.jpg') ?>"/>
+                <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>"/>
             </div>
 
             <div class="slide">
-                <img src="<?=base_url('/public/Gambar/memepolos/drake.jpg') ?>"/>
+                <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>"/>
             </div>
 
             <div class="slide">
-                <img src="<?=base_url('/public/Gambar/memepolos/drake.jpg') ?>"/>
-            </div>
-
-            <div class="slide">
-                <img src="<?=base_url('/public/Gambar/memepolos/drake.jpg') ?>"/>
-            </div>
-
-            <div class="slide">
-                <img src="<?=base_url('/public/Gambar/memepolos/drake.jpg') ?>"/>
-            </div>
-
-            <div class="slide">
-                <img src="<?=base_url('/public/Gambar/memepolos/drake.jpg') ?>"/>
-            </div>
-
-            <div class="slide">
-                <img src="<?=base_url('/public/Gambar/memepolos/drake.jpg') ?>"/>
+                <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>"/>
             </div>
         </div>
         </div>
@@ -132,6 +120,13 @@ $( function() {
   $( "#draggable" ).draggable();
   $( "#draggable" ).resizable();
 } );
+  function createTextArea()
+    {
+    	var txtAreaHTML = "<div contentEditable='true' class='meme-txt-area'></div>";
+    	$("#meme-bg-target").append(txtAreaHTML);
+    	$(".meme-txt-area").draggable();
+    	$(".meme-txt-area").focus();
+    }
   let imgInput = document.getElementById('upload');
   imgInput.addEventListener('change', function(e) {
     if(e.target.files) {
