@@ -59,19 +59,19 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
+                <a class="nav-link" href="<?=base_url('/public/Admin/TabelPost')?>">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Laporan Postingan</span></a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="<?=base_url('/public/Admin/TabelAkun')?>">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Laporan Akun</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="<?=base_url('/public/Admin/TabelToko')?>">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Laporan Toko</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Laporan Postingan</span></a>
             </li>
 
             <!-- Divider -->

@@ -6,12 +6,12 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Laporan Akun</h1>
+    <h1 class="h3 mb-2 text-gray-800">Laporan Toko</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Laporan Akun</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Laporan Toko</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -20,7 +20,7 @@
                         <tr>
                             <th>Nomor Laporan</th>
                             <th>ID Pelapor</th>
-                            <th>ID Pelanggar</th>
+                            <th>ID Toko</th>
                             <th>Alasan</th>
                             <th>Action</th>
                         </tr>
@@ -34,11 +34,11 @@
                         </tr>
                     </tfoot> -->
                     <tbody>
-                      <?php foreach ($laporanakun as $l): ?>
+                      <?php foreach ($laporantoko as $l): ?>
                         <tr>
-                            <td><?=$l['ID_Laporan_Akun'] ?></td>
-                            <td><?=$l['ID_Akun_Pelapor'] ?></td>
-                            <td><?=$l['ID_Pelanggar'] ?></td>
+                            <td><?=$l['ID_Laporan_Toko'] ?></td>
+                            <td><?=$l['ID_Memers'] ?></td>
+                            <td><?=$l['ID_Toko'] ?></td>
                             <td><?=$l['Alasan'] ?></td>
                             <td><a href="#"><button class="btn btn-danger btn-circle"> <i class="fas fa-exclamation-triangle"></i> </button> </a? </td>
                         </tr>
