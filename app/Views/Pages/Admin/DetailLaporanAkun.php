@@ -6,12 +6,12 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Laporan Toko</h1>
+    <h1 class="h3 mb-2 text-gray-800">Laporan Akun</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Laporan Toko</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Laporan Postingan</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -20,7 +20,7 @@
                         <tr>
                             <th>Nomor Laporan</th>
                             <th>ID Pelapor</th>
-                            <th>ID Toko</th>
+                            <th>ID Postingan</th>
                             <th>Alasan</th>
                             <th>Action</th>
                         </tr>
@@ -34,15 +34,21 @@
                         </tr>
                     </tfoot> -->
                     <tbody>
-                      <?php foreach ($laporantoko as $l): ?>
-                        <tr>
-                            <td><?=$l['ID_Laporan_Toko'] ?></td>
-                            <td><?=$l['ID_Memers'] ?></td>
-                            <td><?=$l['ID_Toko'] ?></td>
-                            <td><?=$l['Alasan'] ?></td>
-                            <td><a href="<?=base_url('public/Admin/DetailLaporanToko?idtoko='.$l['ID_Toko']) ?>"><button class="btn btn-danger btn-circle"> <i class="fas fa-exclamation-triangle"></i> </button> </a? </td>
-                        </tr>
-                        <?php endforeach; ?>
+
+                          <tr>
+                            <td><?=$detailakun['ID_Memers'] ?></td>
+                            <td><?=$detailakun['Email'] ?></td>
+                            <td><?=$detailakun['Username'] ?></td>
+                            <td><?=$detailakun['url_foto'] ?></td>
+                              <td>
+                                <form class="" action="<?=base_url('public/Admin/HapusAkun?idakun='.$detailakun['ID_Memers']) ?>" method="post">
+                                  <?= csrf_field(); ?>
+                                  <input type="hidden" name="_method" value="DELETE">
+                                  <button class="btn btn-danger btn-circle"> <i class="fas fa-exclamation-triangle"></i></button>
+                                </form>
+                              </td>
+                          </tr>
+
                     </tbody>
                 </table>
             </div>

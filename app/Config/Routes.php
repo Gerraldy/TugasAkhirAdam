@@ -31,8 +31,8 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Pages::index');
-
-$routes->get('/komentar/(:segment)', 'Pages::komentar/$1');
+$routes->delete('/HapusPostingan/(:num)', 'Admin::HapusPostingan/$1');
+$routes->get('/komentar/(:any)', 'Pages::komentar/$1');
 
 /**
  * --------------------------------------------------------------------

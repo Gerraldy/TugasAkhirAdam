@@ -40,7 +40,7 @@
                             <td><?=$l['ID_Akun_Pelapor'] ?></td>
                             <td><?=$l['ID_Pelanggar'] ?></td>
                             <td><?=$l['Alasan'] ?></td>
-                            <td><a href="#"><button class="btn btn-danger btn-circle"> <i class="fas fa-exclamation-triangle"></i> </button> </a? </td>
+                            <td><a href="<?=base_url('public/Admin/DetailLaporanAkun?idakun='.$l['ID_Pelanggar']) ?>"><button class="btn btn-danger btn-circle"> <i class="fas fa-exclamation-triangle"></i> </button> </a? </td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

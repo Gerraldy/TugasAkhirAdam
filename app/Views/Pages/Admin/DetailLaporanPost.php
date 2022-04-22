@@ -18,10 +18,10 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Nomor Laporan</th>
-                            <th>ID Pelapor</th>
-                            <th>ID Postingan</th>
-                            <th>Alasan</th>
+                            <th>Gambar</th>
+                            <th>Judul</th>
+                            <th>ID</th>
+                            <th>Username</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -34,15 +34,21 @@
                         </tr>
                     </tfoot> -->
                     <tbody>
-                      <?php foreach ($laporanpost as $l): ?>
-                        <tr>
-                            <td><?=$l['ID_Laporan_Post'] ?></td>
-                            <td><?=$l['ID_Memers'] ?></td>
-                            <td><?=$l['ID_Postingan'] ?></td>
-                            <td><?=$l['Alasan'] ?></td>
-                            <td><a href="<?=base_url('public/Admin/DetailLaporanPostingan?idpost='.$l['ID_Postingan']) ?>"><button class="btn btn-danger btn-circle"> <i class="fas fa-exclamation-triangle"></i> </button> </a? </td>
-                        </tr>
-                        <?php endforeach; ?>
+
+                          <tr>
+                              <td><img src="<?= base_url('public/uploads/gambar_post/'.$detailpost['Nama_Gambar']) ?>" class="img-fluid" style="width:30%; height:30%"></td>
+                              <td><?=$detailpost['Judul'] ?></td>
+                              <td><?=$detailpost['ID_Memers'] ?></td>
+                              <td><?=$detailpost['Username'] ?></td>
+                              <td>
+                                <form class="" action="<?=base_url('public/Admin/HapusPostingan?idpost='.$detailpost['ID_Postingan']) ?>" method="post">
+                                  <?= csrf_field(); ?>
+                                  <input type="hidden" name="_method" value="DELETE">
+                                  <button class="btn btn-danger btn-circle"> <i class="fas fa-exclamation-triangle"></i></button>
+                                </form>
+                              </td>
+                          </tr>
+
                     </tbody>
                 </table>
             </div>

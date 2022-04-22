@@ -18,10 +18,9 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Nomor Laporan</th>
-                            <th>ID Pelapor</th>
                             <th>ID Toko</th>
-                            <th>Alasan</th>
+                            <th>Nama Toko</th>
+                            <th>ID Postingan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -34,15 +33,20 @@
                         </tr>
                     </tfoot> -->
                     <tbody>
-                      <?php foreach ($laporantoko as $l): ?>
-                        <tr>
-                            <td><?=$l['ID_Laporan_Toko'] ?></td>
-                            <td><?=$l['ID_Memers'] ?></td>
-                            <td><?=$l['ID_Toko'] ?></td>
-                            <td><?=$l['Alasan'] ?></td>
-                            <td><a href="<?=base_url('public/Admin/DetailLaporanToko?idtoko='.$l['ID_Toko']) ?>"><button class="btn btn-danger btn-circle"> <i class="fas fa-exclamation-triangle"></i> </button> </a? </td>
-                        </tr>
-                        <?php endforeach; ?>
+
+                          <tr>
+                              <td><?=$detailtoko['ID_Toko'] ?></td>
+                              <td><?=$detailtoko['Nama_Toko'] ?></td>
+                              <td><?=$detailtoko['Kontak'] ?></td>
+                              <td>
+                                <form class="" action="<?=base_url('public/Admin/HapusPostingan?idpost='.$detailtoko['ID_Toko']) ?>" method="post">
+                                  <?= csrf_field(); ?>
+                                  <input type="hidden" name="_method" value="DELETE">
+                                  <button class="btn btn-danger btn-circle"> <i class="fas fa-exclamation-triangle"></i></button>
+                                </form>
+                              </td>
+                          </tr>
+
                     </tbody>
                 </table>
             </div>
