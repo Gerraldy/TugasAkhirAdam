@@ -2,15 +2,18 @@
 namespace App\Controllers;
 
 use App\Models\UploadModal;
+use App\Models\MemersModel;
 
 class Upload extends BaseController
 {
 
   protected $UploadModel;
+  protected $MemersModel;
 
   public function __construct()
   {
     $this->UploadModal = new UploadModal();
+    $this->MemersModel = new MemersModel();
   }
 
 	public function upload()
@@ -19,6 +22,7 @@ class Upload extends BaseController
     $id_user = $session->get("user");
     $file = $this->request->getFile('Nama_Gambar');
     $fileName = $file->getRandomName();
+    $username = $this->MemersModel->select("Username")->where("ID_Memers", $id_user)->first();
 
 		$file->move('uploads/gambar_post/', $fileName);
     $slug = url_title($this->request->getVar('Judul'), '-', true);
@@ -26,7 +30,7 @@ class Upload extends BaseController
     // dd($slug);
     $post['Nama_Gambar'] = $fileName;
     $post['ID_Memers'] = $id_user;
-    $post['Username'] = "Wawaw";
+    $post['Username'] = $username;
     $post['Slug'] = $slug;
     $post['Suka'] = "0";
     $post['Tidak_Suka'] = "0";
@@ -37,7 +41,7 @@ class Upload extends BaseController
     }
     // $post["URL"] = 'amkdsaksdpo';
     // dd($post);
-   $this->UploadModal->save($post);
+   //$this->UploadModal->save($post);
 
     //  $session->setFlashdata('sukses-registrasi',"1");
     return redirect()->to(base_url('public/'));

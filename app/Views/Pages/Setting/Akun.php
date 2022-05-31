@@ -22,14 +22,16 @@
   <br>
   <div class="row">
     <div class="col-12">
-      Username :   <input class="nama k-textbox" type="text" style="width:200px" name="nama" required><br>
-      Email :      <input class="nama k-textbox" type="text" style="width:200px" name="nama" required><br>
 
-      <!-- <form action="<?=base_url('public/Upload/upload') ?>" method="post" enctype="multipart/form-data">
 
-      </form> -->
+      <form action="<?=base_url('public/Pages/UpdateAkun') ?>" method="post" enctype="multipart/form-data">
+        <?= csrf_field(); ?>
+        Username :   <input class="nama k-textbox" type="text" style="width:200px" name="Username" required><br>
+        Email :      <input class="nama k-textbox" type="text" style="width:200px" name="Email" required><br>
+        <input type="submit" class="k-button" style="margin-top:20px" value="Simpan" id="btnsave" >
+      </form>
 
-      <input type="submit" class="k-button" style="margin-top:20px" value="Simpan" id="btnsave" >
+
       <input type="submit" class="k-button" style="margin-top:20px" value="Batal" id="btncancel" >
     </div>
   </div>

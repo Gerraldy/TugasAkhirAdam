@@ -32,6 +32,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Pages::index');
 $routes->delete('/HapusPostingan/(:num)', 'Admin::HapusPostingan/$1');
+$routes->add('/UpdateProfile/(:segment)', 'Pages::UpdateProfile/$1');
 $routes->get('/komentar/(:any)', 'Pages::komentar/$1');
 
 /**

@@ -264,6 +264,9 @@ class Pages extends BaseController
 			echo view('Pages/ProfileUserLain', $data);
 		}
 	}
+
+
+
 	public function SettingProfile()
 	{
 		$data = [
@@ -273,6 +276,25 @@ class Pages extends BaseController
 		 // dd($data['kategori']);
 		echo view('Pages/Setting/Profile', $data);
 	}
+	public function UpdateProfile()
+	{
+		$session = session();
+		$id_user = $session->get("user");
+		$file = $this->request->getFile('url_foto');
+		$fileName = $file->getRandomName();
+		$file->move('uploads/gambar_profile/', $fileName);
+		$post = $this->request->getVar();
+
+		$this->MemersModel->update($id_user, [
+			'Nama' => $post['Nama'],
+			'Tgl_Lahir' => $post['Tgl_Lahir'],
+			'Tentang' => $post['Tentang'],
+			'url_foto' => $fileName
+		]);
+		// dd($data);
+		return redirect()->to(base_url('public/Pages/SettingProfile'));
+	}
+
 	public function SettingAkun()
 	{
 		$data = [
@@ -282,6 +304,22 @@ class Pages extends BaseController
 		 // dd($data['kategori']);
 		echo view('Pages/Setting/Akun', $data);
 	}
+
+	public function UpdateAkun()
+	{
+		$session = session();
+		$id_user = $session->get("user");
+
+		$post = $this->request->getVar();
+		$this->MemersModel->update($id_user, [
+			'Username' => $post['Username'],
+			'Email' => $post['Email']
+		]);
+		//dd($post);
+		return redirect()->to(base_url('public/Pages/SettingAkun'));
+
+	}
+
 	public function SettingPassword()
 	{
 		$data = [
@@ -291,6 +329,20 @@ class Pages extends BaseController
 		 // dd($data['kategori']);
 		echo view('Pages/Setting/Password', $data);
 	}
+	public function UpdatePassword()
+	{
+		$session = session();
+		$id_user = $session->get("user");
+
+		$post = $this->request->getVar();
+		$this->MemersModel->update($id_user, ['Password' => $post['Password']
+		]);
+		//dd($post);
+		return redirect()->to(base_url('public/Pages/SettingAkun'));
+
+	}
+
+
 	public function Toko()
   {
 		$data = [

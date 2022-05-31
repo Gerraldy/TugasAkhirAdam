@@ -22,29 +22,20 @@
   <br>
   <div class="row">
     <div class="col-12">
-      <form action="<?=base_url('public/Upload/upload') ?>" method="post" enctype="multipart/form-data">
+      <form action="<?=base_url('public/Pages/UpdateProfile') ?>" method="post" enctype="multipart/form-data">
+        <?= csrf_field(); ?>
         <img src="<?= base_url('/public/gambar/profile.png')?>" href="<?= base_url('/public/gambar/profile.png')?>" data-upload="0" id="gambar-preview" alt="" style="width:80px; height:80px; object-fit: cover">
-        <input type="file" name="Nama_Gambar" class="" id="Nama_Gambar" onchange="readURL(this);">
+        <input type="file" name="url_foto" class="" id="url_foto" onchange="readURL(this);">
         <br>
         <br>
-         Nama :   <input class="nama k-textbox" type="text" style="width:200p" name="nama" required><br>
-         Jenis Kelamin :
-                         <ul class="fieldlist">
-                           <li>
-                             <input type="radio" name="JKelamin" id="jk" class="k-radio">
-                             <label class="k-radio-label" for="JK">Laki-laki</label>
-                           </li>
-                           <li>
-                             <input type="radio" name="JKelamin" id="jk" class="k-radio">
-                             <label class="k-radio-label" for="JK">Perempuan</label>
-                           </li>
-                        </ul><br>
-                        Tgl Lahir :
-                        <input id="tgl-lahir" value="10/10/2011" title="datepicker" />
+         Nama :   <input class="nama k-textbox" type="text" style="width:200p" name="Nama" required><br>
+         <br>
+        Tgl Lahir :
+                  <input id="tgl-lahir" value="10/10/2011" title="datepicker" name="Tgl_Lahir">
         <br>
         <br>
         Tentang :
-        <textarea id="judul" style="width: 50%;" required data-required-msg="Deskripsikan Tentangmu!!" name="Judul"></textarea>
+        <textarea id="Tentang" style="width: 50%;" required data-required-msg="Deskripsikan Tentangmu!!" name="Tentang"></textarea>
         <br>
         <input type="submit" class="k-button" style="margin-top:20px" value="Simpan" id="btnsave" >
         <input type="submit" class="k-button" style="margin-top:20px" value="Batal" id="btncancel" >
@@ -52,5 +43,27 @@
     </div>
   </div>
 </div>
+
+<script>
+function readURL(input) {
+if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        $('#gambar-preview')
+            .attr('src', e.target.result);
+        $('#gambar-preview')
+            .attr('href', e.target.result).data("upload","1");
+
+            $('#gambar-preview').magnificPopup({
+               type: 'image'
+               // other options
+             });
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+</script>
 
 <?= $this->endSection();  ?>

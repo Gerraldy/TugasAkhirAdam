@@ -22,15 +22,19 @@
   <br>
   <div class="row">
     <div class="col-12">
-      Password Baru:   <input class="nama k-textbox" type="text" style="width:200px" name="nama" required><br>
-      Konfirmasi :      <input class="nama k-textbox" type="text" style="width:200px" name="nama" required><br>
+      <form action="<?=base_url('public/Pages/UpdatePassword') ?>" method="post" enctype="multipart/form-data">
+      <?= csrf_field(); ?>
+        Password Baru:   <input class="nama k-textbox" type="text" style="width:200px" name="Password" required><br>
+        Konfirmasi :      <input class="nama k-textbox" type="text" style="width:200px" name="" required><br>
 
+        <input type="submit" class="k-button" style="margin-top:20px" value="Simpan" id="btnsave" >
+        <input type="submit" class="k-button" style="margin-top:20px" value="Batal" id="btncancel" >
+      </form>
       <!-- <form action="<?=base_url('public/Upload/upload') ?>" method="post" enctype="multipart/form-data">
 
       </form> -->
 
-      <input type="submit" class="k-button" style="margin-top:20px" value="Simpan" id="btnsave" >
-      <input type="submit" class="k-button" style="margin-top:20px" value="Batal" id="btncancel" >
+
     </div>
   </div>
 </div>
