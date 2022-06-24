@@ -37,12 +37,12 @@
     </div>
 
   </div>
-  <div class="w3-content w3-display-container" style="max-width:1000px">
-    <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[0]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[0]['Nama_Gambar']) ?>" style="width:100%"></a>
-    <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[1]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[1]['Nama_Gambar']) ?>" style="width:100%"></a>
-  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[2]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[2]['Nama_Gambar']) ?>" style="width:100%"></a>
-  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[3]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[3]['Nama_Gambar']) ?>" style="width:100%"></a>
-  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[4]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[4]['Nama_Gambar']) ?>" style="width:100%"></a>
+  <div class="w3-content w3-display-container" style="max-width:100%">
+    <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[0]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[0]['Nama_Gambar']) ?>" style="object-fit:cover;"></a>
+    <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[1]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[1]['Nama_Gambar']) ?>" style="object-fit:cover;"></a>
+  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[2]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[2]['Nama_Gambar']) ?>" style="object-fit:cover;"></a>
+  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[3]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[3]['Nama_Gambar']) ?>" style="object-fit:cover;"></a>
+  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[4]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[4]['Nama_Gambar']) ?>" style="object-fit:cover;"></a>
   </div>
   <hr>
   <?php foreach($postingan as $p) : ?>
@@ -94,7 +94,7 @@
       <div class="col-2">
         <div class="pt-5" style="">
           <a href="<?= base_url('public/Pages/SavePost?slug='.$p['Slug']) ?>"><button class="k-button btn btn-block">Save</button></a>
-          <button class="k-button btn btn-block">Lapor</button>
+          <a href="<?= base_url('public/Pages/LaporPost?slug='.$p['Slug']) ?>"><button class="k-button btn btn-block">Lapor</button></a>
           <button class="k-button btn btn-block">Tidak Masuk Akal</button>
         </div>
       </div>

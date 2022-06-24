@@ -15,6 +15,9 @@ use App\Models\SavePostinganModel;
 use App\Models\TokoModel;
 use App\Models\TokoKategoriModel;
 // use App\Models\TokoProdukModel;
+
+use App\Models\LaporanPostModel;
+
 class Pages extends BaseController
 {
 	protected $PostModel;
@@ -29,6 +32,9 @@ class Pages extends BaseController
 	protected $TokoModel;
 	protected $TokoKategoriModel;
 	// protected $TokoProdukModel;
+
+	protected $LaporanPostModel;
+
 	public function __construct()
 	{
 		$this->PostModel = new PostModel();
@@ -43,6 +49,9 @@ class Pages extends BaseController
 		$this->TokoModel = new TokoModel();
 		$this->TokoKategoriModel = new TokoKategoriModel();
 		// $this->TokoProdukModel = new TokoModel();
+
+		$this->LaporanPostModel = new LaporanPostModel();
+
 	}
 
 	public function index()
@@ -136,6 +145,34 @@ class Pages extends BaseController
 
 		$this->SavePostinganModel->save($post);
 		//dd($post);
+		return redirect()->to(base_url('public/'));
+	}
+
+	public function LaporPost()
+	{
+		$slug = $this->request->getGet("slug");
+		$postingan = $this->PostModel->where("slug", $slug)->first();
+		//dd($postingan);
+		$data =[
+			'postingan' => $postingan,
+			'title' => 'REPORT!',
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		echo view('Pages/LaporPost', $data);
+	}
+	public function LaporanPostingan()
+	{
+		$iduser = session()->get("user");
+		$slug = $this->request->getGet("slug");
+
+		$postingan = $this->PostModel->where("slug", $slug)->first();
+		$alasan = $this->request->getPost();
+
+		$post['ID_Postingan'] = $postingan['ID_Postingan'];
+		$post['ID_Memers'] = $iduser;
+		$post['Alasan'] = $alasan;
+		//dd($postingan);
+		$this->LaporanPostModel->save($post);
 		return redirect()->to(base_url('public/'));
 	}
 

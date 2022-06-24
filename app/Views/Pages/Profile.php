@@ -5,7 +5,7 @@
 <div class="container" style="margin:auto">
   <div class="row">
     <div class="col-1">
-      <img src="<?= base_url('public/gambar/profile.png') ?>" style="height:75px;weight:50px;">
+      <img src="<?= base_url('public/uploads/gambar_profile/'. $profile['url_foto']) ?>" style="height:75px;weight:50px;">
     </div>
     <div class="col-11">
       <p style="position:relative; top:10px;font-size:20px"><?=$profile['Nama'] ?></p>
