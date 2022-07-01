@@ -23,9 +23,32 @@
         <div class="col-12" style="">
           <h4><?=$slug['Judul'] ?></h4>
           <div class="" style="">
+            <?php $tipefile = explode(".",$slug['Nama_Gambar']) ?>
+            <?php $tipefile_ext = end($tipefile)  ?>
+            <?php if ($tipefile_ext == "mp4"): ?>
+              <div id="example">
+                  <div class="demo-section wide" style="max-width: 644px;">
+                      <div id="mediaplayer" style="height:360px"></div>
+                  </div>
+                  <script type="text/javascript">
+                      $(document).ready(function () {
+
+                          $("#mediaplayer").kendoMediaPlayer({
+                              autoPlay: true,
+                              navigatable: true,
+                              media: {
+                                  title: "ProgressNEXT 2019 Highlights",
+                                  source: "<?= base_url('public/uploads/gambar_post/'.$slug['Nama_Gambar']) ?>"
+                              }
+                          });
+                      });
+                  </script>
+              </div>
+            <?php else: ?>
             <div class=" section-foto" style="position:relative;">
               <img src="<?= base_url('public/uploads/gambar_post/'.$slug['Nama_Gambar']) ?>" class="img-fluid">
             </div>
+            <?php endif; ?>
             <div class="" style="">
               <div class="container-button-like" style="display:inline-block">
                   <button class="btn-like btn btn-block" data-id=<?= $slug['ID_Postingan'] ?>>

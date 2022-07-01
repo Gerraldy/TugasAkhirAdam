@@ -14,7 +14,7 @@ use App\Models\SavePostinganModel;
 
 use App\Models\TokoModel;
 use App\Models\TokoKategoriModel;
-// use App\Models\TokoProdukModel;
+use App\Models\TokoProdukModel;
 
 use App\Models\LaporanPostModel;
 
@@ -31,7 +31,7 @@ class Pages extends BaseController
 
 	protected $TokoModel;
 	protected $TokoKategoriModel;
-	// protected $TokoProdukModel;
+	protected $TokoProdukModel;
 
 	protected $LaporanPostModel;
 
@@ -48,7 +48,7 @@ class Pages extends BaseController
 
 		$this->TokoModel = new TokoModel();
 		$this->TokoKategoriModel = new TokoKategoriModel();
-		// $this->TokoProdukModel = new TokoModel();
+		$this->TokoProdukModel = new TokoProdukModel();
 
 		$this->LaporanPostModel = new LaporanPostModel();
 
@@ -395,11 +395,12 @@ class Pages extends BaseController
   {
 		$data = [
 			'title' => "Home!",
+			'toko_user' => $this->TokoModel->findAll(),
 			'toko_kategori' => $this->TokoKategoriModel->namaKategoriToko(),
-			'toko_produk' => "hehe",
+			'toko_produk' => $this->TokoProdukModel->ProdukToko(),
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
-		// dd($data['toko_kategori']);
+		 // dd($data['toko_produk']);
     echo view('Pages/TokoHome', $data);
   }
 

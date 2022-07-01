@@ -151,12 +151,12 @@
                </nav>
 
                <!-- Page content-->
-               <div class="container-fluid pt-5" style="margin:auto; background-color:#B0C4DE">
+               <div class="container-fluid pt-5" style="margin:auto; background-color:grey">
                  <div class="row">
                    <div class="col-2">
                      <div class="" style="position:; width:auto">
                        <?php foreach ($kategori as $k): ?>
-                         <a class="list-group-item list-group-item-light" href="<?=base_url('/public/Pages/getPostKategori/'.$k['ID_Kategori']) ?>" style="margin:auto; height:100%"><img src="<?= base_url('public/gambar/'.$k['url_gambar']) ?>" style="height:20px;weight:20px;"> <?=$k['Nama_Kategori']?> </a>
+                         <a class="btn btn-outline-light" href="<?=base_url('/public/Pages/getPostKategori/'.$k['ID_Kategori']) ?>" style="margin:auto; background:transparent; border:none; width: 200px;height:100%"><img src="<?= base_url('public/gambar/'.$k['url_gambar']) ?>" style="height:20px;weight:20px;"> <?=$k['Nama_Kategori']?> </a> <hr>
                        <?php endforeach; ?>
                      </div>
 

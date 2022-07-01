@@ -40,8 +40,8 @@ class Upload extends BaseController
       $post["NSFW"] = "1";
     }
     // $post["URL"] = 'amkdsaksdpo';
-    // dd($post);
-   //$this->UploadModal->save($post);
+     // dd($post);
+    $this->UploadModal->save($post);
 
     //  $session->setFlashdata('sukses-registrasi',"1");
     return redirect()->to(base_url('public/'));

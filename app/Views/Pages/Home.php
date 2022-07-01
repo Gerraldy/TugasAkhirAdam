@@ -38,11 +38,11 @@
 
   </div>
   <div class="w3-content w3-display-container" style="max-width:100%">
-    <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[0]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[0]['Nama_Gambar']) ?>" style="object-fit:cover;"></a>
-    <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[1]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[1]['Nama_Gambar']) ?>" style="object-fit:cover;"></a>
-  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[2]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[2]['Nama_Gambar']) ?>" style="object-fit:cover;"></a>
-  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[3]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[3]['Nama_Gambar']) ?>" style="object-fit:cover;"></a>
-  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[4]['Slug'])?>"><img class="mySlides w3-animate-fading" src="<?= base_url('public/uploads/gambar_post/'.$postingan[4]['Nama_Gambar']) ?>" style="object-fit:cover;"></a>
+  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[0]['Slug'])?>"><img class="mySlides w3-animate-fading img-fluid" src="<?= base_url('public/uploads/gambar_post/'.$postingan[0]['Nama_Gambar']) ?>" style=""></a>
+  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[1]['Slug'])?>"><img class="mySlides w3-animate-fading img-fluid" src="<?= base_url('public/uploads/gambar_post/'.$postingan[1]['Nama_Gambar']) ?>" style=""></a>
+  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[2]['Slug'])?>"><img class="mySlides w3-animate-fading img-fluid" src="<?= base_url('public/uploads/gambar_post/'.$postingan[2]['Nama_Gambar']) ?>" style=""></a>
+  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[3]['Slug'])?>"><img class="mySlides w3-animate-fading img-fluid" src="<?= base_url('public/uploads/gambar_post/'.$postingan[3]['Nama_Gambar']) ?>" style=""></a>
+  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[4]['Slug'])?>"><img class="mySlides w3-animate-fading img-fluid" src="<?= base_url('public/uploads/gambar_post/'.$postingan[4]['Nama_Gambar']) ?>" style=""></a>
   </div>
   <hr>
   <?php foreach($postingan as $p) : ?>
@@ -51,9 +51,32 @@
         <text style="font-size:12px; color:grey"><?= $p['Nama_Kategori'] ?></text>
         <div class="col-12" style="">
           <h4><b><?= $p['Judul'] ?></b></h4>
-          <div class="section-foto" style="position:relative;">
-            <img src="<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>" class="img-fluid">
-          </div>
+          <?php $tipefile = explode(".",$p['Nama_Gambar']) ?>
+          <?php $tipefile_ext = end($tipefile)  ?>
+          <?php if ($tipefile_ext == "mp4"): ?>
+            <div id="example">
+                <div class="demo-section wide" style="max-width: 644px;">
+                    <div id="mediaplayer" style="height:360px"></div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+
+                        $("#mediaplayer").kendoMediaPlayer({
+                            autoPlay: true,
+                            navigatable: true,
+                            media: {
+                                title: "ProgressNEXT 2019 Highlights",
+                                source: "<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>"
+                            }
+                        });
+                    });
+                </script>
+            </div>
+          <?php else: ?>
+            <div class="section-foto" style="position:relative;">
+              <img src="<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>" class="img-fluid">
+            </div>
+          <?php endif; ?>
           <br>
           <div class="section-button-like" style="">
             <div class="container-button-like" style="display:inline-block">
@@ -93,9 +116,19 @@
       </div>
       <div class="col-2">
         <div class="pt-5" style="">
-          <a href="<?= base_url('public/Pages/SavePost?slug='.$p['Slug']) ?>"><button class="k-button btn btn-block">Save</button></a>
-          <a href="<?= base_url('public/Pages/LaporPost?slug='.$p['Slug']) ?>"><button class="k-button btn btn-block">Lapor</button></a>
-          <button class="k-button btn btn-block">Tidak Masuk Akal</button>
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle mx-2" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              AKUN
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a href="<?= base_url('public/Pages/SavePost?slug='.$p['Slug']) ?>"></a>
+                <a href="<?= base_url('public/Pages/LaporPost?slug='.$p['Slug']) ?>"></a>
+                <a href="#">Tidak Masuk Akal</a>
+            </div>
+          </li> -->
+          <!-- <a href="<?= base_url('public/Pages/SavePost?slug='.$p['Slug']) ?>"><button class="btn btn-outline-light">Save</button></a>
+          <a href="<?= base_url('public/Pages/LaporPost?slug='.$p['Slug']) ?>"><button class="btn btn-outline-light">Lapor</button></a>
+          <button class="btn btn-outline-light">Tidak Masuk Akal</button> -->
         </div>
       </div>
     </div>
@@ -194,7 +227,7 @@
             var keycode = (event.keyCode ? event.keyCode : event.which);
               if(keycode == '13'){
                   $("#formSearch")[0].submit();
-                  alert();
+
               }
           });
 </script>

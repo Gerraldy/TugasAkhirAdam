@@ -40,12 +40,32 @@
                 <text style="font-size:12px; color:grey"><?= $p['Nama_Kategori']?></text>
                 <div class="col-12" style="">
                   <h4><b><?= $p['Judul'] ?></b></h4>
+                  <?php $tipefile = explode(".",$p['Nama_Gambar']) ?>
+                  <?php $tipefile_ext = end($tipefile)  ?>
+                  <?php if ($tipefile_ext == "mp4"): ?>
+                    <div id="example">
+                        <div class="demo-section wide" style="max-width: 644px;">
+                            <div id="mediaplayer" style="height:360px"></div>
+                        </div>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+
+                                $("#mediaplayer").kendoMediaPlayer({
+                                    autoPlay: true,
+                                    navigatable: true,
+                                    media: {
+                                        title: "ProgressNEXT 2019 Highlights",
+                                        source: "<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>"
+                                    }
+                                });
+                            });
+                        </script>
+                    </div>
+                  <?php else: ?>
                   <div class="section-foto" style="position:relative;">
                     <img src="<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>" class="img-fluid">
-                    <!-- <div class=" section-btn-dropdown" style="">
-                      <button class="option btn btn-block">. . . </button>
-                    </div> -->
                   </div>
+                <?php endif; ?>
                   <br>
                   <div class="section-button-like" style="">
                     <div class="container-button-like" style="display:inline-block">
