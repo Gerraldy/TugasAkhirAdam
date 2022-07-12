@@ -151,7 +151,7 @@
                </nav>
 
                <!-- Page content-->
-               <div class="container-fluid pt-5" style="margin:auto; background-color:grey">
+               <div class="container-fluid pt-5" style="margin:auto; background-color:#708090">
                  <div class="row">
                    <div class="col-2">
                      <div class="" style="position:; width:auto">

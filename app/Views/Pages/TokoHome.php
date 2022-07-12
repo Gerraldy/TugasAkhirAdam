@@ -3,12 +3,31 @@
 <?= $this->section('content'); ?>
 
 <div class="container"  style="max-width:1000px; margin:auto">
-    <?php foreach($toko_user as $t) : ?>
-  <div class="row">
-    <div class="col">
-      <h3><a href="#" style="color:black"> <?=$t['Nama_Toko'] ?></a></h1>
-    </div>
-  </div>
+    <?php //foreach($toko_user as $t) : ?>
+
+
+      <?php
+        for ($i=0; $i < count($toko_user); $i++) {
+          echo '<div class="row">';
+          echo '<div class="col">';
+          echo '<h3><a href="#" style="color:black">'.$toko_user[$i]['Nama_Toko'] . '</a></h3><hr>';
+          for ($j=0; $j < count($toko_produk); $j++) {
+            if ($toko_produk[$j]['ID_Toko'] == $toko_user[$i]['ID_Toko']) {
+
+              echo '<img src="'.base_url('public/gambar/'.$toko_produk[$j]['Url_Gambar']).'"'. 'style="height:200px;weight:100px;">';
+              echo $toko_produk[$j]['Nama_Produk'] . " ";
+
+            } else {
+              echo "";
+            }
+          }
+          echo '</div>';
+          echo'</div>';
+        }
+
+       ?>
+
+
 
   <!-- <div class="row">
     <div class="col-4">
@@ -20,8 +39,7 @@
     </div>
   </div> -->
 
-  <hr>
-  <?php endforeach; ?>
+  <?php //endforeach; ?>
   <div class="row">
     <h5><a href="<?= base_url('/public/Pages/Toko') ?>"><- kembali </a></h5> | | <h5><a href="<?= base_url('/public/Pages/TokoUser') ?>"> Tokoku -></a></h5>
   </div>

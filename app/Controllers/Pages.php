@@ -397,7 +397,7 @@ class Pages extends BaseController
 			'title' => "Home!",
 			'toko_user' => $this->TokoModel->findAll(),
 			'toko_kategori' => $this->TokoKategoriModel->namaKategoriToko(),
-			'toko_produk' => $this->TokoProdukModel->ProdukToko(),
+			'toko_produk' => $this->TokoProdukModel->findAll(),
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
 		 // dd($data['toko_produk']);

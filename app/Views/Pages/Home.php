@@ -37,20 +37,27 @@
     </div>
 
   </div>
-  <div class="w3-content w3-display-container" style="max-width:100%">
+  <!-- <div class="w3-content w3-display-container" style="max-width:100%">
   <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[0]['Slug'])?>"><img class="mySlides w3-animate-fading img-fluid" src="<?= base_url('public/uploads/gambar_post/'.$postingan[0]['Nama_Gambar']) ?>" style=""></a>
   <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[1]['Slug'])?>"><img class="mySlides w3-animate-fading img-fluid" src="<?= base_url('public/uploads/gambar_post/'.$postingan[1]['Nama_Gambar']) ?>" style=""></a>
   <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[2]['Slug'])?>"><img class="mySlides w3-animate-fading img-fluid" src="<?= base_url('public/uploads/gambar_post/'.$postingan[2]['Nama_Gambar']) ?>" style=""></a>
   <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[3]['Slug'])?>"><img class="mySlides w3-animate-fading img-fluid" src="<?= base_url('public/uploads/gambar_post/'.$postingan[3]['Nama_Gambar']) ?>" style=""></a>
   <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[4]['Slug'])?>"><img class="mySlides w3-animate-fading img-fluid" src="<?= base_url('public/uploads/gambar_post/'.$postingan[4]['Nama_Gambar']) ?>" style=""></a>
-  </div>
+  </div> -->
   <hr>
   <?php foreach($postingan as $p) : ?>
   <div class="row">
+      <div class="col-1">
+      </div>
       <div class="col-10" style="">
         <text style="font-size:12px; color:grey"><?= $p['Nama_Kategori'] ?></text>
-        <div class="col-12" style="">
+        <div class="row">
+
           <h4><b><?= $p['Judul'] ?></b></h4>
+        <div class="col-2" style="background-color: black">
+        </div>
+        <div class="col-8" style="background-color: black">
+
           <?php $tipefile = explode(".",$p['Nama_Gambar']) ?>
           <?php $tipefile_ext = end($tipefile)  ?>
           <?php if ($tipefile_ext == "mp4"): ?>
@@ -60,12 +67,11 @@
                 </div>
                 <script type="text/javascript">
                     $(document).ready(function () {
-
                         $("#mediaplayer").kendoMediaPlayer({
                             autoPlay: true,
                             navigatable: true,
                             media: {
-                                title: "ProgressNEXT 2019 Highlights",
+                                title: "<?= $p['Judul'] ?>",
                                 source: "<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>"
                             }
                         });
@@ -73,6 +79,7 @@
                 </script>
             </div>
           <?php else: ?>
+
             <div class="section-foto" style="position:relative;">
               <img src="<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>" class="img-fluid">
             </div>
@@ -80,7 +87,7 @@
           <br>
           <div class="section-button-like" style="">
             <div class="container-button-like" style="display:inline-block">
-                <button class="btn-like btn btn-block" data-id=<?= $p['ID_Postingan'] ?>>
+                <button class="btn-like btn k-button" data-id=<?= $p['ID_Postingan'] ?>>
                   <?php if (!isset($p["Like"])): ?>
                     <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
                   <?php else: ?>
@@ -92,7 +99,7 @@
                 </button>
             </div>
             <div class="container-button-dislike" style="display:inline-block">
-                <button id="" class="btn btn-block btn-dislike" data-id=<?= $p['ID_Postingan'] ?>>
+                <button id="" class="btn k-button btn-dislike" data-id=<?= $p['ID_Postingan'] ?>>
                   <?php if (!isset($p["Dislike"])): ?>
                     <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
                   <?php else: ?>
@@ -102,7 +109,6 @@
                     <?= $p['Tidak_Suka'] ?>
                   </text>
                 </button>
-
             </div>
             <div class="" style="display:inline-block">
               <a href="<?= base_url('public/Pages/Komentar?slug='.$p['Slug'])?>">
@@ -113,8 +119,11 @@
             </div>
           </div>
         </div>
+        <div class="col-2" style="background-color: black">
+        </div>
+        </div>
       </div>
-      <div class="col-2">
+      <div class="col-1">
         <div class="pt-5" style="">
           <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle mx-2" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
