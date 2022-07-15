@@ -43,7 +43,7 @@
       <h4><a href="<?= base_url('/public/Pages/Toko') ?>" style="color:black;text-decoration: none;font-family: 'Garamon', Times, serif;"><?=$toko_kategori[4]['Nama_Kategori_Produk']?></a></h4>
       <div class="">
         <img src="<?= base_url('public/gambar/celana.jpeg') ?>" style="height:200px;weight:100px;">
-        
+
       </div>
     </div>
   </div>

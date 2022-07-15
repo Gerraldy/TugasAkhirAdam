@@ -34,6 +34,13 @@ class PostModel extends Model
       return $this->db->query($sql)->getResultArray();
     }
 
+    public function getMyPost($id)
+    {
+      $sql = "SELECT p.*, k.Nama_Kategori FROM postingan p,kategori k, memers m WHERE p.ID_Kategori = k.ID_Kategori AND p.ID_Memers = m.ID_Memers AND m.ID_Memers = ".$id." ORDER BY p.Tgl_Upload DESC";
+
+      return $this->db->query($sql)->getResultArray();
+    }
+
     public function getNamaKategori($idkategoriPost)
     {
       $sql="select k.Nama_Kategori from kategori k, postingan p where p.ID_Kategori = k.ID_Kategori AND p.ID_kategori =".$idkategoriPost;

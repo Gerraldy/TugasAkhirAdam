@@ -14,8 +14,6 @@
     right:0;
   }
 </style>
-
-
 <div class="container" style="max-width:800px; margin:auto">
   <div class="row">
       <div class="col-12" style="">
@@ -57,11 +55,7 @@
   </div>
 <script>
     $(document).ready(function () {
-      $(".option").kendoButton();
-      $("#like").kendoButton();
-      $("#dislike").kendoButton();
-      $("#comment").kendoButton();
-      $("#komen").kendoButton();
+      
 
       $("#invitation").kendoTextArea({
                rows: 10,

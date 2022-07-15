@@ -33,7 +33,6 @@
   <div class="row mt-3">
     <div class="col-7">
       <div id="meme-bg-target">
-          <!-- <img src="default.jpg" id="img-meme-bg" class="img-meme-bg" /> -->
           <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>" id="img-meme-bg" class="img-meme-bg" />
       </div>
       <div class="" style="">

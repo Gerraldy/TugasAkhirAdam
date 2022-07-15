@@ -20,21 +20,21 @@
     </div>
   </div>
   <br>
+  <form action="<?=base_url('public/Pages/UpdateAkun') ?>" method="post" enctype="multipart/form-data">
+    <?= csrf_field(); ?>
   <div class="row">
-    <div class="col-12">
-
-
-      <form action="<?=base_url('public/Pages/UpdateAkun') ?>" method="post" enctype="multipart/form-data">
-        <?= csrf_field(); ?>
-        Username :   <input class="nama k-textbox" type="text" style="width:200px" name="Username" required><br>
-        Email :      <input class="nama k-textbox" type="text" style="width:200px" name="Email" required><br>
+    <div class="col-2">
+      <p style="color:white">Username :</p><br>
+      <p style="color:white">Email :</p>  <br>
         <input type="submit" class="k-button" style="margin-top:20px" value="Simpan" id="btnsave" >
-      </form>
-
-
-      <input type="submit" class="k-button" style="margin-top:20px" value="Batal" id="btncancel" >
+        <input type="submit" class="k-button" style="margin-top:20px" value="Batal" id="btncancel" >
+    </div>
+    <div class="col-10">
+      <input class="nama k-textbox" type="text" style="width:200px" name="Username" value="" required><br><br>
+      <input class="nama k-textbox" type="text" style="width:200px" name="Email" value="" required>
     </div>
   </div>
+  </form>
 </div>
 
 <?= $this->endSection();  ?>

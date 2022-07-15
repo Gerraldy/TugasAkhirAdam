@@ -243,6 +243,7 @@ class Pages extends BaseController
 		$user = $this->MemersModel->where('ID_Memers',$id)->first();
 		$unlike = $this->UnlikeModel->findAll();
 		$like = $this->LikeModel->findAll();
+		$mypostingan = $this->PostModel->getMyPost($id);
 		$postingan = $this->PostModel->getPostProfile($id);
 		$savepost = $this->SavePostinganModel->getSavePost($id);
 		for ($i=0; $i < count($postingan); $i++) {
@@ -261,12 +262,13 @@ class Pages extends BaseController
 		$data = [
 			'title' => "Profile!",
 			'profile' => $user,
+			'mypostingan' => $mypostingan,
 			'postingan' => $postingan,
 			'savepost' => $savepost,
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
 
-	//	 dd($data['savepost']);
+		 // dd($data['mypostingan']);
     echo view('Pages/Profile', $data);
   }
 	public function Profile()
@@ -306,11 +308,14 @@ class Pages extends BaseController
 
 	public function SettingProfile()
 	{
+		$id = session()->get('user');
+		$user = $this->MemersModel->where('ID_Memers',$id)->first();
 		$data = [
 			'title' => 'Profile',
+			'user' => $user,
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
-		 // dd($data['kategori']);
+		 //dd($data['user']);
 		echo view('Pages/Setting/Profile', $data);
 	}
 	public function UpdateProfile()
@@ -334,6 +339,8 @@ class Pages extends BaseController
 
 	public function SettingAkun()
 	{
+		$id = session()->get('user');
+		$user = $this->MemersModel->where('ID_Memers',$id)->first();
 		$data = [
 			'title' => 'Akun',
 			'kategori' => $this->KategoriModel->namaKategori()
@@ -359,6 +366,8 @@ class Pages extends BaseController
 
 	public function SettingPassword()
 	{
+		$id = session()->get('user');
+		$user = $this->MemersModel->where('ID_Memers',$id)->first();
 		$data = [
 			'title' => 'Password',
 			'kategori' => $this->KategoriModel->namaKategori()

@@ -28,14 +28,14 @@
         <input type="file" name="url_foto" class="" id="url_foto" onchange="readURL(this);">
         <br>
         <br>
-         Nama :   <input class="nama k-textbox" type="text" style="width:200p" name="Nama" required><br>
+         Nama :   <input class="nama k-textbox" type="text" style="width:200p" name="Nama" value="<?=$user['Nama'] ?>" required><br>
          <br>
         Tgl Lahir :
-                  <input id="tgl-lahir" value="10/10/2011" title="datepicker" name="Tgl_Lahir">
+                  <input id="tgl-lahir" value="<?=$user['Tgl_Lahir'] ?>" title="datepicker" name="Tgl_Lahir">
         <br>
         <br>
         Tentang :
-        <textarea id="Tentang" style="width: 50%;" required data-required-msg="Deskripsikan Tentangmu!!" name="Tentang"></textarea>
+        <textarea id="Tentang" class="k-textarea"  style="width: 50%;" required data-required-msg="Deskripsikan Tentangmu!!" name="Tentang"><?=$user['Tentang'] ?></textarea>
         <br>
         <input type="submit" class="k-button" style="margin-top:20px" value="Simpan" id="btnsave" >
         <input type="submit" class="k-button" style="margin-top:20px" value="Batal" id="btncancel" >

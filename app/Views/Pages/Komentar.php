@@ -51,7 +51,7 @@
             <?php endif; ?>
             <div class="" style="">
               <div class="container-button-like" style="display:inline-block">
-                  <button class="btn-like btn btn-block" data-id=<?= $slug['ID_Postingan'] ?>>
+                  <button class="btn-like btn k-button" data-id=<?= $slug['ID_Postingan'] ?>>
                     <?php if (!isset($slug["Like"])): ?>
                       <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
                     <?php else: ?>
@@ -63,7 +63,7 @@
                   </button>
               </div>
               <div class="container-button-dislike" style="display:inline-block">
-                  <button id="" class="btn btn-block btn-dislike" data-id=<?= $slug['ID_Postingan'] ?>>
+                  <button id="" class="btn k-button btn-dislike" data-id=<?= $slug['ID_Postingan'] ?>>
                     <?php if (!isset($slug["Dislike"])): ?>
                       <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
                     <?php else: ?>
@@ -72,20 +72,21 @@
                     <text>
                       <?= $slug['Tidak_Suka'] ?>
                     </text>
-                    <a href="https://www.facebook.com/" target="_blank">
-                      <img src="<?= base_url('public/gambar/facebook.png') ?>" style="width:30px; height:30px">
-                    </a>
-                  </button>
+                    </button>
               </div>
+              <div id="fb-root"></div>
+              <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v14.0" nonce="hsYaH8oe"></script>
+              <div class="fb-share-button" data-href="http://localhost:8080/codeigniter4/public/Pages/Komentar?slug=hon" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2Fcodeigniter4%2Fpublic%2FPages%2FKomentar%3Fslug%3Dhon&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Bagikan</a></div>
+
               <div class="" style="height:100px; width:auto; ">
                 <form id="" action="<?=base_url('public/LikeKomen/submitKomentar?id_post='.$slug["ID_Postingan"])?>" method="POST">
                   <textarea id="isikomen"  style="height:50px ;width: 100%;" required data-required-msg="Please enter a text." data-max-msg="Enter value between 1 and 200" name="Isi_Komentar"></textarea>
                   <div class="k-form-footer">
                       <!-- <div class="k-counter-container" style="position: relative; left: 500px;"><span class="k-counter-value">0</span>/200</div> -->
-                      <a href="#" target=""><img src="<?= base_url('public/gambar/kamera.png') ?>" style="width:40px; height:40px"></a>
                       <br>
-                      <button id="cancel" class="k-button k-primary" style="position: relative; right: auto;">Cancel</button>
-                      <button id="komen" type="submit" class="k-button k-primary" style="position: relative; right: auto;">Send</button>
+                      <button id="komen" type="submit" class="k-button" style="position: relative; right: auto;">Send</button>
+                      <button id="cancel" class="k-button " style="position: relative; right: auto;">Cancel</button>
+
                   </div>
                 </form>
             </div>
@@ -102,21 +103,21 @@
     </div>
   </div>
   <br>
-  <div class="row">
+  <div class="row" style="border-radius:10px ;background-color:black">
     <?php foreach ($komen as $k): ?>
       <div class="col-1">
           <a href="<?= base_url('/public/Pages/Profile?name='.$k['Nama']) ?>" class="mx-2" style="text-decoration:none">
-            <img src="<?= base_url('public/gambar/hewan.png') ?>" style="height:40px;weight:40px;">
+            <img src="<?= base_url('public/uploads/gambar_profile/'. $k['Url_Foto']) ?>" style="border-radius:50% ;height:40px;weight:40px;">
           </a>
       </div>
       <div class="col-11">
         <kbd><?=$k['Nama'] ?></kbd>
         <br>
-        <p class="font-weight-normal"><?= nl2br($k['Isi_Komentar']) ?></p>
+        <p class="font-weight-normal" style="color: white"><?= nl2br($k['Isi_Komentar']) ?></p>
       </div>
-      <hr>
     <?php endforeach; ?>
   </div>
+  <hr>
 </div>
 <script>
     $(document).ready(function () {
