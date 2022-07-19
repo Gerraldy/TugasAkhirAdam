@@ -55,6 +55,25 @@ class Admin extends BaseController
     echo view('Pages/Admin/TLaporanToko', $data);
 	}
 
+  public function MasterMemers()
+  {
+    $data = [
+      'mastermemers' => $this->MemersModel->findAll()
+    ];
+    //dd($data['mastermemers']);
+    echo view('Pages/Admin/MasterMemers', $data);
+  }
+
+  public function MasterMemersPro()
+  {
+    $data = [
+      'mastermemerspro' => $this->MemersModel->where('Status', 1)->findAll()
+    ];
+
+    // dd($data['mastermemerspro']);
+    echo view('Pages/Admin/MasterMemersPro', $data);
+  }
+
 public function DetailLaporanPostingan()
 {
   $idpost = $this->request->getGet("idpost");

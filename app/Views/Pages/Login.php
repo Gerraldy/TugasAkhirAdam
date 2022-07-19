@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-6" style="position: relative">
       <div class="" >
-        <h4>LOGIN! </h4>
+        <h4 style="color:white">LOGIN! </h4>
         <form class="" action="<?= base_url('public/Auth/Masuk') ?>" method="post">
           <input class="email" type="text" style="width:200p" name="email" required>
           <br>
@@ -32,7 +32,7 @@
       <form action="<?=base_url('public/Auth/register') ?>" method="post">
         <?= csrf_field(); ?>
         <div class="" style="position: relative;">
-          <h4>BUAT AKUN! </h4>
+          <h4 style="color:white">BUAT AKUN! </h4>
           <input class="email" type="text" style="width:200p" name="Email" required>
           <br>
           <input class="username" type="text" style="width:200p" name="Username" required>
@@ -110,7 +110,7 @@
       staticNotification.show("Email Atau Username Sudah Terdaftar" ,"error");
     <?php endif; ?>
 
-    
+
 
   });
 

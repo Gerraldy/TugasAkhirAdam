@@ -27,14 +27,15 @@
       <p style="color:white">Username :</p><br>
       <p style="color:white">Email :</p>  <br>
         <input type="submit" class="k-button" style="margin-top:20px" value="Simpan" id="btnsave" >
-        <input type="submit" class="k-button" style="margin-top:20px" value="Batal" id="btncancel" >
+
     </div>
     <div class="col-10">
-      <input class="nama k-textbox" type="text" style="width:200px" name="Username" value="" required><br><br>
-      <input class="nama k-textbox" type="text" style="width:200px" name="Email" value="" required>
+      <input class="nama k-textbox" type="text" style="width:200px" name="Username" value="<?= $user['Username'] ?>" required><br><br>
+      <input class="nama k-textbox" type="text" style="width:200px" name="Email" value="<?= $user['Email'] ?>" required>
     </div>
   </div>
   </form>
+  <a href="<?= base_url('/public/Pages/MyProfile') ?>"> <input type="submit" class="k-button" style="margin-top:20px" value="Batal" id="btncancel" ></a>
 </div>
 
 <?= $this->endSection();  ?>

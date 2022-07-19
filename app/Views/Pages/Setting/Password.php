@@ -28,14 +28,27 @@
       <p style="color:white">Password Baru: :</p><br>
       <p style="color:white">Konfirmasi :</p>  <br>
         <input type="submit" class="k-button" style="margin-top:20px" value="Simpan" id="btnsave" >
-        <input type="submit" class="k-button" style="margin-top:20px" value="Batal" id="btncancel" >
+
     </div>
     <div class="col-10">
-      <input class="nama k-textbox" type="text" style="width:200px" name="Password" required><br><br>
-      <input class="nama k-textbox" type="text" style="width:200px" name="" required>
+      <input id="Password" class="nama k-textbox" type="password" style="width:200px" name="Password" required><br><br>
+      <input id="CPassword" class="nama k-textbox" type="password" style="width:200px" name="CPassword" required><br><br>
+      <input type="checkbox" onclick="LihatPassword()"><text style="color:white"> Lihat Password </text>
     </div>
   </div>
   </form>
+  <a href="<?= base_url('/public/Pages/MyProfile') ?>"> <input type="submit" class="k-button" style="margin-top:20px" value="Batal" id="btncancel" ></a>
 </div>
+
+<script>
+function LihatPassword() {
+  var x = document.getElementById("Password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 
 <?= $this->endSection();  ?>

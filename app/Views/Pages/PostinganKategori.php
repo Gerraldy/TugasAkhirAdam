@@ -80,11 +80,11 @@
             <a class="btn btn-outline-light" href="" style="background:grey; border:none; border-radius:10px ;width: 100px;height:100%; padding:1px">#<?=$nama_kategori['Nama_Kategori'] ?></a>
           <div class="section-button-like" style="">
             <div class="container-button-like" style="display:inline-block">
-                <button class="btn-like btn k-button" data-id=<?= $p['ID_Postingan'] ?> style="">
+                <button class="btn-like k-button" data-id=<?= $p['ID_Postingan'] ?> style="">
                   <?php if (!isset($p["Like"])): ?>
                     <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
                   <?php else: ?>
-                    <img src="<?= base_url('public/gambar/sudahlike.png') ?>" style="height:20px;weight:20px;">
+                    <img src="<?= base_url('public/gambar/sudahlike2.png') ?>" style="height:20px;weight:20px;">
                   <?php endif; ?>
                   <text>
                     <?= $p['Suka'] ?>
@@ -92,11 +92,11 @@
                 </button>
             </div>
             <div class="container-button-dislike" style="display:inline-block">
-                <button id="" class="btn k-button btn-dislike" data-id=<?= $p['ID_Postingan'] ?>>
+                <button id="" class=" k-button btn-dislike" data-id=<?= $p['ID_Postingan'] ?>>
                   <?php if (!isset($p["Dislike"])): ?>
                     <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
                   <?php else: ?>
-                    <img src="<?= base_url('public/gambar/sudahdislike.jpg') ?>" style="height:20px;weight:20px;">
+                    <img src="<?= base_url('public/gambar/sudahdislike2.png') ?>" style="height:20px;weight:20px;">
                   <?php endif; ?>
                   <text>
                     <?= $p['Tidak_Suka'] ?>
@@ -105,7 +105,7 @@
             </div>
             <div class="" style="display:inline-block">
               <a href="<?= base_url('public/Pages/Komentar?slug='.$p['Slug'])?>">
-                <button class="comment btn btn-block">
+                <button class="comment k-button btn-block">
                   <img src="<?= base_url('public/gambar/komentarhitam.png') ?>" style="height:20px;weight:20px;">
                 </button>
               </a>
@@ -117,11 +117,62 @@
   </div>
 <script>
     $(document).ready(function () {
-      $(".option").kendoButton();
-      $(".like").kendoButton();
-      $(".dislike").kendoButton();
-      $(".comment").kendoButton();
 
+      $(".btn-dislike").click(function(){
+        let id_post = $(this).data("id");
+        let t = $(this);
+        $.ajax({
+          type:"GET",
+          url:"<?=base_url('public/LikeKomen/UnlikePost')?>",
+          data:{id_post:id_post},
+          dataType:"json",
+          success:function(data){
+            let jumlah_tidak_suka = data["count"].Tidak_Suka;
+            if (data["sukses"]==1) {
+              // BARU DISLIKE
+              t.children("img").attr("src","<?= base_url('public/gambar/sudahdislike2.png') ?>");
+            }else if (data["sukses"]==0) {
+              // HAPUS DISLIKE
+              t.children("img").attr("src","<?= base_url('public/gambar/dislikeputih.png') ?>");
+            }
+            t.children("text").html(jumlah_tidak_suka);
+
+            if (data["like"]=="1") {
+              // ubah foto like\
+              t.parent().siblings(".container-button-like").children(".btn-like").children("img").attr("src","<?= base_url('public/gambar/likehitam.png') ?>");
+              t.parent().siblings(".container-button-like").children(".btn-like").children("text").html(data["jumlah_like"].Suka);
+              // .children(".btn-like").children("img").attr("src","");
+            }
+          }
+        });
+      });
+
+      $(".btn-like").click(function(){
+        let id_post = $(this).data("id");
+        let t = $(this);
+        $.ajax({
+          type:"GET",
+          url:"<?= base_url('public/LikeKomen/LikePost') ?>",
+          data:{id_post:id_post},
+          dataType:"json",
+          success:function(data){
+            let jumlah_suka = data["count"].Suka;
+            if (data["sukses"]== 1){
+                t.children("img").attr("src","<?= base_url('public/gambar/sudahlike2.png') ?>");
+            }else if (data["sukses"]== 0){
+                t.children("img").attr("src","<?= base_url('public/gambar/likehitam.png') ?>");
+            }
+            t.children("text").html(jumlah_suka);
+
+            if (data["dislike"]=="1") {
+              // ubah foto like\
+              t.parent().siblings(".container-button-dislike").children(".btn-dislike").children("img").attr("src","<?= base_url('public/gambar/dislikeputih.png') ?>");
+              t.parent().siblings(".container-button-dislike").children(".btn-dislike").children("text").html(data["jumlah_dislike"].Tidak_Suka);
+              // .children(".btn-like").children("img").attr("src","");
+            }
+          }
+        });
+      });
     });
 </script>
 

@@ -21,7 +21,7 @@
       <div class="col-10" style="">
         <text style="font-size:12px; color:grey"><?= $namaKategori['Nama_Kategori'] ?></text>
         <div class="col-12" style="">
-          <h4><?=$slug['Judul'] ?></h4>
+          <h4 style="color:white"><?=$slug['Judul'] ?></h4>
           <div class="" style="">
             <?php $tipefile = explode(".",$slug['Nama_Gambar']) ?>
             <?php $tipefile_ext = end($tipefile)  ?>
@@ -55,7 +55,7 @@
                     <?php if (!isset($slug["Like"])): ?>
                       <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
                     <?php else: ?>
-                      <img src="<?= base_url('public/gambar/sudahlike.png') ?>" style="height:20px;weight:20px;">
+                      <img src="<?= base_url('public/gambar/sudahlike2.png') ?>" style="height:20px;weight:20px;">
                     <?php endif; ?>
                     <text>
                       <?= $slug['Suka'] ?>
@@ -67,7 +67,7 @@
                     <?php if (!isset($slug["Dislike"])): ?>
                       <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
                     <?php else: ?>
-                      <img src="<?= base_url('public/gambar/sudahdislike.jpg') ?>" style="height:20px;weight:20px;">
+                      <img src="<?= base_url('public/gambar/sudahdislike2.png') ?>" style="height:20px;weight:20px;">
                     <?php endif; ?>
                     <text>
                       <?= $slug['Tidak_Suka'] ?>
@@ -76,7 +76,7 @@
               </div>
               <div id="fb-root"></div>
               <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v14.0" nonce="hsYaH8oe"></script>
-              <div class="fb-share-button" data-href="http://localhost:8080/codeigniter4/public/Pages/Komentar?slug=hon" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2Fcodeigniter4%2Fpublic%2FPages%2FKomentar%3Fslug%3Dhon&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Bagikan</a></div>
+              <div class="fb-share-button" data-href="https://9gag.com/u/adambejo4040/comments" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2Fcodeigniter4%2Fpublic%2FPages%2FKomentar%3Fslug%3Dhon&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Bagikan</a></div>
 
               <div class="" style="height:100px; width:auto; ">
                 <form id="" action="<?=base_url('public/LikeKomen/submitKomentar?id_post='.$slug["ID_Postingan"])?>" method="POST">
@@ -143,7 +143,7 @@
             let jumlah_tidak_suka = data["count"].Tidak_Suka;
             if (data["sukses"]==1) {
               // BARU DISLIKE
-              t.children("img").attr("src","<?= base_url('public/gambar/sudahdislike.jpg') ?>");
+              t.children("img").attr("src","<?= base_url('public/gambar/sudahdislike2.png') ?>");
             }else if (data["sukses"]==0) {
               // HAPUS DISLIKE
               t.children("img").attr("src","<?= base_url('public/gambar/dislikeputih.png') ?>");
@@ -171,7 +171,7 @@
           success:function(data){
             let jumlah_suka = data["count"].Suka;
             if (data["sukses"]== 1){
-                t.children("img").attr("src","<?= base_url('public/gambar/sudahlike.png') ?>");
+                t.children("img").attr("src","<?= base_url('public/gambar/sudahlike2.png') ?>");
             }else if (data["sukses"]== 0){
                 t.children("img").attr("src","<?= base_url('public/gambar/likehitam.png') ?>");
             }

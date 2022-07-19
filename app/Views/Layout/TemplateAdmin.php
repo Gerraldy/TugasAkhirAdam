@@ -49,6 +49,26 @@
                     <span>Dashboard</span></a>
             </li>
 
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Master
+            </div>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?=base_url('/public/Admin/MasterMemers')?>">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Master Memers</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?=base_url('/public/Admin/MasterMemersPro')?>">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Master Memers Pro</span></a>
+            </li>
+
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -76,7 +96,20 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
+            <div class="sidebar-heading">
+                Pendapatan
+            </div>
 
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?=base_url('/public/Admin/LaporanPemasukanFiturPro')?>">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Fitur Pro</span></a>
+            </li>
+
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>

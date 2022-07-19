@@ -343,6 +343,7 @@ class Pages extends BaseController
 		$user = $this->MemersModel->where('ID_Memers',$id)->first();
 		$data = [
 			'title' => 'Akun',
+			'user' => $user,
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
 		 // dd($data['kategori']);
@@ -381,10 +382,22 @@ class Pages extends BaseController
 		$id_user = $session->get("user");
 
 		$post = $this->request->getVar();
-		$this->MemersModel->update($id_user, ['Password' => $post['Password']
-		]);
+		$pesan = "Password Tidak Sama";
+
+		if ($post['Password'] == $post['CPassword']) {
+			$this->MemersModel->update($id_user, ['Password' => $post['Password']]);
+
+			return redirect()->to(base_url('public/Pages/MyProfile'));
+		} else {
+			echo '<script type ="text/JavaScript">';
+			echo 'alert("JavaScript Alert Box by PHP")';
+			echo '</script>';
+
+			return redirect()->to(base_url('public/Pages/SettingPassword'));
+		}
+
 		//dd($post);
-		return redirect()->to(base_url('public/Pages/SettingAkun'));
+
 
 	}
 

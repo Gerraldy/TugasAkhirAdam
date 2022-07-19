@@ -9,19 +9,19 @@
       <?php
         for ($i=0; $i < count($toko_user); $i++) {
           echo '<div class="row">';
-          echo '<div class="col">';
+
           echo '<h3><a href="#" style="color:black">'.$toko_user[$i]['Nama_Toko'] . '</a></h3><hr>';
           for ($j=0; $j < count($toko_produk); $j++) {
             if ($toko_produk[$j]['ID_Toko'] == $toko_user[$i]['ID_Toko']) {
-
-              echo '<img src="'.base_url('public/gambar/'.$toko_produk[$j]['Url_Gambar']).'"'. 'style="height:200px;weight:100px;">';
-              echo $toko_produk[$j]['Nama_Produk'] . " ";
-
+              echo '<div class="col">';
+              echo '<img src="'.base_url('public/gambar/'.$toko_produk[$j]['Url_Gambar']).'"'. 'style="height:200px;weight:100px;"><br>';
+              echo '<b><text style="color:white">'.$toko_produk[$j]['Nama_Produk'] . "</text></b>";
+                echo '</div>';
             } else {
               echo "";
             }
           }
-          echo '</div>';
+
           echo'</div>';
         }
 

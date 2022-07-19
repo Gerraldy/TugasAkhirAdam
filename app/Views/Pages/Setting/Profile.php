@@ -28,18 +28,22 @@
         <input type="file" name="url_foto" class="" id="url_foto" onchange="readURL(this);">
         <br>
         <br>
-         Nama :   <input class="nama k-textbox" type="text" style="width:200p" name="Nama" value="<?=$user['Nama'] ?>" required><br>
-         <br>
-        Tgl Lahir :
-                  <input id="tgl-lahir" value="<?=$user['Tgl_Lahir'] ?>" title="datepicker" name="Tgl_Lahir">
-        <br>
-        <br>
-        Tentang :
-        <textarea id="Tentang" class="k-textarea"  style="width: 50%;" required data-required-msg="Deskripsikan Tentangmu!!" name="Tentang"><?=$user['Tentang'] ?></textarea>
-        <br>
-        <input type="submit" class="k-button" style="margin-top:20px" value="Simpan" id="btnsave" >
-        <input type="submit" class="k-button" style="margin-top:20px" value="Batal" id="btncancel" >
+        <div class="row">
+          <div class="col-2">
+            <p style="color:white">Nama :</p><br>
+            <p style="color:white">Tanggal Lahir :</p>  <br>
+            <p style="color:white">Tentang :</p>  <br>
+              <input type="submit" class="k-button" style="margin-top:20px" value="Simpan" id="btnsave" >
+
+          </div>
+          <div class="col-10">
+            <input id="Nama" class="nama k-textbox" type="text" style="width:200p" name="Nama" value="<?=$user['Nama'] ?>" required><br><br>
+            <input id="tgl-lahir" value="<?=$user['Tgl_Lahir'] ?>" title="datepicker" name="Tgl_Lahir"><br><br><br>
+            <textarea id="Tentang" class="k-textarea"  style="width: 50%;" required data-required-msg="Deskripsikan Tentangmu!!" name="Tentang"><?=$user['Tentang'] ?></textarea>
+          </div>
+        </div>
       </form>
+      <a href="<?= base_url('/public/Pages/MyProfile') ?>"> <input type="submit" class="k-button" style="margin-top:20px" value="Batal" id="btncancel" ></a>
     </div>
   </div>
 </div>

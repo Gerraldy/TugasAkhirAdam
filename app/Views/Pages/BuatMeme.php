@@ -2,6 +2,76 @@
 
 <?= $this->section('content'); ?>
 <style media="screen">
+#meme-bg-target {
+	background:#FFF;
+	border:#CCC 1px solid;
+	margin:20px 0px;
+	display:inline-block;
+	position:relative;
+}
+#img-meme-bg {
+	width:100%;
+}
+#meme-preview {
+	width:100%;
+	height:100%;
+	background:#FFF;
+	border:#CCC 1px solid;
+	margin:0px;
+	position:relative;
+}
+.meme-txt-area {
+	border:#FFF 1px dotted;
+	position:absolute;
+	top:0;
+	left:0;
+	padding:10px;
+	min-width:200px;
+	color:#black;
+	text-align:left;
+	cursor:move;
+    font-size:24px;
+}
+.meme-txt-area:focus {
+	outline: none;
+}
+div#meme-canvas-container {
+    display:inline-block;
+    position:relative;
+    max-width: 550px;
+    max-height: 340px;
+    width:100%;
+    height:100%;
+}
+
+.btn-add {
+    padding: 10px 50px;
+    margin-left: 15px;
+    background: #F0F0F0;
+    border: #dedddd 1px solid;
+    border-radius: 2px;
+}
+
+.btn-save {
+    padding: 10px 50px;
+    margin-bottom: 25px;
+    background: #09F;
+    border: #09F 1px solid;
+    border-radius: 2px;
+    color:#FFF;
+    font-size: 16px;
+}
+
+.choose-file {
+    padding: 8px;
+    border: #F0F0F0 1px solid;
+    border-radius: 2px;
+}
+
+.label-preview {
+    color:#333;
+    margin: 20px 0px 10px;
+}
 #carousel {
   max-width:100%;
 
@@ -27,7 +97,7 @@
     <div class="col-6">
 
         <button id="stiker" class="stiker k-button " style="position: relative; left:150px">Stiker</button>
-        <button id="addgambar" class="addgambar k-button " style="position: relative; left:200px">Tambah Gambar</button>
+        <button id="addgambar" class="addgambar k-button" style="position: relative; left:200px">Tambah Gambar</button>
     </div>
   </div>
   <div class="row mt-3">
@@ -47,7 +117,7 @@
     <div class="col-5">
       <div class="">
         <button id="subscribe" class="subscribe k-button w-100">SUBSCRIBE</button>
-        <input type="file" class="w-100" id="upload" accept = "image/*" >
+        <input type="file" name="meme_bg" value="Upload MEME Image" class="choose-file" onChange="showPreview(this);" />
         <!-- <button id="upload" type="file" accept="image/*" class="upload k-button w-100 mt-2" >Upload Meme</button> -->
         <input type="button" name="add_text" value="Add Text" class="btn-add" onClick="createTextArea()" />
         <div class="mt-2">
@@ -103,7 +173,7 @@
         </div>
         <div class="mt-5 pb-3 row">
           <div class="col-6">
-            <button id="buatmeme" class="k-button w-100" >Buat Meme</button>
+            <input type="button" name="save-as-image" id="save-as-image" class="btn-save" value="Buat Meme" />
           </div>
           <div class="col-6">
             <button id="reset" class="k-button w-100">Reset</button>
@@ -113,8 +183,25 @@
       </div>
     </div>
   </div>
+  <div class="label-preview">Preview</div>
+  <div id="meme-canvas-container">
+      <canvas id="meme-preview"></canvas>
+  </div>
 </div>
 <script>
+
+function showPreview(objFileInput)
+{
+    if (objFileInput.files[0])
+    {
+        var fileReader = new FileReader();
+        fileReader.onload = function (e) {
+            $("#meme-bg-target img").attr('src', e.target.result);
+        }
+        fileReader.readAsDataURL(objFileInput.files[0]);
+    }
+}
+
 $( function() {
   $( "#draggable" ).draggable();
   $( "#draggable" ).resizable();

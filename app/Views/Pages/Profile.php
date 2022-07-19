@@ -81,7 +81,7 @@
                           <?php if (!isset($p["Like"])): ?>
                             <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
                           <?php else: ?>
-                            <img src="<?= base_url('public/gambar/sudahlike.png') ?>" style="height:20px;weight:20px;">
+                            <img src="<?= base_url('public/gambar/sudahlike2.png') ?>" style="height:20px;weight:20px;">
                           <?php endif; ?>
                           <text>
                             <?= $p['Suka'] ?>
@@ -93,7 +93,7 @@
                           <?php if (!isset($p["Dislike"])): ?>
                             <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
                           <?php else: ?>
-                            <img src="<?= base_url('public/gambar/sudahdislike.jpg') ?>" style="height:20px;weight:20px;">
+                            <img src="<?= base_url('public/gambar/sudahdislike2.png') ?>" style="height:20px;weight:20px;">
                           <?php endif; ?>
                           <text>
                             <?= $p['Tidak_Suka'] ?>
@@ -123,24 +123,46 @@
         <div class="container" style="max-width:800px; margin:auto">
           <?php foreach($mypostingan as $p) : ?>
           <div class="row">
-              <div class="col-12" style="">
-                <text style="font-size:12px; color:grey"><?= $p['Nama_Kategori']?></text>
-                <div class="col-12" style="">
-                  <h4><b><?= $p['Judul'] ?></b></h4>
-                  <div class="section-foto" style="position:relative;">
-                    <img src="<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>" class="img-fluid">
-                    <!-- <div class=" section-btn-dropdown" style="">
-                      <button class="option btn btn-block">. . . </button>
-                    </div> -->
-                  </div>
+            <div class="col-2" style="background-color: black">
+            </div>
+            <div class="col-8" style="background-color: black">
+
+              <?php if ($tipefile_ext == "mp4"): ?>
+                <div id="example">
+                    <div class="demo-section wide" style="max-width: 644px;">
+                        <div id="mediaplayer" style="height:360px"></div>
+                    </div>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $("#mediaplayer").kendoMediaPlayer({
+                                autoPlay: true,
+                                navigatable: true,
+                                media: {
+                                    title: "ProgressNEXT 2019 Highlights",
+                                    source: "<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>"
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+              <?php else: ?>
+              <div class="section-foto" style="position:relative;">
+                <img src="<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>" class="img-fluid">
+              </div>
+            <?php endif; ?>
+            </div>
+            <div class="col-2" style="background-color: black">
+            </div>
+
                   <br>
+                  <a class="btn btn-outline-light" href="<?=base_url('/public/Pages/getPostKategori/'.$p['ID_Kategori']) ?>" style="background:grey; border:none; border-radius:10px ;width: 100px;height:100%; padding:1px">#<?=$p['Nama_Kategori'] ?></a>
                   <div class="section-button-like" style="">
                     <div class="container-button-like" style="display:inline-block">
                         <button class="btn-like btn btn-block" data-id=<?= $p['ID_Postingan'] ?>>
                           <?php if (!isset($p["Like"])): ?>
                             <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
                           <?php else: ?>
-                            <img src="<?= base_url('public/gambar/sudahlike.png') ?>" style="height:20px;weight:20px;">
+                            <img src="<?= base_url('public/gambar/sudahlike2.png') ?>" style="height:20px;weight:20px;">
                           <?php endif; ?>
                           <text>
                             <?= $p['Suka'] ?>
@@ -152,7 +174,7 @@
                           <?php if (!isset($p["Dislike"])): ?>
                             <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
                           <?php else: ?>
-                            <img src="<?= base_url('public/gambar/sudahdislike.jpg') ?>" style="height:20px;weight:20px;">
+                            <img src="<?= base_url('public/gambar/sudahdislike2.png') ?>" style="height:20px;weight:20px;">
                           <?php endif; ?>
                           <text>
                             <?= $p['Tidak_Suka'] ?>
@@ -168,8 +190,7 @@
                       </a>
                     </div>
                   </div>
-                </div>
-              </div>
+
             </div>
             <hr>
             <?php endforeach; ?>
@@ -201,7 +222,7 @@
                           <?php if (!isset($p["Like"])): ?>
                             <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
                           <?php else: ?>
-                            <img src="<?= base_url('public/gambar/sudahlike.png') ?>" style="height:20px;weight:20px;">
+                            <img src="<?= base_url('public/gambar/sudahlike2.png') ?>" style="height:20px;weight:20px;">
                           <?php endif; ?>
                           <text>
                             <?= $p['Suka'] ?>
@@ -213,7 +234,7 @@
                           <?php if (!isset($p["Dislike"])): ?>
                             <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
                           <?php else: ?>
-                            <img src="<?= base_url('public/gambar/sudahdislike.jpg') ?>" style="height:20px;weight:20px;">
+                            <img src="<?= base_url('public/gambar/sudahdislike2.png') ?>" style="height:20px;weight:20px;">
                           <?php endif; ?>
                           <text>
                             <?= $p['Tidak_Suka'] ?>
@@ -273,7 +294,7 @@
             let jumlah_tidak_suka = data["count"].Tidak_Suka;
             if (data["sukses"]==1) {
               // BARU DISLIKE
-              t.children("img").attr("src","<?= base_url('public/gambar/sudahdislike.jpg') ?>");
+              t.children("img").attr("src","<?= base_url('public/gambar/sudahdislike2.png') ?>");
             }else if (data["sukses"]==0) {
               // HAPUS DISLIKE
               t.children("img").attr("src","<?= base_url('public/gambar/dislikeputih.png') ?>");
@@ -301,7 +322,7 @@
           success:function(data){
             let jumlah_suka = data["count"].Suka;
             if (data["sukses"]== 1){
-                t.children("img").attr("src","<?= base_url('public/gambar/sudahlike.png') ?>");
+                t.children("img").attr("src","<?= base_url('public/gambar/sudahlike2.png') ?>");
             }else if (data["sukses"]== 0){
                 t.children("img").attr("src","<?= base_url('public/gambar/likehitam.png') ?>");
             }

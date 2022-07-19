@@ -94,11 +94,11 @@
         <a class="btn btn-outline-light" href="<?=base_url('/public/Pages/getPostKategori/'.$p['ID_Kategori']) ?>" style="background:grey; border:none; border-radius:10px ;width: 100px;height:100%; padding:1px">#<?=$p['Nama_Kategori'] ?></a>
         <div class="section-button-like" style="">
           <div class="container-button-like" style="display:inline-block">
-              <button class="btn-like btn k-button" data-id=<?= $p['ID_Postingan'] ?> style="">
+              <button class="btn-like k-button" data-id=<?= $p['ID_Postingan'] ?> style="">
                 <?php if (!isset($p["Like"])): ?>
                   <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
                 <?php else: ?>
-                  <img src="<?= base_url('public/gambar/sudahlike.png') ?>" style="height:20px;weight:20px;">
+                  <img src="<?= base_url('public/gambar/sudahlike2.png') ?>" style="height:20px;weight:20px;">
                 <?php endif; ?>
                 <text>
                   <?= $p['Suka'] ?>
@@ -106,11 +106,11 @@
               </button>
           </div>
           <div class="container-button-dislike" style="display:inline-block">
-              <button id="" class="btn k-button btn-dislike" data-id=<?= $p['ID_Postingan'] ?>>
+              <button id="" class="k-button btn-dislike" data-id=<?= $p['ID_Postingan'] ?>>
                 <?php if (!isset($p["Dislike"])): ?>
                   <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
                 <?php else: ?>
-                  <img src="<?= base_url('public/gambar/sudahdislike.jpg') ?>" style="height:20px;weight:20px;">
+                  <img src="<?= base_url('public/gambar/sudahdislike2.png') ?>" style="height:20px;weight:20px;">
                 <?php endif; ?>
                 <text>
                   <?= $p['Tidak_Suka'] ?>
@@ -119,7 +119,7 @@
           </div>
           <div class="" style="display:inline-block">
             <a href="<?= base_url('public/Pages/Komentar?slug='.$p['Slug'])?>">
-              <button class="comment btn k-button btn-block">
+              <button class="comment k-button btn-block">
                 <img src="<?= base_url('public/gambar/komentarhitam.png') ?>" style="height:20px;weight:20px;">
               </button>
             </a>
@@ -129,19 +129,9 @@
       </div>
       <div class="col-1">
         <div class="pt-5" style="">
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle mx-2" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              AKUN
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a href="<?= base_url('public/Pages/SavePost?slug='.$p['Slug']) ?>"></a>
-                <a href="<?= base_url('public/Pages/LaporPost?slug='.$p['Slug']) ?>"></a>
-                <a href="#">Tidak Masuk Akal</a>
-            </div>
-          </li> -->
-          <!-- <a href="<?= base_url('public/Pages/SavePost?slug='.$p['Slug']) ?>"><button class="btn btn-outline-light">Save</button></a>
+           <a href="<?= base_url('public/Pages/SavePost?slug='.$p['Slug']) ?>"><button class="btn btn-outline-light">Save</button></a>
           <a href="<?= base_url('public/Pages/LaporPost?slug='.$p['Slug']) ?>"><button class="btn btn-outline-light">Lapor</button></a>
-          <button class="btn btn-outline-light">Tidak Masuk Akal</button> -->
+          <button class="btn btn-outline-light">Tidak Masuk Akal</button>
         </div>
       </div>
     </div>
@@ -163,7 +153,7 @@
             let jumlah_tidak_suka = data["count"].Tidak_Suka;
             if (data["sukses"]==1) {
               // BARU DISLIKE
-              t.children("img").attr("src","<?= base_url('public/gambar/sudahdislike.jpg') ?>");
+              t.children("img").attr("src","<?= base_url('public/gambar/sudahdislike2.png') ?>");
             }else if (data["sukses"]==0) {
               // HAPUS DISLIKE
               t.children("img").attr("src","<?= base_url('public/gambar/dislikeputih.png') ?>");
@@ -191,7 +181,7 @@
           success:function(data){
             let jumlah_suka = data["count"].Suka;
             if (data["sukses"]== 1){
-                t.children("img").attr("src","<?= base_url('public/gambar/sudahlike.png') ?>");
+                t.children("img").attr("src","<?= base_url('public/gambar/sudahlike2.png') ?>");
             }else if (data["sukses"]== 0){
                 t.children("img").attr("src","<?= base_url('public/gambar/likehitam.png') ?>");
             }

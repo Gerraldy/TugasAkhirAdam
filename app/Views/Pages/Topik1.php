@@ -19,13 +19,10 @@
       <div class="col-12" style="">
         <text style="font-size:12px; color:grey">Diskusi Senja~</text>
         <div class="col-12" style="">
-          <h4>Diskusi Tentang Covid19 Disini!</h4>
+          <h4 style="color:white">Diskusi Tentang Covid19 Disini!</h4>
           <div class="" style="">
             <div class=" section-foto" style="position:relative;">
               <img src="<?= base_url('public/gambar/covid19.png')?>" class="img-fluid">
-              <div class="section-btn-dropdown" style="">
-                <button class="option btn btn-block">. . . </button>
-              </div>
             </div>
             <div class="" style="">
               Suka :  Tidak Suka :
@@ -36,7 +33,9 @@
                 <button id="dislike" class="btn btn-block"><img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;"></button>
               </div>
               <div class="" style="position: relative; top:-50px ;left:100px;height:25px; width:50px;">
-                <a href="https://www.facebook.com/" target="_blank"><img src="<?= base_url('public/gambar/facebook.png') ?>" style="width:40px; height:40px"></a>
+                <div id="fb-root"></div>
+                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v14.0" nonce="hsYaH8oe"></script>
+                <div class="fb-share-button" data-href="https://9gag.com/u/adambejo4040/comments" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2Fcodeigniter4%2Fpublic%2FPages%2FKomentar%3Fslug%3Dhon&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Bagikan</a></div>
               </div>
               <div class="" style=" position: relative; bottom:20px ;height:100px; width:auto; ">
                 <form id="invitationForm">
@@ -44,7 +43,7 @@
                   <div class="k-form-footer">
                       <!-- <div class="k-counter-container" style="position: relative; left: 500px;"><span class="k-counter-value">0</span>/200</div> -->
                       <br>
-                      <button id="komen" class="k-button k-primary" style="position: relative; right: auto;">Send</button>
+                      <button id="komen" class="k-button" style="position: relative; right: auto;">Send</button>
                   </div>
                 </form>
             </div>
@@ -55,7 +54,7 @@
   </div>
 <script>
     $(document).ready(function () {
-      
+
 
       $("#invitation").kendoTextArea({
                rows: 10,
