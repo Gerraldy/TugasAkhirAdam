@@ -92,6 +92,9 @@ div#meme-canvas-container {
   width:50px;
 }
 </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.js"></script>
+
 <div class="container"  style="background-color:#777">
   <div class="row pt-3">
     <div class="col-6">
@@ -173,7 +176,8 @@ div#meme-canvas-container {
         </div>
         <div class="mt-5 pb-3 row">
           <div class="col-6">
-            <input type="button" name="save-as-image" id="save-as-image" class="btn-save" value="Buat Meme" />
+            <input type="button" name="save-as-image" id="save-as-image" class="btn-save" onclick="save()" value="Buat Meme" />
+						<input type="button" name="save" id="save" class="btn-download" onclick="download_img()" value="save" />
           </div>
           <div class="col-6">
             <button id="reset" class="k-button w-100">Reset</button>
@@ -185,10 +189,33 @@ div#meme-canvas-container {
   </div>
   <div class="label-preview">Preview</div>
   <div id="meme-canvas-container">
-      <canvas id="meme-preview"></canvas>
+      <!-- <canvas id="meme-preview"></canvas> -->
   </div>
 </div>
 <script>
+
+// html2canvas($('#meme-bg-target'), {
+//     onrendered: function (canvas) {
+//         var canvasImg = canvas.toDataURL("image/jpg");
+//         $('#meme-canvas-container').html('<img src="'+canvasImg+'" alt="">');
+//     }
+// });
+// html2canvas(document.body).then(function(canvas) {
+//     document.body.appendChild(canvas);
+// });
+
+function save() {
+	html2canvas(document.querySelector("#meme-bg-target")).then(canvas => {
+		canvas.id = "newmeme";
+	  document.querySelector("#meme-canvas-container").appendChild(canvas);
+		// canvas.style.display="none";
+		var link = document.createElement('a');
+  	link.download = 'memebaru.png';
+  	link.href = document.getElementById('newmeme').toDataURL()
+  	link.click();
+	});
+
+}
 
 function showPreview(objFileInput)
 {
@@ -213,6 +240,11 @@ $( function() {
     	$(".meme-txt-area").draggable();
     	$(".meme-txt-area").focus();
     }
+
+		$("#reset").click(function () {
+    	$(".meme-txt-area").hide();
+		});
+
   let imgInput = document.getElementById('upload');
   imgInput.addEventListener('change', function(e) {
     if(e.target.files) {

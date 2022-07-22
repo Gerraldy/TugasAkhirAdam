@@ -6,7 +6,11 @@
 
     <div class="row" >
       <div class="col-2">
-        <img src="<?= base_url('public/uploads/gambar_profile/'. $profile['url_foto']) ?>" id="fotoprofile" class="img-fluid" style="height:100px;weight:100px;border-radius:50%; object-fit: cover;display: flex;justify-content: center;align-items: center;">
+        <?php if ($profile['url_foto'] == ""): ?>
+          <img src="<?= base_url('/public/gambar/profile.png') ?>" id="fotoprofile" class="img-fluid" style="height:100px;weight:100px;border-radius:50%; object-fit: cover;display: flex;justify-content: center;align-items: center;">
+          <?php else: ?>
+            <img src="<?= base_url('public/uploads/gambar_profile/'. $profile['url_foto']) ?>" id="fotoprofile" class="img-fluid" style="height:100px;weight:100px;border-radius:50%; object-fit: cover;display: flex;justify-content: center;align-items: center;">
+        <?php endif; ?>  
       </div>
       <div class="col-10">
         <p style="color:white ;position:relative; top:10px;font-size:20px"><?=$profile['Nama'] ?></p>

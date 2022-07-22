@@ -38,7 +38,7 @@
           </div>
           <div class="col-10">
             <input id="Nama" class="nama k-textbox" type="text" style="width:200p" name="Nama" value="<?=$user['Nama'] ?>" required><br><br>
-            <input id="tgl-lahir" value="<?=$user['Tgl_Lahir'] ?>" title="datepicker" name="Tgl_Lahir"><br><br><br>
+            <input id="tgl-lahir" type="k-datepicker" value="<?=$user['Tgl_Lahir'] ?>" title="datepicker" name="Tgl_Lahir"><br><br><br>
             <textarea id="Tentang" class="k-textarea"  style="width: 50%;" required data-required-msg="Deskripsikan Tentangmu!!" name="Tentang"><?=$user['Tentang'] ?></textarea>
           </div>
         </div>
@@ -49,6 +49,7 @@
 </div>
 
 <script>
+$("#tgl-lahir").kendoDatePicker();
 function readURL(input) {
 if (input.files && input.files[0]) {
     var reader = new FileReader();

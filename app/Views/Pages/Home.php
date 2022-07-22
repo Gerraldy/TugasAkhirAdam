@@ -94,7 +94,7 @@
         <a class="btn btn-outline-light" href="<?=base_url('/public/Pages/getPostKategori/'.$p['ID_Kategori']) ?>" style="background:grey; border:none; border-radius:10px ;width: 100px;height:100%; padding:1px">#<?=$p['Nama_Kategori'] ?></a>
         <div class="section-button-like" style="">
           <div class="container-button-like" style="display:inline-block">
-              <button class="btn-like k-button" data-id=<?= $p['ID_Postingan'] ?> style="">
+              <button class="btn-like k-button btn-outline-light" data-id=<?= $p['ID_Postingan'] ?> style="">
                 <?php if (!isset($p["Like"])): ?>
                   <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
                 <?php else: ?>
@@ -106,7 +106,7 @@
               </button>
           </div>
           <div class="container-button-dislike" style="display:inline-block">
-              <button id="" class="k-button btn-dislike" data-id=<?= $p['ID_Postingan'] ?>>
+              <button id="" class="k-button btn-dislike btn-outline-light" data-id=<?= $p['ID_Postingan'] ?>>
                 <?php if (!isset($p["Dislike"])): ?>
                   <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
                 <?php else: ?>
@@ -119,7 +119,7 @@
           </div>
           <div class="" style="display:inline-block">
             <a href="<?= base_url('public/Pages/Komentar?slug='.$p['Slug'])?>">
-              <button class="comment k-button btn-block">
+              <button class="comment k-button btn-outline-light btn-block">
                 <img src="<?= base_url('public/gambar/komentarhitam.png') ?>" style="height:20px;weight:20px;">
               </button>
             </a>

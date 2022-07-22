@@ -20,8 +20,6 @@ class Auth extends BaseController
   {
     $session = \Config\Services::session();
     //ini diganti pengecekan register
-
-
     $email =  $this->request->getVar('email');
     $username =  $this->request->getVar('username');
     $user = $this->MemersModel->where('email',$email)->orWhere('username',$username)->first();
@@ -42,7 +40,7 @@ class Auth extends BaseController
        $session->setFlashdata('sukses-registrasi',"1");
     }
     //----
-    return redirect()->to(base_url('public/Auth/Login'));
+    return redirect()->to(base_url('public/Pages/Login'));
     //return view('Pages/Login');
 
   }
