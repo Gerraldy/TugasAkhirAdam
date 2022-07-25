@@ -65,8 +65,6 @@ class Auth extends BaseController
       //dd($user['Username']);
       return redirect()->to(base_url('public/'));
     }elseif ($email=='admin' && $password=='admin') {
-
-
       //dd($data['laporanpost']);
        echo view('Pages/Admin/AdminDashboard');
     }else {

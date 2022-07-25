@@ -18,6 +18,9 @@ use App\Models\TokoProdukModel;
 
 use App\Models\LaporanPostModel;
 
+use App\Models\TopikModel;
+use App\Models\TopikKomentarModel;
+
 class Pages extends BaseController
 {
 	protected $PostModel;
@@ -34,6 +37,9 @@ class Pages extends BaseController
 	protected $TokoProdukModel;
 
 	protected $LaporanPostModel;
+
+	protected $TopikModel;
+	protected $TopiKomentarkModel;
 
 	public function __construct()
 	{
@@ -52,6 +58,8 @@ class Pages extends BaseController
 
 		$this->LaporanPostModel = new LaporanPostModel();
 
+		$this->TopikModel = new TopikModel();
+		$this->TopikKomentarModel = new TopikKomentarModel();
 	}
 
 	public function index()
@@ -63,6 +71,7 @@ class Pages extends BaseController
 		//$post = $posting->findAll();
 		$unlike = $this->UnlikeModel->findAll();
 		$like = $this->LikeModel->findAll();
+		$topik = $this->TopikModel->findAll();
 		$postingan = $this->PostModel->getPostAndDetail();
 		// dd($unlike);
 		for ($i=0; $i < count($postingan); $i++) {
@@ -83,9 +92,10 @@ class Pages extends BaseController
 		$data = [
       'title' => 'Home!',
       'postingan' => $postingan,
+			'topik' => $topik,
 			'kategori' => $this->KategoriModel->namaKategori()
  		 ];
-		 // dd($data['postingan']);
+		  // dd($data['topik']);
 		echo view('Pages/Home', $data);
 	}
 	public function getPostKategori($idKategoriPost)
@@ -193,40 +203,19 @@ class Pages extends BaseController
 		];
     return view('Pages/Login', $data);
 	}
-  public function Topic1()
+  public function Topik()
   {
+		$idtopik = $this->request->getGet("ID_Topik");
+		$topik = $this->TopikModel->where("ID_Topik", $idtopik)->first();
+		$komentar = $this->TopikKomentarModel->getKomentar($idtopik);
 		$data = [
-			'title' => "Covid19!",
+			'title' => $topik['Nama_Topik'],
+			'topik' => $topik,
+			'komentar' => $komentar,
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
-    echo view('Pages/Topik1', $data);
-  }
-
-	public function Topic2()
-  {
-		$data = [
-			'title' => "Pemerintah!",
-			'kategori' => $this->KategoriModel->namaKategori()
-		];
-    echo view('Pages/Topik2', $data);
-  }
-
-	public function Topic3()
-  {
-		$data = [
-			'title' => "Vaksin!",
-			'kategori' => $this->KategoriModel->namaKategori()
-		];
-    echo view('Pages/Topik3', $data);
-  }
-
-	public function Topic4()
-  {
-		$data = [
-			'title' => "Cafe!",
-			'kategori' => $this->KategoriModel->namaKategori()
-		];
-    echo view('Pages/Topik4', $data);
+		// dd($komentar);
+		echo view('Pages/Topik', $data);
   }
 
 	public function BuatMeme()
@@ -276,26 +265,31 @@ class Pages extends BaseController
 		$namauser = $this->request->getGet("name");
 		$getuser = $this->MemersModel->where("Nama", $namauser)->first();
 		$iduser = $getuser['ID_Memers'];
+
 		$user = session()->get("user");
 		$savepost = $this->SavePostinganModel->getSavePost($iduser);
 		if ($iduser == $user) {
 			$id = session()->get('user');
+			$mypostingan = $this->PostModel->getMyPost($id);
 			$user = $this->MemersModel->where('ID_Memers',$id)->first();
 			$data = [
 				'title' => "Profile!",
 				'profile' => $user,
 				'postingan' => $this->PostModel->getPostProfile($id),
 				'savepost' => $savepost,
+				'mypostingan' => $mypostingan,
 				'kategori' => $this->KategoriModel->namaKategori()
 			];
 	    echo view('Pages/Profile', $data);
 		}else {
 			$userlain = $this->MemersModel->where('ID_Memers', $iduser)->first();
 			$savepost = $this->SavePostinganModel->getSavePost($iduser);
+			$mypostingan = $this->PostModel->getMyPost($iduser);
 			$data = [
 				'title' => $namauser." - MemeTube",
 				'kategori' => $this->KategoriModel->namaKategori(),
 				'postingan' => $this->PostModel->getPostProfile($iduser),
+				'mypostingan' => $mypostingan,
 				'savepost' => $savepost,
 				'profile' => $userlain
 			];
@@ -303,8 +297,6 @@ class Pages extends BaseController
 			echo view('Pages/ProfileUserLain', $data);
 		}
 	}
-
-
 
 	public function SettingProfile()
 	{
@@ -395,12 +387,8 @@ class Pages extends BaseController
 
 			return redirect()->to(base_url('public/Pages/SettingPassword'));
 		}
-
 		//dd($post);
-
-
 	}
-
 
 	public function Toko()
   {

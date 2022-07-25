@@ -17,7 +17,7 @@
     <script src="<?=base_url('public/navbar/js/scripts.js') ?>"></script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
+    
     <script src="<?= base_url('public/js/bootstrap.min.js') ?>"></script>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
@@ -112,7 +112,7 @@
                <div class="container-fluid pt-5" style="margin:auto; background-color:#232222">
                  <div class="row">
                    <div class="col-2" style="">
-                     <div class="" style="position:; width:auto">
+                     <div class="mt-4" style="position:; width:auto">
                        <?php foreach ($kategori as $k): ?>
                          <a class="btn btn-outline-light" href="<?=base_url('/public/Pages/getPostKategori/'.$k['ID_Kategori']) ?>" style="margin:auto; background:transparent; border:none; width: 200px;height:100%"><img src="<?= base_url('public/gambar/'.$k['url_gambar']) ?>" style="height:20px;weight:20px;"> <?=$k['Nama_Kategori']?> </a> <hr>
                        <?php endforeach; ?>

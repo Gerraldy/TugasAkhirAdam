@@ -1,292 +1,161 @@
-<style media="screen">
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box}
+body {font-family: Verdana, sans-serif; margin:0}
+.mySlides {display: none}
+img {vertical-align: middle;}
 
-* {
-box-sizing: border-box;
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
 }
 
-body {
-background: #f6f5f7;
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
-font-family: 'Montserrat', sans-serif;
-height: 100vh;
-margin: -20px 0 50px;
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
 }
 
-h1 {
-font-weight: bold;
-margin: 0;
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
 }
 
-h2 {
-text-align: center;
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
 }
 
-p {
-font-size: 14px;
-font-weight: 100;
-line-height: 20px;
-letter-spacing: 0.5px;
-margin: 20px 0 30px;
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
 }
 
-span {
-font-size: 12px;
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
 }
 
-a {
-color: #333;
-font-size: 14px;
-text-decoration: none;
-margin: 15px 0;
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
 }
 
-button {
-border-radius: 20px;
-border: 1px solid #FF4B2B;
-background-color: #FF4B2B;
-color: #FFFFFF;
-font-size: 12px;
-font-weight: bold;
-padding: 12px 45px;
-letter-spacing: 1px;
-text-transform: uppercase;
-transition: transform 80ms ease-in;
+.active, .dot:hover {
+  background-color: #717171;
 }
 
-button:active {
-transform: scale(0.95);
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
 }
 
-button:focus {
-outline: none;
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
 }
 
-button.ghost {
-background-color: transparent;
-border-color: #FFFFFF;
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
 }
-
-form {
-background-color: #FFFFFF;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-padding: 0 50px;
-height: 100%;
-text-align: center;
-}
-
-input {
-background-color: #eee;
-border: none;
-padding: 12px 15px;
-margin: 8px 0;
-width: 100%;
-}
-
-.container {
-background-color: #fff;
-border-radius: 10px;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25),
-    0 10px 10px rgba(0,0,0,0.22);
-position: relative;
-overflow: hidden;
-width: 768px;
-max-width: 100%;
-min-height: 480px;
-}
-
-.form-container {
-position: absolute;
-top: 0;
-height: 100%;
-transition: all 0.6s ease-in-out;
-}
-
-.sign-in-container {
-left: 0;
-width: 50%;
-z-index: 2;
-}
-
-.container.right-panel-active .sign-in-container {
-transform: translateX(100%);
-}
-
-.sign-up-container {
-left: 0;
-width: 50%;
-opacity: 0;
-z-index: 1;
-}
-
-.container.right-panel-active .sign-up-container {
-transform: translateX(100%);
-opacity: 1;
-z-index: 5;
-animation: show 0.6s;
-}
-
-@keyframes show {
-0%, 49.99% {
-  opacity: 0;
-  z-index: 1;
-}
-
-50%, 100% {
-  opacity: 1;
-  z-index: 5;
-}
-}
-
-.overlay-container {
-position: absolute;
-top: 0;
-left: 50%;
-width: 50%;
-height: 100%;
-overflow: hidden;
-transition: transform 0.6s ease-in-out;
-z-index: 100;
-}
-
-.container.right-panel-active .overlay-container{
-transform: translateX(-100%);
-}
-
-.overlay {
-background: #FF416C;
-background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-background: linear-gradient(to right, #FF4B2B, #FF416C);
-background-repeat: no-repeat;
-background-size: cover;
-background-position: 0 0;
-color: #FFFFFF;
-position: relative;
-left: -100%;
-height: 100%;
-width: 200%;
-  transform: translateX(0);
-transition: transform 0.6s ease-in-out;
-}
-
-.container.right-panel-active .overlay {
-  transform: translateX(50%);
-}
-
-.overlay-panel {
-position: absolute;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-padding: 0 40px;
-text-align: center;
-top: 0;
-height: 100%;
-width: 50%;
-transform: translateX(0);
-transition: transform 0.6s ease-in-out;
-}
-
-.overlay-left {
-transform: translateX(-20%);
-}
-
-.container.right-panel-active .overlay-left {
-transform: translateX(0);
-}
-
-.overlay-right {
-right: 0;
-transform: translateX(0);
-}
-
-.container.right-panel-active .overlay-right {
-transform: translateX(20%);
-}
-
-.social-container {
-margin: 20px 0;
-}
-
-.social-container a {
-border: 1px solid #DDDDDD;
-border-radius: 50%;
-display: inline-flex;
-justify-content: center;
-align-items: center;
-margin: 0 5px;
-height: 40px;
-width: 40px;
-}
-
-
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-<h2>Weekly Coding Challenge #1: Sign in/up Form</h2>
-<div class="container" id="container">
-	<div class="form-container sign-up-container">
-		<form action="#">
-			<h1>Create Account</h1>
-			<div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="social"><i class="fab fa-google"></i></a>
-				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div>
-			<span>or use your email for registration</span>
-			<input type="text" placeholder="Name" />
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<button>Sign Up</button>
-		</form>
-	</div>
-	<div class="form-container sign-in-container">
-		<form action="#">
-			<h1>Sign in</h1>
-			<div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="social"><i class="fab fa-google"></i></a>
-				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div>
-			<span>or use your account</span>
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<a href="#">Forgot your password?</a>
-			<button>Sign In</button>
-		</form>
-	</div>
-	<div class="overlay-container">
-		<div class="overlay">
-			<div class="overlay-panel overlay-left">
-				<h1>Welcome Back!</h1>
-				<p>To keep connected with us please login with your personal info</p>
-				<button class="ghost" id="signIn">Sign In</button>
-			</div>
-			<div class="overlay-panel overlay-right" style="background-image:">
-				<h1>Hello, Friend!</h1>
-				<p>Enter your personal details and start journey with us</p>
-				<button class="ghost" id="signUp">Sign Up</button>
-			</div>
-		</div>
-	</div>
+</head>
+<body>
+
+<div class="slideshow-container">
+
+<div class="mySlides fade">
+  <div class="numbertext">1 / 3</div>
+  <img src="<?= base_url('/public/gambar/Logo.png') ?>" style="width:100%">
+  <div class="text">Caption Text</div>
 </div>
 
-<script type="text/javascript">
-const signUpButton = document.getElementById('signUp');
-const signInButton = document.getElementById('signIn');
-const container = document.getElementById('container');
+<div class="mySlides fade">
+  <div class="numbertext">2 / 3</div>
+  <img src="<?= base_url('/public/gambar/Logo.png') ?>" style="width:100%">
+  <div class="text">Caption Two</div>
+</div>
 
-signUpButton.addEventListener('click', () => {
-container.classList.add("right-panel-active");
-});
+<div class="mySlides fade">
+  <div class="numbertext">3 / 3</div>
+  <img src="<?= base_url('/public/gambar/Logo.png') ?>" style="width:100%">
+  <div class="text">Caption Three</div>
+</div>
 
-signInButton.addEventListener('click', () => {
-container.classList.remove("right-panel-active");
-});
+<a class="prev" onclick="plusSlides(-1)">❮</a>
+<a class="next" onclick="plusSlides(1)">❯</a>
+
+</div>
+<br>
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
+  <span class="dot" onclick="currentSlide(3)"></span>
+</div>
+
+<script>
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
 </script>
+
+</body>
+</html>
