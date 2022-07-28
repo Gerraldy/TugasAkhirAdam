@@ -17,7 +17,7 @@
     <script src="<?=base_url('public/navbar/js/scripts.js') ?>"></script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    
+
     <script src="<?= base_url('public/js/bootstrap.min.js') ?>"></script>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
@@ -34,7 +34,6 @@
             document.write(decodeURIComponent('%3Clink rel="stylesheet" href="/path/to/local/kendo.common.min.css" %3C/%3E'));
             document.write(decodeURIComponent('%3Clink rel="stylesheet" href="/path/to/local/kendo.blueopal.min.css" %3C/%3E'));
             document.write(decodeURIComponent('%3Cscript src="/path/to/local/kendo.all.min.js" %3E%3C/script%3E'));
-
         }
 
         $( function() {
@@ -84,6 +83,7 @@
                        </button>
                        <div class="collapse navbar-collapse" id="navbarResponsive">
                            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                               <li class="nav-item"><a href="#" class="nav-link">SUBSCRIBE</a></li>
                                <li class="nav-item"><a href="<?= base_url('/public/Pages/Toko') ?>" class="nav-link">TOKO</a></li>
                                <li class="nav-item"><a class="nav-link" href="#" id="meme">BUAT MEME</a></li>
                                <?php if (session()->get('user') != null): ?>
@@ -93,7 +93,6 @@
                                    </a>
                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                      <a class="dropdown-item" href="<?= base_url('/public/Pages/MyProfile') ?>">Profil</a>
-                                     <a class="dropdown-item" href="#">Tokoku</a>
                                      <a class="dropdown-item" id="setting" href="<?=base_url('/public/Pages/SettingProfile') ?>">Setting</a>
                                      <a class="dropdown-item" href="<?= base_url('/public/Auth/Logout') ?>">Logout</a>
                                    </div>
@@ -147,7 +146,6 @@
                   <img src="<?= base_url('/public/gambar/profile.png')?>" href="<?= base_url('/public/gambar/profile.png')?>" data-upload="0" id="gambar-preview" alt="" style="width:80px; height:80px; object-fit: cover">
                   Pilih Gambar:
                   <input type="file" name="Nama_Gambar" class="" id="Nama_Gambar" onchange="readURL(this);">
-
                   <br>
                   <br>
                   <textarea id="judul" style="width: 100%;" required data-required-msg="Deskripsikan Gambarmu!" name="Judul"></textarea>
@@ -180,11 +178,7 @@
 
     </div>
   </div>
-
-
-
           <script>
-
             function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -228,13 +222,8 @@
                       }
                   }
 
-                  $("#ngakak").kendoButton();
-                  $("#game").kendoButton();
-                  $("#anime").kendoButton();
-                  $("#hewan").kendoButton();
-                  $("#sport").kendoButton();
-                  $("#jodoh").kendoButton();
-                  $("#art").kendoButton();
+
+
                   $("#meme").click(function(){
                     $("#modal-create-meme").modal("show");
                   });

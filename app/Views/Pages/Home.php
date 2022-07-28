@@ -108,6 +108,7 @@
   <div class="m-2 p-3 " style="background-color:">
     <div class="row">
       <div class="col-4">
+
         <div class="">
         </div>
         <form class="" id="formSearch" action="<?= base_url('/public/Pages/Cari') ?>" method="get">
@@ -130,7 +131,7 @@
   </div>
   <hr style="height:3px;color:black;background-color:white">
   <div class="slideshow-container" style="max-width:70%">
-
+    
   <div class="mySlides fade">
     <div class="numbertext">1 / 3</div>
     <div class="row">

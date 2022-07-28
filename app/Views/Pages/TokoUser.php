@@ -4,37 +4,47 @@
 
 <div class="container"  style="max-width:1000px; margin:auto">
   <div class="row p-2">
-    <div class="col-10">
-      <h3>Ucup Store</h1>
-    </div>
-    <div class="col-2">
-      <a href="#" class="" style="text-decoration:none"><button id="" class="k-button" style="padding: 3px 10px;">Buka Toko</button></a>
-    </div>
+    <?php if ($user == $toko['ID_Memers']): ?>
+      <div class="col-10">
+        <h3 style="color:white"><?= $toko['Nama_Toko'] ?></h3>
+      </div>
+        <?php if ($toko['status'] == 1): ?>
+          <div class="col-2">
+            <a href="#" class="" style="text-decoration:none"><button id="" class="k-button" style="padding: 3px 10px;">Tutup Toko</button></a>
+          </div>
+          <?php else: ?>
+            <div class="col-2">
+              <a href="#" class="" style="text-decoration:none"><button id="" class="k-button" style="padding: 3px 10px;">Buka Toko</button></a>
+            </div>
+        <?php endif; ?>
+      <?php else: ?>
+        <div class="col-12">
+          <h3 style="color:white"><?= $toko['Nama_Toko'] ?></h3>
+        </div>
+    <?php endif; ?>
   </div>
   <div class="row">
-    Tentang Toko!
-    <textarea id="tentang" style="width: 100%;" required data-required-msg="!" name="tentang"></textarea>
+    <p style="color:white"><?=$toko['Tentang'] ?></p><br>
+    <text style="color:white">Kontak : <?=$toko['Kontak'] ?> </text>
   </div>
   <div class="row p-2">
-    <div class="col-4">
-      <div class="">
-        <img src="<?= base_url('public/gambar/baju.png') ?>" style="height:200px;weight:100px;">
-        <p> Nama Barang </p>
+    <?php foreach ($toko_produk as $tp ): ?>
+        <div class="col">
+          <a href="<?=base_url('public/Pages/DetailProduk?idproduk='.$tp['ID_Produk']) ?>">
+            <img src="<?= base_url('public/gambar/baju.png') ?>" class="img-fluid" style="max-width:50%; max-height:50%"><br>
+            <text style="color:white"><?=$tp['Nama_Produk'] ?> </text>
+          </a>
+        </div>
+    <?php endforeach; ?>
+    <div class="row">
+      <div class="col" style="text-align: left;">
+        <a href="<?=base_url('public/Pages/TambahProduk')?>" >
+          <img src="<?= base_url('public/gambar/plus.png') ?>" class="img-fluid" style="max-width:50%; max-height:50%"><br>
+        </a>
       </div>
-    </div>
-    <div class="col-4">
-      <div class="">
-        <img src="<?= base_url('public/gambar/celana.jpeg') ?>" style="height:200px;weight:100px;">
-        <p> Nama Barang </p>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="">
-        <img src="<?= base_url('public/gambar/hoodie.jpg') ?>" style="height:200px;weight:100px;">
-        <p> Nama Barang </p>
-      </div>
+
     </div>
   </div>
-</div>
+  </div>
 
 <?= $this->endSection();  ?>

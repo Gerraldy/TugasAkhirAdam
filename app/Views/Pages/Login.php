@@ -42,7 +42,7 @@
 			<span>or use your account</span>
 			<input class="email" type="text" name="email" placeholder="Email" />
 			<input class="password" type="password" name="password" placeholder="Password" />
-			<a href="#">Forgot your password?</a>
+			<a href="<?=base_url('public/Auth/LupaPassword') ?>">Forgot your password?</a>
 			<button>Sign In</button>
 		</form>
 	</div>

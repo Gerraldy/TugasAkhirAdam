@@ -30,7 +30,7 @@
 	color:#black;
 	text-align:left;
 	cursor:move;
-    font-size:24px;
+  font-size:24px;
 }
 .meme-txt-area:focus {
 	outline: none;
@@ -177,7 +177,6 @@ div#meme-canvas-container {
         <div class="mt-5 pb-3 row">
           <div class="col-6">
             <input type="button" name="save-as-image" id="save-as-image" class="btn-save" onclick="save()" value="Buat Meme" />
-						<input type="button" name="save" id="save" class="btn-download" onclick="download_img()" value="save" />
           </div>
           <div class="col-6">
             <button id="reset" class="k-button w-100">Reset</button>

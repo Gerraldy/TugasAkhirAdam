@@ -10,7 +10,7 @@ class TokoProdukModel extends Model
 {
   protected $table = 'toko_produk';
   protected $primaryKey = "ID_Produk";
-  protected $allowedFields = ['ID_Toko','ID_Kategori_Produk' ,'Nama_Produk','Deskripsi', 'Url_Gambar'];
+  protected $allowedFields = ['ID_Toko','ID_Kategori_Produk' ,'Nama_Produk','Deskripsi','LinkToped', 'LinkShopee', 'Url_Gambar'];
 
 
   public function ProdukToko()

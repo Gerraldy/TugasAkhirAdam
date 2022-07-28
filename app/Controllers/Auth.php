@@ -79,5 +79,10 @@ class Auth extends BaseController
     return redirect()->to(base_url('public/'));
   }
 
+  public function LupaPassword()
+  {
+      echo view('Pages/LupaPassword');
+  }
+
 
 }

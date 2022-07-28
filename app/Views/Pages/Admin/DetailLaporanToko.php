@@ -20,7 +20,7 @@
                         <tr>
                             <th>ID Toko</th>
                             <th>Nama Toko</th>
-                            <th>ID Postingan</th>
+                            <th>Kontak</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -39,7 +39,7 @@
                               <td><?=$detailtoko['Nama_Toko'] ?></td>
                               <td><?=$detailtoko['Kontak'] ?></td>
                               <td>
-                                <form class="" action="<?=base_url('public/Admin/HapusPostingan?idpost='.$detailtoko['ID_Toko']) ?>" method="post">
+                                <form class="" action="<?=base_url('public/Admin/HapusToko?idtoko='.$detailtoko['ID_Toko']) ?>" method="post">
                                   <?= csrf_field(); ?>
                                   <input type="hidden" name="_method" value="DELETE">
                                   <button class="btn btn-danger btn-circle"> <i class="fas fa-exclamation-triangle"></i></button>

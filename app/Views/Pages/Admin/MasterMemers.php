@@ -22,6 +22,7 @@
                             <th>Email</th>
                             <th>Username</th>
                             <th>Url Foto</th>
+                            <th>Action</th>
 
                         </tr>
                     </thead>
@@ -30,9 +31,9 @@
                         <tr>
                             <td><?=$m['Nama'] ?></td>
                             <td><?=$m['Email'] ?></td>
-                            <td><?=$m['Username'] ?></td>
+                            <th>Url Foto</th><th>Url Foto</th><th>Url Foto</th>
                             <td><img src="<?= base_url('public/uploads/gambar_profile/'.$m['url_foto']) ?>" class="img-fluid" style="height:100px;weight:100px; object-fit: cover;display: flex;justify-content: center;align-items: center;"></td>
-                            <!-- <td><a href="<?php//base_url('public/Admin/DetailLaporanAkun?idakun='.$m['ID_Pelanggar']) ?>"><button class="btn btn-danger btn-circle"> <i class="fas fa-exclamation-triangle"></i> </button> </a> </td> -->
+                            <td><a href="<?php//base_url('public/Admin/DetailLaporanAkun?idakun='.$m['ID_Pelanggar']) ?>"><button class="btn btn-danger btn-circle"> <i class="fas fa-exclamation-triangle"></i> </button> </a> </td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

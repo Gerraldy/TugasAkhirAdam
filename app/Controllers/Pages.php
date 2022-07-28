@@ -71,7 +71,7 @@ class Pages extends BaseController
 		//$post = $posting->findAll();
 		$unlike = $this->UnlikeModel->findAll();
 		$like = $this->LikeModel->findAll();
-		$topik = $this->TopikModel->findAll();
+		$topik = $this->TopikModel->orderBy("ID_Topik", "DESC")->findAll();
 		$postingan = $this->PostModel->getPostAndDetail();
 		// dd($unlike);
 		for ($i=0; $i < count($postingan); $i++) {
@@ -93,9 +93,10 @@ class Pages extends BaseController
       'title' => 'Home!',
       'postingan' => $postingan,
 			'topik' => $topik,
+			'toko' => $this->TokoModel->where("ID_Memers", $user)->first(),
 			'kategori' => $this->KategoriModel->namaKategori()
  		 ];
-		  // dd($data['topik']);
+		   //dd($data['toko']);
 		echo view('Pages/Home', $data);
 	}
 	public function getPostKategori($idKategoriPost)
@@ -392,8 +393,10 @@ class Pages extends BaseController
 
 	public function Toko()
   {
+		$user = session()->get("user");
 		$data = [
 			'title' => "Toko!",
+			'toko' => $this->TokoModel->where("ID_Memers", $user)->first(),
 			'toko_kategori' => $this->TokoKategoriModel->namaKategoriToko(),
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
@@ -403,9 +406,12 @@ class Pages extends BaseController
 
 	public function TokoHome()
   {
+		$user = session()->get("user");
 		$data = [
 			'title' => "Home!",
-			'toko_user' => $this->TokoModel->findAll(),
+			'user' => $user,
+			'toko' => $this->TokoModel->where("ID_Memers", $user)->first(),
+			'toko_user' => $this->TokoModel->where("status", 1)->findAll(),
 			'toko_kategori' => $this->TokoKategoriModel->namaKategoriToko(),
 			'toko_produk' => $this->TokoProdukModel->findAll(),
 			'kategori' => $this->KategoriModel->namaKategori()
@@ -416,14 +422,47 @@ class Pages extends BaseController
 
 	public function TokoUser()
   {
+		$id_user = session()->get("user");
+		$idtoko = $this->request->getGet("idtoko");
 		$data = [
-			'title' => "Tokoku!",
+			'title' => "Toko!",
+			'user' => $id_user,
+			'toko' => $this->TokoModel->where("ID_Toko", $idtoko)->first(),
+			'toko_produk' => $this->TokoProdukModel->where("ID_Toko", $idtoko)->findAll(),
 			'toko_kategori' => $this->TokoKategoriModel->namaKategoriToko(),
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
-		// dd($data['toko_kategori']);
+		// dd($data['toko']);
     echo view('Pages/TokoUser', $data);
   }
+
+	public function DetailProduk()
+	{
+		$id_user = session()->get("user");
+		$idproduk = $this->request->getGet("idproduk");
+		$data = [
+			'title' => "Detail Produk!",
+			'produk' => $this->TokoProdukModel->where("ID_Produk", $idproduk)->first(),
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		//dd($data['produk']);
+		echo view('Pages/TokoDetailProduk', $data);
+	}
+
+	public function TambahProduk()
+	{
+		$data = [
+			'title' => "Tambah Produk!",
+			'toko_kategori' => $this->TokoKategoriModel->namaKategoriToko(),
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		echo view('Pages/TokoTambahProduk', $data);
+	}
+
+	public function InsertProduk()
+	{
+		// code...
+	}
 
 	public function percobaan()
 	{

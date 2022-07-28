@@ -6,8 +6,8 @@ use App\Models\LaporanTokoModel;
 use App\Models\PostModel;
 use App\Models\MemersModel;
 use App\Models\TokoModel;
+use App\Models\TopikModel;
 
-;
 
 class Admin extends BaseController
 {
@@ -17,6 +17,7 @@ class Admin extends BaseController
   protected $PostModel;
   protected $MemersModel;
   protected $TokoModel;
+  protected $TopikModel;
 
   public function __construct()
   {
@@ -26,12 +27,41 @@ class Admin extends BaseController
     $this->PostModel = new PostModel();
     $this->MemersModel = new MemersModel();
     $this->TokoModel = new TokoModel();
+    $this->TopikModel = new TopikModel();
   }
 
   public function Dashboard()
 	{
     echo view('Pages/Admin/AdminDashboard');
 	}
+
+  public function MasterTopik()
+	{
+    $data = [
+      'topik' => $this->TopikModel->findAll()
+    ];
+    // dd($data['topik']);
+    echo view('Pages/Admin/MasterTopik', $data);
+	}
+
+  public function MasterAddTopik()
+  {
+    echo view('Pages/Admin/MasterTopikAdd');
+  }
+
+  public function AddTopik()
+  {
+
+    $file = $this->request->getFile('Url_Foto');
+    $fileName = $file->getRandomName();
+    $file->move('uploads/gambar_topik/', $fileName);
+
+    $post = $this->request->getVar();
+    $post['Url_Foto'] = $fileName;
+    $this->TopikModel->save($post);
+      // dd($post);
+    return redirect()->to(base_url('public/Admin/MasterTopik'));
+  }
 
 	public function TabelPost()
 	{
@@ -90,7 +120,7 @@ public function HapusPostingan()
 {
   $idpost = $this->request->getGet("idpost");
   $this->PostModel->delete($idpost);
-  $this->LaporanPostModel->delete($idpost);
+  $this->LaporanPostModel->where("ID_Postingan", $idpost)->delete();
   return redirect()->to(base_url('public/Admin/TabelPost'));
 }
 
@@ -111,7 +141,7 @@ public function HapusAkun()
 {
   $idakun = $this->request->getGet("idakun");
   $this->MemersModel->delete($idakun);
-  $this->LaporanAkunModel->delete($idakun);
+  $this->LaporanAkunModel->where("ID_Memers", $idakun)->delete();
   return redirect()->to(base_url('public/Admin/TabelAkun'));
 }
 
@@ -126,6 +156,14 @@ public function DetailLaporanToko()
   ];
   //dd($detailpost);
   echo view('Pages/Admin/DetailLaporanToko', $data);
+}
+
+public function HapusToko()
+{
+  $idtoko = $this->request->getGet("idtoko");
+  $this->TokoModel->delete($idtoko);
+  $this->LaporanTokoModel->where("ID_Toko", $idtoko)->delete();
+  return redirect()->to(base_url('public/Admin/TabelToko'));
 }
 
 	//--------------------------------------------------------------------

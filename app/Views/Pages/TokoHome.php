@@ -3,14 +3,23 @@
 <?= $this->section('content'); ?>
 
 <div class="container"  style="max-width:1000px; margin:auto">
-    <?php //foreach($toko_user as $t) : ?>
-
+    <div class="row mt-3">
+      <?php if ($toko == null): ?>
+        <div class="col" style="text-align: right;">
+          <button type="button" name="button">Buka toko</button>
+        </div>
+        <?php else: ?>
+          <div class="col" style="text-align: right;">
+            <a href="<?=base_url('public/Pages/TokoUser?idtoko='.$toko['ID_Toko'])?>"><button type="button" class="k-button" name="button">TokoKu</button></a> 
+          </div>
+      <?php endif; ?>
+    </div>
 
       <?php
         for ($i=0; $i < count($toko_user); $i++) {
           echo '<div class="row">';
 
-          echo '<h3><a href="#" style="color:black">'.$toko_user[$i]['Nama_Toko'] . '</a></h3><hr>';
+          echo '<h3><a href="'.base_url('public/Pages/TokoUser?idtoko='. $toko_user[$i]['ID_Toko']) .'" style="color:black">'.$toko_user[$i]['Nama_Toko'] . '</a></h3><hr>';
           for ($j=0; $j < count($toko_produk); $j++) {
             if ($toko_produk[$j]['ID_Toko'] == $toko_user[$i]['ID_Toko']) {
               echo '<div class="col">';

@@ -6,6 +6,7 @@ use App\Models\LikeModel;
 use App\Models\UnlikeModel;
 use App\Models\PostModel;
 use App\Models\KomentarModel;
+use App\Models\TopikKomentarModel;
 
 class LikeKomen extends BaseController
 {
@@ -14,12 +15,15 @@ class LikeKomen extends BaseController
   protected $PostModel;
   protected $KomentarModel;
 
+  protected $TopikKomentarModel;
+
   public function __construct()
   {
     $this->LikeModel = new LikeModel();
     $this->UnlikeModel = new UnlikeModel();
     $this->PostModel = new PostModel();
     $this->KomentarModel = new KomentarModel();
+    $this->TopikKomentarModel = new TopikKomentarModel();
   }
 	public function index()
 	{
@@ -48,6 +52,17 @@ class LikeKomen extends BaseController
     // dd($postingan);
     $this->KomentarModel->save($post);
     return redirect()->to(base_url('public/Pages/Komentar?slug='.$slug));
+  }
+
+  public function submitKomentarTopik()
+  {
+    $request = service("request");
+		$session = session();
+		$id_user = $session->get("user");
+
+    $id_topik =  $request->getGet("ID_Topik");
+    $isi_komentar =  htmlspecialchars($request->getPost("Isi_KomentarTopik"));
+    dd($isi_komentar);
   }
 
   public function UnlikePost()
@@ -143,6 +158,9 @@ class LikeKomen extends BaseController
     }
     echo json_encode($return);
   }
+
+
+
 
 	//--------------------------------------------------------------------
 

@@ -35,6 +35,9 @@ $routes->delete('/HapusPostingan/(:num)', 'Admin::HapusPostingan/$1');
 $routes->add('/UpdateProfile/(:segment)', 'Pages::UpdateProfile/$1');
 $routes->get('/komentar/(:any)', 'Pages::komentar/$1');
 
+$routes->add('Email/LupaPassword', 'Email::LupaPassword');
+$routes->post('Email/send-email', 'Email::send_email');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
