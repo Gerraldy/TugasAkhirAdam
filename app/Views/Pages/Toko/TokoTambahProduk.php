@@ -7,24 +7,25 @@
       <div class="col-4" style="text-align:center">
         <img src="<?= base_url('/public/gambar/profile.png')?>" href="<?= base_url('/public/gambar/profile.png')?>" data-upload="0" id="gambar-preview" alt="" style="width:75%; height:75%; object-fit: cover">
       </div>
-      <div class="col-8">
-        <form class="" action="<?=base_url('public/Pages/InsertProduk') ?>" method="post" enctype="multipart/form-data">
+      <div class="col-8 pt-2">
+        <form action="<?=base_url('public/Pages/InsertProduk?idtoko='. $toko['ID_Toko']) ?>" method="post" enctype="multipart/form-data">
           <input type="file" name="Url_Gambar" class="" id="Url_Gambar" onchange="readURL(this);"><br><br>
           <text>Nama Produk :</text><br>
-          <input type="textbox" name="Nama_Produk" value=""><br>
+          <input type="textbox" name="Nama_Produk" class="k-textbox" value="" required><br>
           <text>Deskripsi Produk :</text><br>
-          <input type="textbox" name="Deskripsi" value=""><br>
+          <input type="textbox" name="Deskripsi" class="k-textbox" value="" required><br>
           <text>Kategori Produk :</text><br>
-          <select id="ID_Kategori" name="ID_Kategori">
-          <?php foreach ($toko_kategori as $t): ?>
+          <select id="ID_Kategori" name="ID_Kategori_Produk">
+            <?php foreach ($toko_kategori as $t): ?>
             <option value="<?=$t['ID_Kategori_Produk']?>"><?=$t['Nama_Kategori_Produk'] ?></option>
-          <?php endforeach; ?>
-        </select><br>
+            <?php endforeach; ?>
+          </select><br>
           <text>Link Tokopedia(jika tidak ada, kosongkan saja) :</text><br>
-          <input type="textbox" name="Link_Toped" value=""><br>
+          <input type="textbox" name="Link_Toped" class="k-textbox" value=""><br>
           <text>Link Shopee(jika tidak ada, kosongkan saja) :</text><br>
-          <input type="textbox" name="Link_Shopee" value=""><br><br>
-          <button id="btnAdd" type="button" class="k-button"name="Tambah">Tambah</button>
+          <input type="textbox" name="Link_Shopee" class="k-textbox" value=""><br><br>
+          <input type="submit" style="" class="k-button" value="Tambah" id="btnAdd" >
+          <input type="submit" style="" class="k-button" value="Kembali" id="btnBack" >
         </form>
       </div>
   </div>

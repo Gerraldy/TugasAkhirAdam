@@ -10,11 +10,11 @@
       </div>
         <?php if ($toko['status'] == 1): ?>
           <div class="col-2">
-            <a href="#" class="" style="text-decoration:none"><button id="" class="k-button" style="padding: 3px 10px;">Tutup Toko</button></a>
+            <a href="<?=base_url('public/Pages/BukaTutupToko?status='.$toko['status'].'&idtoko='.$toko['ID_Toko']) ?>" class="" style="text-decoration:none"><button id="" class="k-button" style="padding: 3px 10px;">Tutup Toko</button></a>
           </div>
           <?php else: ?>
             <div class="col-2">
-              <a href="#" class="" style="text-decoration:none"><button id="" class="k-button" style="padding: 3px 10px;">Buka Toko</button></a>
+              <a href="<?=base_url('public/Pages/BukaTutupToko?status='.$toko['status'].'&idtoko='.$toko['ID_Toko']) ?>" class="" style="text-decoration:none"><button id="" class="k-button" style="padding: 3px 10px;">Buka Toko</button></a>
             </div>
         <?php endif; ?>
       <?php else: ?>

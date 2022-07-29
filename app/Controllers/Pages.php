@@ -401,7 +401,7 @@ class Pages extends BaseController
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
 		// dd($data['toko_kategori']);
-    echo view('Pages/Toko', $data);
+    echo view('Pages/Toko/Toko', $data);
   }
 
 	public function TokoHome()
@@ -417,8 +417,18 @@ class Pages extends BaseController
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
 		 // dd($data['toko_produk']);
-    echo view('Pages/TokoHome', $data);
+    echo view('Pages/Toko/TokoHome', $data);
   }
+
+	public function BuatToko()
+	{
+		$user = session()->get("user");
+		$data = [
+			'title' => "Buka Toko!",
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		  echo view('Pages/Toko/BuatToko', $data);
+	}
 
 	public function TokoUser()
   {
@@ -433,8 +443,31 @@ class Pages extends BaseController
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
 		// dd($data['toko']);
-    echo view('Pages/TokoUser', $data);
+    echo view('Pages/Toko/TokoUser', $data);
   }
+
+	public function BukaTutupToko()
+	{
+		$status = $this->request->getGet("status");
+		$idtoko = $this->request->getGet("idtoko");
+		$id_user = session()->get("user");
+
+		if ($status == 1) {
+			$this->TokoModel->update($idtoko, ['status' => 0]);
+		} elseif ($status == 0) {
+			$this->TokoModel->update($idtoko, ['status' => 1]);
+		}
+		$data = [
+			'title' => "Toko!",
+			'user' => $id_user,
+			'toko' => $this->TokoModel->where("ID_Toko", $idtoko)->first(),
+			'toko_produk' => $this->TokoProdukModel->where("ID_Toko", $idtoko)->findAll(),
+			'toko_kategori' => $this->TokoKategoriModel->namaKategoriToko(),
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		// dd($status);
+		echo view('Pages/Toko/TokoUser', $data);
+	}
 
 	public function DetailProduk()
 	{
@@ -446,22 +479,90 @@ class Pages extends BaseController
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
 		//dd($data['produk']);
-		echo view('Pages/TokoDetailProduk', $data);
+		echo view('Pages/Toko/TokoDetailProduk', $data);
+	}
+
+	public function UbahProduk()
+	{
+		$id_user = session()->get("user");
+		$idproduk = $this->request->getGet("idproduk");
+		$data = [
+			'title' => "Detail Produk!",
+			'toko_kategori' => $this->TokoKategoriModel->namaKategoriToko(),
+			'produk' => $this->TokoProdukModel->where("ID_Produk", $idproduk)->first(),
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		//dd($data['produk']);
+		echo view('Pages/Toko/TokoEditProduk', $data);
+	}
+
+	public function EditProduk()
+	{
+		$idtoko = $this->request->getGet("idtoko");
+		$idproduk = $this->request->getGet("idproduk");
+		$id_user = session()->get("user");
+
+		$file = $this->request->getFile('Url_Gambar');
+		$fileName = $file->getRandomName();
+		$file->move('uploads/gambar_produk/', $fileName);
+
+		$post = $this->request->getVar();
+		$post['Url_Gambar'] = $fileName;
+		$post['ID_Toko'] = $idtoko;
+
+		//dd($post);
+		$this->TokoProdukModel->update($idproduk, [
+			'ID_Toko' => $post['ID_Toko'],
+			'Nama_Produk' => $post['Nama_Produk'],
+			'Deskripsi' => $post['Deskripsi'],
+			'ID_Kategori_Produk' => $post['ID_Kategori_Produk'],
+			'Link_Toped' => $post['Link_Toped'],
+			'Link_Shopee' => $post['Link_Shopee'],
+			'Url_Gambar' => 	$post['Url_Gambar']
+		]);
+
+		$data = [
+			'title' => "Detail Produk!",
+			'produk' => $this->TokoProdukModel->where("ID_Produk", $idproduk)->first(),
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		//dd($data['produk']);
+		echo view('Pages/Toko/TokoDetailProduk', $data);
 	}
 
 	public function TambahProduk()
 	{
+		$id_user = session()->get("user");
 		$data = [
 			'title' => "Tambah Produk!",
+			'toko' => $this->TokoModel->where("ID_Memers", $id_user)->first(),
 			'toko_kategori' => $this->TokoKategoriModel->namaKategoriToko(),
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
-		echo view('Pages/TokoTambahProduk', $data);
+		echo view('Pages/Toko/TokoTambahProduk', $data);
 	}
 
 	public function InsertProduk()
 	{
-		// code...
+		$idtoko = $this->request->getGet("idtoko");
+    $id_user = session()->get("user");
+    $file = $this->request->getFile('Url_Gambar');
+    $fileName = $file->getRandomName();
+		$file->move('uploads/gambar_produk/', $fileName);
+	  $post = $this->request->getVar();
+		$post['Url_Gambar'] = $fileName;
+		$post['ID_Toko'] = $idtoko;
+		// dd($post);
+		$this->TokoProdukModel->save($post);
+		$data = [
+			'title' => "Toko!",
+			'user' => $id_user,
+			'toko' => $this->TokoModel->where("ID_Toko", $idtoko)->first(),
+			'toko_produk' => $this->TokoProdukModel->where("ID_Toko", $idtoko)->findAll(),
+			'toko_kategori' => $this->TokoKategoriModel->namaKategoriToko(),
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		echo view('Pages/Toko/TokoUser', $data);
 	}
 
 	public function percobaan()

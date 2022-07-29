@@ -131,7 +131,7 @@
   </div>
   <hr style="height:3px;color:black;background-color:white">
   <div class="slideshow-container" style="max-width:70%">
-    
+
   <div class="mySlides fade">
     <div class="numbertext">1 / 3</div>
     <div class="row">
@@ -182,13 +182,6 @@
     <span class="dot" onclick="currentSlide(2)"></span>
     <span class="dot" onclick="currentSlide(3)"></span>
   </div>
-  <!-- <div class="w3-content w3-display-container" style="max-width:100%">
-  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[0]['Slug'])?>"><img class="mySlides w3-animate-fading img-fluid" src="<?= base_url('public/uploads/gambar_post/'.$postingan[0]['Nama_Gambar']) ?>" style=""></a>
-  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[1]['Slug'])?>"><img class="mySlides w3-animate-fading img-fluid" src="<?= base_url('public/uploads/gambar_post/'.$postingan[1]['Nama_Gambar']) ?>" style=""></a>
-  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[2]['Slug'])?>"><img class="mySlides w3-animate-fading img-fluid" src="<?= base_url('public/uploads/gambar_post/'.$postingan[2]['Nama_Gambar']) ?>" style=""></a>
-  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[3]['Slug'])?>"><img class="mySlides w3-animate-fading img-fluid" src="<?= base_url('public/uploads/gambar_post/'.$postingan[3]['Nama_Gambar']) ?>" style=""></a>
-  <a href="<?= base_url('public/Pages/Komentar?slug='.$postingan[4]['Slug'])?>"><img class="mySlides w3-animate-fading img-fluid" src="<?= base_url('public/uploads/gambar_post/'.$postingan[4]['Nama_Gambar']) ?>" style=""></a>
-  </div> -->
   <hr>
   <?php foreach($postingan as $p) : ?>
   <div class="row">
@@ -214,7 +207,7 @@
                 <script type="text/javascript">
                     $(document).ready(function () {
                         $("#mediaplayer").kendoMediaPlayer({
-                            autoPlay: true,
+                            autoPlay: false,
                             navigatable: true,
                             media: {
                                 title: "<?= $p['Judul'] ?>",

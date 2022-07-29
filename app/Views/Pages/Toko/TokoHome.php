@@ -6,11 +6,11 @@
     <div class="row mt-3">
       <?php if ($toko == null): ?>
         <div class="col" style="text-align: right;">
-          <button type="button" name="button">Buka toko</button>
+          <a href="<?=base_url('public/Pages/BuatToko')?>"><button type="button" class="k-button" name="button">Buka Toko</button></a>
         </div>
         <?php else: ?>
           <div class="col" style="text-align: right;">
-            <a href="<?=base_url('public/Pages/TokoUser?idtoko='.$toko['ID_Toko'])?>"><button type="button" class="k-button" name="button">TokoKu</button></a> 
+            <a href="<?=base_url('public/Pages/TokoUser?idtoko='.$toko['ID_Toko'])?>"><button type="button" class="k-button" name="button">TokoKu</button></a>
           </div>
       <?php endif; ?>
     </div>
@@ -23,7 +23,7 @@
           for ($j=0; $j < count($toko_produk); $j++) {
             if ($toko_produk[$j]['ID_Toko'] == $toko_user[$i]['ID_Toko']) {
               echo '<div class="col">';
-              echo '<img src="'.base_url('public/gambar/'.$toko_produk[$j]['Url_Gambar']).'"'. 'style="height:200px;weight:100px;"><br>';
+              echo '<img src="'.base_url('public/uploads/gambar_produk/'.$toko_produk[$j]['Url_Gambar']).'"'. 'style="height:200px;weight:100px;"><br>';
               echo '<b><text style="color:white">'.$toko_produk[$j]['Nama_Produk'] . "</text></b>";
                 echo '</div>';
             } else {
