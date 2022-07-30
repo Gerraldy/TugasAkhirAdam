@@ -430,6 +430,60 @@ class Pages extends BaseController
 		  echo view('Pages/Toko/BuatToko', $data);
 	}
 
+	public function CreateToko()
+	{
+		$user = session()->get("user");
+		$post = $this->request->getVar();
+		$post['status'] = 0;
+		$post['ID_Memers'] = $user;
+		$this->TokoModel->save($post);
+		$data = [
+			'title' => "Home!",
+			'user' => $user,
+			'toko' => $this->TokoModel->where("ID_Memers", $user)->first(),
+			'toko_user' => $this->TokoModel->where("status", 1)->findAll(),
+			'toko_kategori' => $this->TokoKategoriModel->namaKategoriToko(),
+			'toko_produk' => $this->TokoProdukModel->findAll(),
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		 // dd($data['toko_produk']);
+    echo view('Pages/Toko/TokoHome', $data);
+	}
+
+	public function UbahToko()
+	{
+		$user = session()->get("user");
+		$idtoko = $this->request->getGet("idtoko");
+		$data = [
+			'title' => "Ubah Toko!",
+			'toko' => $this->TokoModel->where("ID_Memers", $user)->first(),
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		  echo view('Pages/Toko/UbahToko', $data);
+	}
+
+	public function EditToko()
+	{
+		$id_user = session()->get("user");
+		$idtoko = $this->request->getGet("idtoko");
+		$post = $this->request->getVar();
+		$this->TokoModel->update($idtoko, [
+			'Nama_Toko' => $post['Nama_Toko'],
+			'Kontak' => $post['Kontak'],
+			'Tentang' => $post['Tentang'],
+		]);
+		$data = [
+			'title' => "Toko!",
+			'user' => $id_user,
+			'toko' => $this->TokoModel->where("ID_Toko", $idtoko)->first(),
+			'toko_produk' => $this->TokoProdukModel->where("ID_Toko", $idtoko)->findAll(),
+			'toko_kategori' => $this->TokoKategoriModel->namaKategoriToko(),
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		// dd($data['toko']);
+		echo view('Pages/Toko/TokoUser', $data);
+	}
+
 	public function TokoUser()
   {
 		$id_user = session()->get("user");

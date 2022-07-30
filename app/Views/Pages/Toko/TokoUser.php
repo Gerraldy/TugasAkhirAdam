@@ -5,8 +5,11 @@
 <div class="container"  style="max-width:1000px; margin:auto">
   <div class="row p-2">
     <?php if ($user == $toko['ID_Memers']): ?>
-      <div class="col-10">
+      <div class="col-8">
         <h3 style="color:white"><?= $toko['Nama_Toko'] ?></h3>
+      </div>
+      <div class="col-2">
+        <a href="<?=base_url('public/Pages/UbahToko?idtoko='.$toko['ID_Toko']) ?>" class="" style="text-decoration:none"><button id="" class="k-button" style="padding: 3px 10px;">Ubah Toko</button></a>
       </div>
         <?php if ($toko['status'] == 1): ?>
           <div class="col-2">
@@ -18,8 +21,11 @@
             </div>
         <?php endif; ?>
       <?php else: ?>
-        <div class="col-12">
+        <div class="col-10">
           <h3 style="color:white"><?= $toko['Nama_Toko'] ?></h3>
+        </div>
+        <div class="col-2">
+            <a href="#" class="" style="text-decoration:none"><button id="" class="k-button" style="padding: 3px 10px;">Lapor Toko!</button></a>
         </div>
     <?php endif; ?>
   </div>
