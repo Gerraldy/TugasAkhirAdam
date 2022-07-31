@@ -36,20 +36,26 @@
   <div class="row p-2">
     <?php foreach ($toko_produk as $tp ): ?>
         <div class="col">
-          <a href="<?=base_url('public/Pages/DetailProduk?idproduk='.$tp['ID_Produk']) ?>">
+          <a href="<?=base_url('public/Pages/DetailProduk?idproduk='.$tp['ID_Produk'].'&idtoko='.$tp['ID_Toko']) ?>">
             <img src="<?= base_url('public/gambar/baju.png') ?>" class="img-fluid" style="max-width:50%; max-height:50%"><br>
             <text style="color:white"><?=$tp['Nama_Produk'] ?> </text>
           </a>
         </div>
     <?php endforeach; ?>
-    <div class="row">
-      <div class="col" style="text-align: left;">
-        <a href="<?=base_url('public/Pages/TambahProduk')?>" >
-          <img src="<?= base_url('public/gambar/plus.png') ?>" class="img-fluid" style="max-width:50%; max-height:50%"><br>
-        </a>
+    <?php if ($user == $toko['ID_Memers']): ?>
+      <div class="row">
+        <div class="col" style="text-align: left;">
+          <a href="<?=base_url('public/Pages/TambahProduk')?>" >
+            <img src="<?= base_url('public/gambar/plus.png') ?>" class="img-fluid" style="max-width:50%; max-height:50%"><br>
+          </a>
+        </div>
       </div>
+      <?php else: ?>
+        <div class="">
 
-    </div>
+        </div>
+    <?php endif; ?>
+
   </div>
   </div>
 

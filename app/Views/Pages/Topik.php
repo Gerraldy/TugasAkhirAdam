@@ -31,15 +31,11 @@
               <div class="fb-share-button" data-href="https://9gag.com/u/adambejo4040/comments" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2Fcodeigniter4%2Fpublic%2FPages%2FKomentar%3Fslug%3Dhon&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Bagikan</a></div>
               <br><br>
               <div class="" style="bottom:20px ;height:100%; width:100%; ">
-                <form id="" action="<?=base_url('public/LikeKomen/submitKomentarTopik?ID_Topik='.$topik["ID_Topik"])?>" method="POST">
-                  <textarea id="isikomen"  style="height:50px ;width: 100%;" required data-required-msg="Please enter a text." data-max-msg="Enter value between 1 and 200" name="Isi_KomentarTopik"></textarea>
-                  <div class="k-form-footer">
-                      <!-- <div class="k-counter-container" style="position: relative; left: 500px;"><span class="k-counter-value">0</span>/200</div> -->
-                      <br>
-                      <button id="komen" type="submit" class="k-button" style="position: relative; right: auto;">Send</button>
-                      <button id="cancel" class="k-button " style="position: relative; right: auto;">Cancel</button>
+                <form action="<?=base_url('public/LikeKomen/submitKomentarTopik?ID_Topik='.$topik["ID_Topik"])?>" method="post" enctype="multipart/form-data">
+                  <textarea id="isikomen" class="k-textarea mt-3 mb-3"  style="height:50px;width: 100%;" required name="Isi_KomentarTopik"></textarea>
 
-                  </div>
+                  <input type="submit" class="k-button" name="" value="Send" id="btnSend">
+                  <button id="cancel" class="k-button " style="position: relative; right: auto;">Cancel</button>
                 </form>
                 <br>
                 <div class="row" style="border-radius:10px ;background-color:black">
@@ -71,21 +67,6 @@
         $("#isikomen").val("");
       });
 
-      $("#invitation").kendoTextArea({
-               rows: 10,
-               maxLength:200,
-               placeholder: "Enter your text here."
-           });
-
-           $("#invitation").on('input', function (e) {
-               $('.k-counter-container .k-counter-value').html($(e.target).val().length);
-           });
-
-           $("#invitationForm").kendoValidator();
-
-           $("form").submit(function (event) {
-               event.preventDefault();
-           });
     });
 </script>
 <?= $this->endSection();  ?>

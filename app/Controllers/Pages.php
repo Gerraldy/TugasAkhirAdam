@@ -527,8 +527,11 @@ class Pages extends BaseController
 	{
 		$id_user = session()->get("user");
 		$idproduk = $this->request->getGet("idproduk");
+		$idtoko = $this->request->getGet("idtoko");
 		$data = [
 			'title' => "Detail Produk!",
+			'user' => $id_user,
+			'toko' => $this->TokoModel->where("ID_Toko", $idtoko)->first(),
 			'produk' => $this->TokoProdukModel->where("ID_Produk", $idproduk)->first(),
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
@@ -582,6 +585,25 @@ class Pages extends BaseController
 		];
 		//dd($data['produk']);
 		echo view('Pages/Toko/TokoDetailProduk', $data);
+	}
+
+	public function HapusProduk()
+	{
+		$id_user = session()->get("user");
+		$idproduk = $this->request->getGet("idproduk");
+		$idtoko = $this->request->getGet("idtoko");
+		$this->TokoProdukModel->where("ID_Produk", $idproduk)->delete();
+
+		$data = [
+			'title' => "Toko!",
+			'user' => $id_user,
+			'toko' => $this->TokoModel->where("ID_Toko", $idtoko)->first(),
+			'toko_produk' => $this->TokoProdukModel->where("ID_Toko", $idtoko)->findAll(),
+			'toko_kategori' => $this->TokoKategoriModel->namaKategoriToko(),
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		// dd($data['toko']);
+    echo view('Pages/Toko/TokoUser', $data);
 	}
 
 	public function TambahProduk()

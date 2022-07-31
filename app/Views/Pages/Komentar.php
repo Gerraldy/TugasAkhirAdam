@@ -86,7 +86,6 @@
                       <br>
                       <button id="komen" type="submit" class="k-button" style="position: relative; right: auto;">Send</button>
                       <button id="cancel" class="k-button " style="position: relative; right: auto;">Cancel</button>
-
                   </div>
                 </form>
             </div>

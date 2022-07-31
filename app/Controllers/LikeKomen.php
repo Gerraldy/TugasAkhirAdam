@@ -56,13 +56,15 @@ class LikeKomen extends BaseController
 
   public function submitKomentarTopik()
   {
-    $request = service("request");
-		$session = session();
-		$id_user = $session->get("user");
+		$id_user = session()->get("user");
+    $id_topik = $this->request->getGet("ID_Topik");
+    $post = $this->request->getVar();
+    $post['ID_Memers'] = $id_user;
+    $post['ID_Topik'] = $id_topik;
+    //dd($post);
+    $this->TopikKomentarModel->save($post);
 
-    $id_topik =  $request->getGet("ID_Topik");
-    $isi_komentar =  htmlspecialchars($request->getPost("Isi_KomentarTopik"));
-    dd($isi_komentar);
+    return redirect()->to(base_url('public/Pages/Topik?ID_Topik='.$id_topik));
   }
 
   public function UnlikePost()

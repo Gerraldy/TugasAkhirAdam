@@ -27,10 +27,9 @@
 	left:0;
 	padding:10px;
 	min-width:200px;
-	color:#black;
 	text-align:left;
 	cursor:move;
-  font-size:24px;
+  font-size:20px;
 }
 .meme-txt-area:focus {
 	outline: none;
@@ -112,9 +111,6 @@ div#meme-canvas-container {
         <canvas id="myCanvas" style="">
 
         </canvas>
-        <!-- <div id="draggable" class="ui-widget-content" style="width: 150px; height: 150px; padding: 0.5px;">
-          <p>Drag me around</p>
-        </div> -->
       </div>
     </div>
     <div class="col-5">
@@ -122,7 +118,7 @@ div#meme-canvas-container {
         <button id="subscribe" class="subscribe k-button w-100">SUBSCRIBE</button>
         <input type="file" name="meme_bg" value="Upload MEME Image" class="choose-file" onChange="showPreview(this);" />
         <!-- <button id="upload" type="file" accept="image/*" class="upload k-button w-100 mt-2" >Upload Meme</button> -->
-        <input type="button" name="add_text" value="Add Text" class="btn-add" onClick="createTextArea()" />
+        <input type="button" id="buattext" name="add_text" value="Add Text" class="btn-add" onClick="createTextArea()" />
         <div class="mt-2">
            <div id="carousel">
             <div class="slide">
@@ -153,15 +149,9 @@ div#meme-canvas-container {
         <br>
         <div class="box-col">
           <div class="row">
-            <div class="col-12">
-              <input id="kata1" class="kata" style="width: 70%;" />
-              <input type="color" id="palette-picker1" style="width:10%" value="#cc2222" data-role="colorpicker" data-palette="basic">
-              <img src="<?= base_url('public/gambar/gearhitam.png') ?>" class="img-fluid" style="width:10%">
-            </div>
-            <div class="col-12">
-              <input id="kata2" class="kata" style="width: 70%;" />
-              <input type="color" id="palette-picker2" style="width:10%" value="#cc2222" data-role="colorpicker" data-palette="basic">
-              <img src="<?= base_url('public/gambar/gearhitam.png') ?>" class="img-fluid" style="width:10%">
+            <div class="col-12" id="editText">
+							<input type='color' id='colors' value='#000000' />
+
             </div>
           </div>
         </div>
@@ -192,6 +182,7 @@ div#meme-canvas-container {
   </div>
 </div>
 <script>
+
 
 // html2canvas($('#meme-bg-target'), {
 //     onrendered: function (canvas) {
@@ -229,15 +220,40 @@ function showPreview(objFileInput)
 }
 
 $( function() {
-  $( "#draggable" ).draggable();
-  $( "#draggable" ).resizable();
+	var count = 0;
+  $('#buattext').click(function(){
+		var txtAreaHTML = "<p id='textedit' contentEditable='true' class='meme-txt-area'></p>";
+		var editTxt = "<img src='<?= base_url('public/gambar/gearhitam.png') ?>' class='img-fluid' style='width:10%'><br>"
+		$("#meme-bg-target").append(txtAreaHTML);
+		$("#editText").append(editTxt);
+		$(".meme-txt-area").draggable();
+		$(".meme-txt-area").focus();
+    count++;
+  });
+
 } );
+
+	var colors;
+	var defaultColor = "#000000";
+	window.addEventListener("load", startup, false);
+	function startup() {
+			colors = document.querySelector("#colors");
+			colors.value = defaultColor;
+			colors.addEventListener("input", updateFirst, false);
+			colors.select();
+	}
+	function updateFirst(event)
+	{
+			var p = document.querySelector("#textedit");
+			if (p)
+			{
+					p.style.color = event.target.value;
+			}
+	}
+
   function createTextArea()
     {
-    	var txtAreaHTML = "<div contentEditable='true' class='meme-txt-area'></div>";
-    	$("#meme-bg-target").append(txtAreaHTML);
-    	$(".meme-txt-area").draggable();
-    	$(".meme-txt-area").focus();
+
     }
 
 		$("#reset").click(function () {

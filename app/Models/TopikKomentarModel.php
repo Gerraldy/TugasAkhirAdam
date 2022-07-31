@@ -8,7 +8,7 @@ use CodeIgniter\Model;
 
 class TopikKomentarModel extends Model
 {
-  protected $table = 'topik_Komentar';
+  protected $table = 'komentar_topik';
   protected $primaryKey = "ID_KomentarTopik";
   protected $allowedFields = ['ID_Topik	','ID_Memers', 'Isi_KomentarTopik'];
 

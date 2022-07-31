@@ -22,10 +22,18 @@
 
           </div>
       <?php endif; ?>
-      <div class="pb-2" style="position: absolute;bottom:0">
-        <a href="<?= base_url('public/Pages/UbahProduk?idproduk='.$produk['ID_Produk']) ?>"> <input type="submit" style="" class="k-button" value="Ubah" id="btnUpdate" ></a>
-        <input type="submit" style="" class="k-button" value="Kembali" id="btnBack" onclick="history.back()">
-      </div>
+      <?php if ($user == $toko['ID_Memers']): ?>
+        <div class="pb-2" style="position: absolute;bottom:0">
+          <a href="<?= base_url('public/Pages/HapusProduk?idproduk='.$produk['ID_Produk'].'&idtoko='.$produk['ID_Toko']) ?>"> <input type="submit" style="" class="k-button" value="Hapus" id="btnDelete" ></a>
+          <a href="<?= base_url('public/Pages/UbahProduk?idproduk='.$produk['ID_Produk']) ?>"> <input type="submit" style="" class="k-button" value="Ubah" id="btnUpdate" ></a>
+          <input type="submit" style="" class="k-button" value="Kembali" id="btnBack" onclick="history.back()">
+        </div>
+        <?php else: ?>
+          <div class="">
+            <input type="submit" style="" class="k-button" value="Kembali" id="btnBack" onclick="history.back()">
+          </div>
+      <?php endif; ?>
+
 
     </div>
 

@@ -59,7 +59,7 @@ class Admin extends BaseController
     $post = $this->request->getVar();
     $post['Url_Foto'] = $fileName;
     $this->TopikModel->save($post);
-      // dd($post);
+   // dd($post);
     return redirect()->to(base_url('public/Admin/MasterTopik'));
   }
 
