@@ -19,11 +19,11 @@
         for ($i=0; $i < count($toko_user); $i++) {
           echo '<div class="row">';
 
-          echo '<h3><a href="'.base_url('public/Pages/TokoUser?idtoko='. $toko_user[$i]['ID_Toko']) .'" style="color:black">'.$toko_user[$i]['Nama_Toko'] . '</a></h3><hr>';
+          echo '<h3><a href="'.base_url('public/Pages/TokoUser?idtoko='. $toko_user[$i]['ID_Toko']) .'" style="color:white">'.$toko_user[$i]['Nama_Toko'] . '</a></h3><hr>';
           for ($j=0; $j < count($toko_produk); $j++) {
             if ($toko_produk[$j]['ID_Toko'] == $toko_user[$i]['ID_Toko']) {
               echo '<div class="col">';
-              echo '<img src="'.base_url('public/uploads/gambar_produk/'.$toko_produk[$j]['Url_Gambar']).'"'. 'style="height:200px;weight:100px;"><br>';
+              echo '<a href="'. base_url('public/Pages/DetailProduk?idproduk='.$toko_produk[$j]['ID_Produk'].'&idtoko='.$toko_produk[$j]['ID_Toko']).'"><img src="'.base_url('public/uploads/gambar_produk/'.$toko_produk[$j]['Url_Gambar']).'"'. 'style="height:200px;weight:100px;"></a><br>';
               echo '<b><text style="color:white">'.$toko_produk[$j]['Nama_Produk'] . "</text></b>";
                 echo '</div>';
             } else {

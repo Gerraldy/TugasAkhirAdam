@@ -14,7 +14,7 @@
     right:0;
   }
   * {box-sizing: border-box}
-  body {font-family: Verdana, sans-serif; margin:0}
+  body { margin:0}
   .mySlides {display: none}
   img {vertical-align: middle;}
 
@@ -103,6 +103,8 @@
   @media only screen and (max-width: 300px) {
     .prev, .next, {font-size: 11px}
   }
+
+
 </style>
 <div class="container" style="max-width:900px; margin:auto">
   <div class="m-2 p-3 " style="background-color:">
@@ -232,7 +234,7 @@
         <a class="btn btn-outline-light m-1" href="<?=base_url('/public/Pages/getPostKategori/'.$p['ID_Kategori']) ?>" style="background:grey; border:none; border-radius:10px ;width: 100px;height:100%; padding:1px">#<?=$p['Nama_Kategori'] ?></a>
         <div class="section-button-like" style="">
           <div class="container-button-like" style="display:inline-block">
-              <button class="btn-like " data-id=<?= $p['ID_Postingan'] ?> style="padding: 5px 13px;border: 1px solid white;border-radius: 20px;background-color: #FCD6A7;">
+              <button class="btn-like " data-id=<?= $p['ID_Postingan'] ?> style="padding: 5px 13px;border: 1px solid white;border-radius: 20px;background-color: #969798;">
                 <?php if (!isset($p["Like"])): ?>
                   <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
                 <?php else: ?>
@@ -244,7 +246,7 @@
               </button>
           </div>
           <div class="container-button-dislike" style="display:inline-block">
-              <button id="" class="btn-dislike k-button btn-outline-light" style="" data-id=<?= $p['ID_Postingan'] ?>>
+              <button id="" class="btn-dislike k-button btn-outline-light" style="padding: 5px 13px;border: 1px solid white;border-radius: 20px;background-color: #969798;" data-id=<?= $p['ID_Postingan'] ?>>
                 <?php if (!isset($p["Dislike"])): ?>
                   <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
                 <?php else: ?>
@@ -257,7 +259,7 @@
           </div>
           <div class="" style="display:inline-block">
             <a href="<?= base_url('public/Pages/Komentar?slug='.$p['Slug'])?>">
-              <button class="comment k-button btn-outline-light btn-block">
+              <button class="comment k-button btn-outline-light btn-block" style="padding: 5px 13px;border: 1px solid white;border-radius: 20px;background-color: #969798;">
                 <img src="<?= base_url('public/gambar/komentarhitam.png') ?>" style="height:20px;weight:20px;">
               </button>
             </a>
@@ -268,15 +270,18 @@
       <div class="col-1">
         <div class="pt-5" style="">
           <div class="dropdown">
-            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              !
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="<?= base_url('public/Pages/SavePost?slug='.$p['Slug']) ?>">Save</a>
-              <a class="dropdown-item" href="<?= base_url('public/Pages/LaporPost?slug='.$p['Slug']) ?>">Report</a>
-              <a class="dropdown-item" href="#">Tidak Masuk Akal</a>
+            <button class="dropbtn">!</button>
+            <div class="dropdown-content">
+              <a href="<?= base_url('public/Pages/SavePost?slug='.$p['Slug']) ?>" style="color:black; text-decoration: none; ">Save</a>
+              <a href="<?= base_url('public/Pages/LaporPost?slug='.$p['Slug']) ?>" style="color:black; text-decoration: none;">Lapor</a>
+              <a href="#" style="color:black; text-decoration: none; ">Tidak Masuk Akal</a>
             </div>
           </div>
+          <!-- <select id="option1" class="" style="width: 100%;" >
+            <option><a class="dropdown-item" href="<?= base_url('public/Pages/SavePost?slug='.$p['Slug']) ?>">Save</a></option>
+            <a class="dropdown-item" href="<?= base_url('public/Pages/LaporPost?slug='.$p['Slug']) ?>"><option>Report</option></a>
+            <option><a class="dropdown-item" href="#">Tidak Masuk Akal</a></option>
+          </select> -->
            <!-- <a href="<?= base_url('public/Pages/SavePost?slug='.$p['Slug']) ?>"><button class="btn btn-outline-light">Save</button></a>
           <a href="<?= base_url('public/Pages/LaporPost?slug='.$p['Slug']) ?>"><button class="btn btn-outline-light">Lapor</button></a>
           <button class="btn btn-outline-light">Tidak Masuk Akal</button> -->
@@ -288,6 +293,7 @@
   </div>
 <script>
 $(document).ready(function () {
+  //$("#option1").kendoDropDownList();
 
   $(".btn-dislike").click(function(){
     //alert("test");

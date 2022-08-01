@@ -1,8 +1,7 @@
 <?= $this->extend('Layout/Template'); ?>
 
 <?= $this->section('content'); ?>
-
-<div class="container">
+<div class="container pt-3">
   <div class="row">
     <div class="col-2">
       <?php if ($profile['url_foto'] == ""): ?>
@@ -12,25 +11,39 @@
       <?php endif; ?>
     </div>
     <div class="col-10">
-      <p style="color:white; top:10px;font-size:20px"><?=$profile['Nama'] ?></p>
+      <p style="color:white; top:10px;font-size:20px"><?=$profile['Username'] ?></p>
       <!-- <hr style="height:3px;border-width:0;color:black;background-color:black"> -->
-      <p style="color:white;"><?=$profile['Email'] ?></p>
+      <text style="color:white; top:10px;font-size:13px">Follower : <?=$follower ?></text> ||
+      <text style="color:white;font-size:13px">Following : <?=$following?></text>
     </div>
   </div>
-  <div class="row">
+  <div class="row pt-2">
     <div class="col">
       <p style="color:white;"> <?= $profile['Tentang'] ?> </p>
     </div>
   </div>
   <div class="row" style="position:relative; top:10px">
     <div class="col-1">
-      <button class="k-button" id="showHome" name="button" style="width:70px">Home</button>
+      <button class="k-button btn-outline-light" id="showHome" name="button" style="width:70px">Home</button>
     </div>
     <div class="col-1">
-      <button class="k-button" id="showPost" name="button" style="width:70px">Post</button>
+      <button class="k-button btn-outline-light" id="showPost" name="button" style="width:70px">Post</button>
     </div>
-    <div class="col-10">
-      <button class="k-button" id="showSave" name="button" style="width:70px">Save</button>
+    <div class="col-9">
+      <button class="k-button btn-outline-light" id="showSave" name="button" style="width:70px">Save</button>
+    </div>
+    <div class="col-1" style="">
+      <div class="dropdown">
+        <button class="dropbtn k-button btn-outline-light"><img src="<?= base_url('/public/gambar/3dotbiru.png') ?>" alt="" style="height:15px;weight:15px;"></button>
+        <div class="dropdown-content">
+          <?php if ($follow != null): ?>
+              <a href="<?=base_url('public/Pages/FollowAkun?idakun='.$profile['ID_Memers']) ?>" style="color:black; text-decoration: none;">Unfollow</a>
+            <?php else: ?>
+              <a href="<?=base_url('public/Pages/FollowAkun?idakun='.$profile['ID_Memers']) ?>" style="color:black; text-decoration: none;">Follow</a>
+          <?php endif; ?>
+          <a href="<?=base_url('public/Pages/LaporAkun?idakun='.$profile['ID_Memers']) ?>" style="color:black; text-decoration: none;">Lapor</a>
+        </div>
+      </div>
     </div>
   </div>
   <hr style="height:3px;color:black;background-color:white">
@@ -40,7 +53,6 @@
         <div class="container" style="max-width:800px; margin:auto">
           <?php foreach($postingan as $p) : ?>
           <div class="row">
-
                   <h4 style="color:white ;"><b><?= $p['Judul'] ?></b></h4>
                   <div class="col-2" style="background-color: black">
                   </div>
@@ -55,7 +67,7 @@
                           <script type="text/javascript">
                               $(document).ready(function () {
                                   $("#mediaplayer").kendoMediaPlayer({
-                                      autoPlay: true,
+                                      autoPlay: false,
                                       navigatable: true,
                                       media: {
                                           title: "ProgressNEXT 2019 Highlights",
@@ -78,7 +90,7 @@
                   <a class="btn btn-outline-light" href="<?=base_url('/public/Pages/getPostKategori/'.$p['ID_Kategori']) ?>" style="background:grey; border:none; border-radius:10px ;width: 100px;height:100%; padding:1px">#<?=$p['Nama_Kategori'] ?></a>
                   <div class="section-button-like" style="">
                     <div class="container-button-like" style="display:inline-block">
-                        <button class="btn-like btn k-button" data-id=<?= $p['ID_Postingan'] ?> style="">
+                        <button class="btn-like btn k-button" data-id=<?= $p['ID_Postingan'] ?> style="padding: 5px 13px;border: 1px solid white;border-radius: 20px;background-color: #969798;">
                           <?php if (!isset($p["Like"])): ?>
                             <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
                           <?php else: ?>
@@ -90,7 +102,7 @@
                         </button>
                     </div>
                     <div class="container-button-dislike" style="display:inline-block">
-                        <button id="" class="btn k-button btn-dislike" data-id=<?= $p['ID_Postingan'] ?>>
+                        <button id="" class="btn k-button btn-dislike" data-id=<?= $p['ID_Postingan'] ?> style="padding: 5px 13px;border: 1px solid white;border-radius: 20px;background-color: #969798;">
                           <?php if (!isset($p["Dislike"])): ?>
                             <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
                           <?php else: ?>
@@ -103,7 +115,7 @@
                     </div>
                     <div class="" style="display:inline-block">
                       <a href="<?= base_url('public/Pages/Komentar?slug='.$p['Slug'])?>">
-                        <button class="comment btn k-button btn-block">
+                        <button class="comment btn k-button btn-block" style="padding: 5px 13px;border: 1px solid white;border-radius: 20px;background-color: #969798;">
                           <img src="<?= base_url('public/gambar/komentarhitam.png') ?>" style="height:20px;weight:20px;">
                         </button>
                       </a>
@@ -217,7 +229,7 @@
                     <script type="text/javascript">
                         $(document).ready(function () {
                             $("#mediaplayer").kendoMediaPlayer({
-                                autoPlay: true,
+                                autoPlay: false,
                                 navigatable: true,
                                 media: {
                                     title: "ProgressNEXT 2019 Highlights",
@@ -304,6 +316,8 @@ $(document).ready(function () {
     $("#postingan").hide();
     $("#save").show();
   });
+
+  $("#option").kendoDropDownList();
 
   $(".btn-dislike").click(function(){
     let id_post = $(this).data("id");

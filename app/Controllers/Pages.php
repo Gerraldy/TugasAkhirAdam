@@ -17,9 +17,13 @@ use App\Models\TokoKategoriModel;
 use App\Models\TokoProdukModel;
 
 use App\Models\LaporanPostModel;
+use App\Models\LaporanAkunModel;
+use App\Models\LaporanTokoModel;
 
 use App\Models\TopikModel;
 use App\Models\TopikKomentarModel;
+
+use App\Models\FollowModel;
 
 class Pages extends BaseController
 {
@@ -37,9 +41,13 @@ class Pages extends BaseController
 	protected $TokoProdukModel;
 
 	protected $LaporanPostModel;
+	protected $LaporanAkunModel;
+	protected $LaporanTokoModel;
 
 	protected $TopikModel;
 	protected $TopiKomentarkModel;
+
+	protected $FollowModel;
 
 	public function __construct()
 	{
@@ -57,9 +65,14 @@ class Pages extends BaseController
 		$this->TokoProdukModel = new TokoProdukModel();
 
 		$this->LaporanPostModel = new LaporanPostModel();
+		$this->LaporanAkunModel = new LaporanAkunModel();
+		$this->LaporanTokoModel = new LaporanTokoModel();
 
 		$this->TopikModel = new TopikModel();
 		$this->TopikKomentarModel = new TopikKomentarModel();
+
+		$this->FollowModel = new FollowModel();
+
 	}
 
 	public function index()
@@ -124,6 +137,26 @@ class Pages extends BaseController
 		];
 	//	dd($data['postinganKategori']);
 		echo view('Pages/PostinganKategori', $data);
+	}
+
+	public function FollowAkun()
+	{
+		$iduser = session()->get("user");
+		$following = $this->request->getGet("idakun");
+		$getuser = $this->MemersModel->where("ID_Memers", $following)->first();
+		$follow = $this->FollowModel->where('Follower',$iduser)->orWhere('Following', $following)->first();
+		$post = $this->request->getVar();
+		$post['Follower'] = $iduser;
+		$post['Following'] = $following;
+
+		if ($follow != null) {
+			$this->FollowModel->where('Follower',$iduser)->orWhere('Following', $following)->delete();
+		}else {
+			$this->FollowModel->save($post);
+		}
+		//dd($post);
+
+		return redirect()->to(base_url('public/Pages/Profile?name='.$getuser['Nama']));
 	}
 
 	public function Komentar()
@@ -236,6 +269,8 @@ class Pages extends BaseController
 		$mypostingan = $this->PostModel->getMyPost($id);
 		$postingan = $this->PostModel->getPostProfile($id);
 		$savepost = $this->SavePostinganModel->getSavePost($id);
+		$follower = count($this->FollowModel->Where('Following', $id)->findAll());
+		$following = count($this->FollowModel->Where('Follower', $id)->findAll());
 		for ($i=0; $i < count($postingan); $i++) {
 			// echo "a";
 			foreach ($unlike as $key) {
@@ -253,6 +288,8 @@ class Pages extends BaseController
 			'title' => "Profile!",
 			'profile' => $user,
 			'mypostingan' => $mypostingan,
+			'follower' => $follower,
+			'following' => $following,
 			'postingan' => $postingan,
 			'savepost' => $savepost,
 			'kategori' => $this->KategoriModel->namaKategori()
@@ -266,17 +303,20 @@ class Pages extends BaseController
 		$namauser = $this->request->getGet("name");
 		$getuser = $this->MemersModel->where("Nama", $namauser)->first();
 		$iduser = $getuser['ID_Memers'];
-
 		$user = session()->get("user");
 		$savepost = $this->SavePostinganModel->getSavePost($iduser);
 		if ($iduser == $user) {
 			$id = session()->get('user');
 			$mypostingan = $this->PostModel->getMyPost($id);
 			$user = $this->MemersModel->where('ID_Memers',$id)->first();
+			$follower = count($this->FollowModel->Where('Following', $user)->findAll());
+			$following = count($this->FollowModel->Where('Follower', $user)->findAll());
 			$data = [
 				'title' => "Profile!",
 				'profile' => $user,
 				'postingan' => $this->PostModel->getPostProfile($id),
+				'follower' => $follower,
+				'following' => $following,
 				'savepost' => $savepost,
 				'mypostingan' => $mypostingan,
 				'kategori' => $this->KategoriModel->namaKategori()
@@ -286,17 +326,51 @@ class Pages extends BaseController
 			$userlain = $this->MemersModel->where('ID_Memers', $iduser)->first();
 			$savepost = $this->SavePostinganModel->getSavePost($iduser);
 			$mypostingan = $this->PostModel->getMyPost($iduser);
+			$follow = $this->FollowModel->where('Follower',$user)->orWhere('Following', $iduser)->first();
+			$follower = count($this->FollowModel->Where('Following', $iduser)->findAll());
+			$following = count($this->FollowModel->Where('Follower', $iduser)->findAll());
 			$data = [
 				'title' => $namauser." - MemeTube",
 				'kategori' => $this->KategoriModel->namaKategori(),
 				'postingan' => $this->PostModel->getPostProfile($iduser),
+				'follow' => $follow,
+				'follower' => $follower,
+				'following' => $following,
 				'mypostingan' => $mypostingan,
 				'savepost' => $savepost,
 				'profile' => $userlain
 			];
-		// dd($userlain);
+		 	//dd($following);
 			echo view('Pages/ProfileUserLain', $data);
 		}
+	}
+
+	public function LaporAkun()
+	{
+		$idakun = $this->request->getGet("idakun");
+
+		$getuser = $this->MemersModel->where("ID_Memers", $idakun)->first();
+
+		$data = [
+			'title' => 'Laporan Akun!',
+			'akun' => $getuser,
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		 //dd($getuser);
+		echo view('Pages/LaporAkun', $data);
+	}
+
+	public function ReportAkun()
+	{
+		$iduser = session()->get("user");
+		$idakun = $this->request->getGet("idakun");
+		$getuser = $this->MemersModel->where("ID_Memers", $idakun)->first();
+		$laporan = $this->request->getVar();
+		$laporan['ID_Akun_Pelapor'] = $iduser;
+		$laporan['ID_Pelanggar'] = $idakun;
+		$this->LaporanAkunModel->save($laporan);
+		//dd($laporan);
+		return redirect()->to(base_url('public/Pages/Profile?name='.$getuser['Nama']));
 	}
 
 	public function SettingProfile()
@@ -639,6 +713,32 @@ class Pages extends BaseController
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
 		echo view('Pages/Toko/TokoUser', $data);
+	}
+
+	public function LaporToko()
+	{
+		$iduser = session()->get("user");
+		$idtoko = $this->request->getGet("idtoko");
+		$data = [
+			'title' => "Tambah Produk!",
+			'user' => $iduser,
+			'toko' => $this->TokoModel->where("ID_Toko", $idtoko)->first(),
+			'toko_kategori' => $this->TokoKategoriModel->namaKategoriToko(),
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		echo view('Pages/Toko/LaporToko', $data);
+	}
+
+	public function ReportToko()
+	{
+		$idtoko = $this->request->getGet("idtoko");
+		$iduser = session()->get("user");
+		$post = $this->request->getVar();
+		$post['ID_Memers'] = $iduser;
+		$post['ID_Toko'] = $idtoko;
+		// dd($post);
+		$this->LaporanTokoModel->save($post);
+		return redirect()->to(base_url('public/Pages/TokoUser?idtoko='.$idtoko));
 	}
 
 	public function percobaan()

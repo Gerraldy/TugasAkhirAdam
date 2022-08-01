@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
 
-<div class="container" style="margin:auto">
+<div class="container pt-3" style="margin:auto">
 
     <div class="row" >
       <div class="col-2">
@@ -13,9 +13,10 @@
         <?php endif; ?>
       </div>
       <div class="col-10">
-        <p style="color:white ;position:relative; top:10px;font-size:20px"><?=$profile['Nama'] ?></p>
+        <p style="color:white ;position:relative; top:10px;font-size:20px"><?=$profile['Username'] ?></p>
         <!-- <hr style="height:3px;border-width:0;color:black;background-color:black"> -->
-        <p style="color:white ;position:relative;"><?=$profile['Email'] ?></p>
+        <text style="color:white; top:10px;font-size:13px">Follower : <?=$follower ?></text> ||
+        <text style="color:white;font-size:13px">Following : <?=$following?></text>
       </div>
     </div>
     <div class="row">
@@ -25,13 +26,13 @@
     </div>
     <div class="row" style="position:relative; top:10px">
       <div class="col-1">
-        <button class="k-button" id="showHome" name="button" style="width:70px">Home</button>
+        <button class="k-button btn-outline-light" id="showHome" name="button" style="width:70px">Home</button>
       </div>
       <div class="col-1">
-        <button class="k-button" id="showPost" name="button" style="width:70px">Post</button>
+        <button class="k-button btn-outline-light" id="showPost" name="button" style="width:70px">Post</button>
       </div>
       <div class="col-10">
-        <button class="k-button" id="showSave" name="button" style="width:70px">Save</button>
+        <button class="k-button btn-outline-light" id="showSave" name="button" style="width:70px">Save</button>
       </div>
     </div>
 
@@ -57,7 +58,7 @@
                       <script type="text/javascript">
                           $(document).ready(function () {
                               $("#mediaplayer").kendoMediaPlayer({
-                                  autoPlay: true,
+                                  autoPlay: false,
                                   navigatable: true,
                                   media: {
                                       title: "ProgressNEXT 2019 Highlights",
@@ -79,7 +80,7 @@
               <a class="btn btn-outline-light" href="<?=base_url('/public/Pages/getPostKategori/'.$p['ID_Kategori']) ?>" style="background:grey; border:none; border-radius:10px ;width: 100px;height:100%; padding:1px">#<?=$p['Nama_Kategori'] ?></a>
               <div class="section-button-like" style="">
                 <div class="container-button-like" style="display:inline-block">
-                    <button class="btn-like btn k-button" data-id=<?= $p['ID_Postingan'] ?> style="">
+                    <button class="btn-like btn k-button" data-id=<?= $p['ID_Postingan'] ?> style="padding: 5px 13px;border: 1px solid white;border-radius: 20px;background-color: #969798;">
                       <?php if (!isset($p["Like"])): ?>
                         <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
                       <?php else: ?>
@@ -91,7 +92,7 @@
                     </button>
                 </div>
                 <div class="container-button-dislike" style="display:inline-block">
-                    <button id="" class="btn k-button btn-dislike" data-id=<?= $p['ID_Postingan'] ?>>
+                    <button id="" class="btn k-button btn-dislike" data-id=<?= $p['ID_Postingan'] ?> style="padding: 5px 13px;border: 1px solid white;border-radius: 20px;background-color: #969798;">
                       <?php if (!isset($p["Dislike"])): ?>
                         <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
                       <?php else: ?>
@@ -104,7 +105,7 @@
                 </div>
                 <div class="" style="display:inline-block">
                   <a href="<?= base_url('public/Pages/Komentar?slug='.$p['Slug'])?>">
-                    <button class="comment btn k-button btn-block">
+                    <button class="comment btn k-button btn-block" style="padding: 5px 13px;border: 1px solid white;border-radius: 20px;background-color: #969798;">
                       <img src="<?= base_url('public/gambar/komentarhitam.png') ?>" style="height:20px;weight:20px;">
                     </button>
                   </a>

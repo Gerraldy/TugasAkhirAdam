@@ -25,7 +25,7 @@
           <h3 style="color:white"><?= $toko['Nama_Toko'] ?></h3>
         </div>
         <div class="col-2">
-            <a href="#" class="" style="text-decoration:none"><button id="" class="k-button" style="padding: 3px 10px;">Lapor Toko!</button></a>
+            <a href="<?=base_url('public/Pages/LaporToko?idtoko='.$toko['ID_Toko']) ?>" class="" style="text-decoration:none"><button id="" class="k-button" style="padding: 3px 10px;">Lapor Toko!</button></a>
         </div>
     <?php endif; ?>
   </div>

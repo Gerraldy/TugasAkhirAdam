@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="<?= base_url('public/kendoStyle/kendo.default.min.css'); ?>" >
     <link rel="stylesheet" href="<?= base_url('public/css/magnific-popup.css'); ?>" >
     <link rel="stylesheet" href="<?= base_url('public/css/w3.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('public/css/cssdropdown.css'); ?>">
     <link href="<?=base_url('public/css/jquery-ui.min.css')?>" rel="stylesheet" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 
