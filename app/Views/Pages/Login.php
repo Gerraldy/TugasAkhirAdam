@@ -24,7 +24,18 @@
 			<div class="social-container">
 				<a href="#" class="social"><i class="fab fa-google"></i></a>
 			</div>
-			<span>or use your email for registration</span>
+      <?php
+          if (!empty(session()->getFlashdata('success'))) { ?>
+              <div class="alert-success">
+                  <?php echo session()->getFlashdata('success'); ?>
+              </div>
+          <?php }
+
+          if (!empty(session()->getFlashdata('error'))) { ?>
+              <div class="alert-danger">
+                  <?php echo session()->getFlashdata('error'); ?>
+              </div>
+       <?php } ?>
 			<input type="email" name="email" placeholder="Email" />
       <input type="text" name="username" placeholder="Username" />
       <input type="text" name="nama" placeholder="Nama" />

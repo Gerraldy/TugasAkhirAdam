@@ -112,6 +112,17 @@ class Pages extends BaseController
 		   //dd($data['toko']);
 		echo view('Pages/Home', $data);
 	}
+
+	public function Midtrans()
+	{
+		$data = [
+			'title' => 'Pembayaran',
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		//dd($data['postinganKategori']);
+		echo view('Midtrans/transaction', $data);
+	}
+
 	public function getPostKategori($idKategoriPost)
 	{
 		// dd($idKategoriPost);

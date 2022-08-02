@@ -57,7 +57,7 @@ class Auth extends BaseController
     $email =  $this->request->getVar('email');
     $password =  $this->request->getVar('password');
     $user = $this->MemersModel->where('Email',$email)->orWhere('Password', $password)->first();
-    if ($user['Email'] == $email && $user['Password'] == $password) {
+    if ($user != null) {
       $session->setFlashdata('sukses-masuk',"1");
       $session->set([
         'user' => $user['ID_Memers'],
@@ -68,7 +68,7 @@ class Auth extends BaseController
     }elseif ($email=='admin' && $password=='admin') {
       //dd($data['laporanpost']);
        echo view('Pages/Admin/AdminDashboard');
-    }elseif ($user == null)  {
+    }else{
       $session->setFlashdata('gagal-masuk',"1");
       return redirect()->to(base_url('public/Auth/Login'));
     }

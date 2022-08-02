@@ -84,7 +84,7 @@
                        </button>
                        <div class="collapse navbar-collapse" id="navbarResponsive">
                            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                               <li class="nav-item"><a href="#" class="nav-link">SUBSCRIBE</a></li>
+                               <li class="nav-item"><a href="<?= base_url('/public/Pages/Midtrans') ?>" class="nav-link">SUBSCRIBE</a></li>
                                <li class="nav-item"><a href="<?= base_url('/public/Pages/Toko') ?>" class="nav-link">TOKO</a></li>
                                <li class="nav-item"><a class="nav-link" href="#" id="meme">BUAT MEME</a></li>
                                <?php if (session()->get('user') != null): ?>
@@ -99,7 +99,7 @@
                                    </div>
                                  </li>
                                <?php else: ?>
-                                 <a href="<?= base_url('/public/Pages/Login') ?>" class="mx-2" style="text-decoration:none"><button id="gologin" class="k-button" style="padding: 3px 10px;;">Login</button></a>
+                                 <a href="<?= base_url('/public/Pages/Login') ?>" class="mx-2" style="text-decoration:none"><button id="gologin" class="k-button btn-outline-light" style="padding: 3px 10px;;">Login</button></a>
                                <?php endif; ?>
                            </ul>
                        </div>

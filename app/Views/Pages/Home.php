@@ -191,7 +191,7 @@
       </div>
       <div class="col-10" style="">
         <div class="row">
-
+        <!-- <text > <a href="#"style="color:white"><?=$p['Username'] ?></a> </text> -->
         <h4 style="color:white"><b><?= $p['Judul'] ?></b></h4>
         <div class="col-1" style="background-color: black">
         </div>

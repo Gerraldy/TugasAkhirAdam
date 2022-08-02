@@ -233,7 +233,7 @@ width: 40px;
   </div>
   <div class="card">
 	<div class="card-body">
-		<h3 class="card-title text-center" style="text-align: center;">Reset password</h3>
+		<h3 class="card-title text-center" style="text-align: center;">Buat Katasandi Baru</h3>
     <?php
                 if (!empty(session()->getFlashdata('success'))) { ?>
                     <div class="alert-success">
@@ -250,7 +250,7 @@ width: 40px;
       <form class="" action="<?=base_url('public/Email/send_email') ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
         <div class="" style="text-align: center;">
           <img src="<?= base_url('/public/gambar/lock.png') ?>" alt="Avatar" class="avatar" style="width: 150px; border-radius: 10%;"><br>
-					<label for="exampleInputEmail1">Enter your email address and we will send you a link to reset your password.</label><br><br>
+					<label for="exampleInputEmail1"></label><br><br>
 					<input type="email" name="Email" class="form-control form-control-sm" placeholder="Enter your email address"><br><br>
           	<button type="submit" class="btn btn-primary btn-block">Send password reset email</button>
         </div>
