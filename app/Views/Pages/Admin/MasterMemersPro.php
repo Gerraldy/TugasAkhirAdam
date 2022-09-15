@@ -28,8 +28,8 @@
                             <th>Email</th>
                             <th>Username</th>
                             <th>Url Foto</th>
-                            <th>Berlaku Sampai</th>
-                            
+                            <th>Sisa Waktu</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -39,7 +39,7 @@
                             <td><?=$m['Email'] ?></td>
                             <td><?=$m['Username'] ?></td>
                             <td><img src="<?= base_url('public/uploads/gambar_profile/'.$m['url_foto']) ?>" class="img-fluid" style="height:100px;weight:100px; object-fit: cover;display: flex;justify-content: center;align-items: center;"></td>
-                            <td></td>
+                            <td> <progress value="0" max="10" id="progressBar"></progress></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -49,6 +49,32 @@
     </div>
 
 </div>
+<script>
+var timeleft = 10;
+var downloadTimer = setInterval(function(){
+  if(timeleft <= 0){
+    clearInterval(downloadTimer);
+  }
+  document.getElementById("sisa").value = 10 - timeleft;
+  timeleft -= 1;
+}, 1000);
 
+// $(document).ready(function () {
+//   const starting = 10;
+//   let time = starting * 60;
+//
+//   const countdown = document.getElementById('sisa');
+//   setInterval(updatecountdown, 1000);
+//   function updatecountdown() {
+//     const minutes = Math.floor(time / 60);
+//     let seconds = time % 60;
+//
+//     seconds = seconds < 10 ? '0' + seconds : seconds;
+//     const countdown = '${minutes}:${seconds}';
+//     time--;
+//   }
+// });
+
+</script>
 
 <?= $this->endSection();  ?>

@@ -25,6 +25,8 @@ use App\Models\TopikKomentarModel;
 
 use App\Models\FollowModel;
 
+use App\Models\MemePolosModel;
+
 class Pages extends BaseController
 {
 	protected $PostModel;
@@ -48,6 +50,8 @@ class Pages extends BaseController
 	protected $TopiKomentarkModel;
 
 	protected $FollowModel;
+
+	protected $MemePolosModel;
 
 	public function __construct()
 	{
@@ -73,6 +77,8 @@ class Pages extends BaseController
 
 		$this->FollowModel = new FollowModel();
 
+		$this->MemePolosModel = new MemePolosModel();
+
 	}
 
 	public function index()
@@ -80,6 +86,7 @@ class Pages extends BaseController
 	//	$posting = new PostModel();
 		$session = session();
 		$user = $session->get("user");
+		$status = $session->get("status");
 
 		//$post = $posting->findAll();
 		$unlike = $this->UnlikeModel->findAll();
@@ -105,6 +112,7 @@ class Pages extends BaseController
 		$data = [
       'title' => 'Home!',
       'postingan' => $postingan,
+			'status' => $status,
 			'topik' => $topik,
 			'toko' => $this->TokoModel->where("ID_Memers", $user)->first(),
 			'kategori' => $this->KategoriModel->namaKategori()
@@ -123,6 +131,18 @@ class Pages extends BaseController
 		echo view('Midtrans/transaction', $data);
 	}
 
+	public function LanggananPro()
+	{
+		$iduser = session()->get("user");
+		$data = [
+			'title' => 'Pembayaran',
+			'user' => $this->MemersModel->where("ID_Memers", $iduser)->first(),
+			'kategori' => $this->KategoriModel->namaKategori()
+		];
+		//dd($data['user']);
+		echo view('Pages/LanggananPro', $data);
+	}
+
 	public function getPostKategori($idKategoriPost)
 	{
 		// dd($idKategoriPost);
@@ -132,21 +152,21 @@ class Pages extends BaseController
 			'nama_kategori' => $this->PostModel->getNamaKategori($idKategoriPost),
 			'kategori' => $this->KategoriModel->namaKategori()
 		];
-		//dd($data['postinganKategori']);
+		//dd($data['nama_kategori']);
 		echo view('Pages/PostinganKategori', $data);
 	}
 
 	public function Cari()
 	{
 		$cari = $this->request->getGet('cari');
-		$idkategori = $this->KategoriModel->select("ID_Kategori")->where("Nama_Kategori",$cari)->first();
+		$idkategoripost = $this->KategoriModel->select("ID_Kategori")->where("Nama_Kategori",$cari)->first();
 		$data = [
 			'title' => $cari,
-			'postinganKategori' => $this->PostModel->getPostKategori($idkategori),
-		  //'nama_kategori' => $this->PostModel->getNamaKategori($idkategori),
+			'postinganKategori' => $this->PostModel->getPostKategori($idkategoripost),
+		  'nama_kategori' => $this->PostModel->getNamaKategori($idkategoripost['ID_Kategori']),
 		  'kategori' => $this->KategoriModel->namaKategori()
 		];
-	//	dd($data['postinganKategori']);
+		//dd($idkategoripost['ID_Kategori']);
 		echo view('Pages/PostinganKategori', $data);
 	}
 
@@ -265,11 +285,25 @@ class Pages extends BaseController
 
 	public function BuatMeme()
   {
-		$data = [
-			'title' => "Buat Meme Mu Disini!",
-			'kategori' => $this->KategoriModel->namaKategori()
-		];
-    echo view('Pages/BuatMeme', $data);
+		$id = session()->get('user');
+		if ($id != null) {
+			$data = [
+				'title' => "Buat Meme Mu Disini!",
+				'user' => $this->MemersModel->where('ID_Memers',$id)->first(),
+				'memepolos' => $this->MemePolosModel->findAll(),
+				'kategori' => $this->KategoriModel->namaKategori()
+			];
+	    echo view('Pages/BuatMeme', $data);
+		}else {
+			$data = [
+				'title' => "Login!",
+				'kategori' => $this->KategoriModel->namaKategori()
+			];
+			$message = "Login Dulu Brooo!";
+			echo "<script type='text/javascript'>alert('$message');</script>";
+			return view('Pages/Login', $data);
+		}
+
   }
 	public function MyProfile()
   {

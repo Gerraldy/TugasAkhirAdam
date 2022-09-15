@@ -1,0 +1,74 @@
+:root {
+  --blue: #3ba5e2;
+  --light-blue: #c8e6ff;
+  --dark-blue: #0b8b9c;
+  --white: #fff;
+  --black: #000;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  --bg-nav: var(--blue);
+  --nav-link: var(--light-blue);
+  --hover-nav-link: var(--dark-blue);
+}
+
+nav {
+  padding: 0.9rem 1.1rem;
+  font-family: "Josefin Sans", sans-serif;
+  background-color: var(--bg-nav);
+  display: flex;
+  justify-content: space-between;
+}
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+}
+
+.logo {
+  font-weight: 600;
+  color: white;
+}
+
+nav li a {
+  color: var(--nav-link);
+  cursor: pointer;
+  text-decoration: none;
+  margin-right: 0.6em;
+}
+
+nav li a:hover {
+  color: var(--hover-nav-link);
+  transition: color 0.5ms ease-in-out;
+}
+
+section h1 {
+  font-family: "Orelega One", cursive;
+}
+section h5 {
+  font-family: "Prompt", sans-serif;
+}
+
+section {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+section h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  nav {
+    background-color: yellow;
+  }
+} */

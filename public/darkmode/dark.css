@@ -1,0 +1,68 @@
+:root {
+  --grey1: #303030;
+  --grey2: #3f3f3f;
+  --grey3: #858585;
+  --grey4: #aaaaaa;
+  --black: #000;
+  --white: #fff;
+}
+
+.dark-body {
+  --bg: var(--grey2);
+  --bg-nav: var(--grey1);
+  --nav-link: var(--grey4);
+  --hover-nav-link: var(--grey3);
+
+  --section-h1: var(--white);
+  --section-h5: var(--grey4);
+}
+
+body {
+  background-color: var(--bg);
+}
+
+nav {
+  background-color: var(--bg-nav);
+}
+
+nav li a {
+  color: var(--nav-link);
+}
+
+nav li a:hover {
+  color: var(--hover-nav-link);
+}
+
+section h1 {
+  color: var(--section-h1);
+}
+
+section h5 {
+  color: var(--section-h5);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--grey2);
+  }
+
+  nav {
+    background-color: var(--grey1);
+  }
+
+  nav li a {
+    color: var(--grey4);
+  }
+
+  nav li a:hover {
+    color: var(--grey3);
+  }
+
+  section h1 {
+    color: var(--white);
+  }
+
+  section h5 {
+    color: var(--grey4);
+  }
+}

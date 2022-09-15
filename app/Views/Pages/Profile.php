@@ -13,26 +13,26 @@
         <?php endif; ?>
       </div>
       <div class="col-10">
-        <p style="color:white ;position:relative; top:10px;font-size:20px"><?=$profile['Username'] ?></p>
+        <p style="color:black ;position:relative; top:10px;font-size:20px"><?=$profile['Username'] ?></p>
         <!-- <hr style="height:3px;border-width:0;color:black;background-color:black"> -->
-        <text style="color:white; top:10px;font-size:13px">Follower : <?=$follower ?></text> ||
-        <text style="color:white;font-size:13px">Following : <?=$following?></text>
+        <text style="color:black; top:10px;font-size:13px">Follower : <?=$follower ?></text> ||
+        <text style="color:black;font-size:13px">Following : <?=$following?></text>
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <p style="color:white ;"><?= $profile['Tentang'] ?> </p>
+        <p style="color:black ;"><?= $profile['Tentang'] ?> </p>
       </div>
     </div>
     <div class="row" style="position:relative; top:10px">
       <div class="col-1">
-        <button class="k-button btn-outline-light" id="showHome" name="button" style="width:70px">Home</button>
+        <button class="k-button btn-outline-dark" id="showHome" name="button" style="width:70px">Home</button>
       </div>
       <div class="col-1">
-        <button class="k-button btn-outline-light" id="showPost" name="button" style="width:70px">Post</button>
+        <button class="k-button btn-outline-dark" id="showPost" name="button" style="width:70px">Post</button>
       </div>
       <div class="col-10">
-        <button class="k-button btn-outline-light" id="showSave" name="button" style="width:70px">Save</button>
+        <button class="k-button btn-outline-dark" id="showSave" name="button" style="width:70px">Save</button>
       </div>
     </div>
 
@@ -314,6 +314,7 @@
       });
 
       $(".btn-like").click(function(){
+        //alert("suka");
         let id_post = $(this).data("id");
         let t = $(this);
         $.ajax({

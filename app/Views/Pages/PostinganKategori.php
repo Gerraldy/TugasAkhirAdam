@@ -56,9 +56,8 @@
                   </div>
                   <script type="text/javascript">
                       $(document).ready(function () {
-
                           $("#mediaplayer").kendoMediaPlayer({
-                              autoPlay: true,
+                              autoPlay: false,
                               navigatable: true,
                               media: {
                                   title: "ProgressNEXT 2019 Highlights",
@@ -77,7 +76,7 @@
           </div>
           <div class="col-2" style="background-color: black">
           </div>
-            <a class="btn btn-outline-light" href="" style="background:grey; border:none; border-radius:10px ;width: 100px;height:100%; padding:1px">#<?=$nama_kategori['Nama_Kategori'] ?></a>
+          <a class="btn btn-outline-light" href="" style="background:grey; border:none; border-radius:10px ;width: 100px;height:100%; padding:1px">#<?=$nama_kategori['Nama_Kategori'] ?></a>
           <div class="section-button-like" style="">
             <div class="container-button-like" style="display:inline-block">
                 <button class="btn-like k-button" data-id=<?= $p['ID_Postingan'] ?> style="">

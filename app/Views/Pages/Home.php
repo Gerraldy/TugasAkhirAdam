@@ -118,21 +118,58 @@
         </form>
       </div>
       <div class="col-2">
-        <a class="btn nav-link p-1" href="<?= base_url('/public/Pages/Topik?ID_Topik='.$topik[0]['ID_Topik']) ?>" style="border:2px solid white; border-radius:20px;color:white"><?=$topik[0]['Nama_Topik'] ?></a>
+        <a class="btn nav-link p-1" href="<?= base_url('/public/Pages/Topik?ID_Topik='.$topik[0]['ID_Topik']) ?>" style="border:2px; border-radius:20px;color:"><?=$topik[0]['Nama_Topik'] ?></a>
       </div>
       <div class="col-2">
-        <a class="btn nav-link p-1" href="<?= base_url('/public/Pages/Topik?ID_Topik='.$topik[1]['ID_Topik']) ?>" style="border:2px solid white; border-radius:50px;color:white;"><?=$topik[1]['Nama_Topik'] ?></a>
+        <a class="btn nav-link p-1" href="<?= base_url('/public/Pages/Topik?ID_Topik='.$topik[1]['ID_Topik']) ?>" style="border:2px; border-radius:50px;color:;"><?=$topik[1]['Nama_Topik'] ?></a>
       </div>
       <div class="col-2">
-        <a class="btn nav-link p-1" href="<?= base_url('/public/Pages/Topik?ID_Topik='.$topik[2]['ID_Topik']) ?>" style="border:2px solid white; border-radius:50px;color:white"><?=$topik[2]['Nama_Topik'] ?></a>
+        <a class="btn nav-link p-1" href="<?= base_url('/public/Pages/Topik?ID_Topik='.$topik[2]['ID_Topik']) ?>" style="border:2px; border-radius:50px;color:"><?=$topik[2]['Nama_Topik'] ?></a>
       </div>
       <div class="col-2">
-        <a class="btn nav-link p-1" href="<?= base_url('/public/Pages/Topik?ID_Topik='.$topik[3]['ID_Topik']) ?>" style="border:2px solid white; border-radius:50px;color:white"><?=$topik[3]['Nama_Topik'] ?></a>
+        <a class="btn nav-link p-1" href="<?= base_url('/public/Pages/Topik?ID_Topik='.$topik[3]['ID_Topik']) ?>" style="border:2px; border-radius:50px;color:"><?=$topik[3]['Nama_Topik'] ?></a>
       </div>
     </div>
   </div>
   <hr style="height:3px;color:black;background-color:white">
-  <div class="slideshow-container" style="max-width:70%">
+
+  <section class="categories">
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    <div class="col-lg-3">
+
+                            <h5><a href="#">Fresh Fruit</a></h5>
+                            <div class="backgrouniklan" style="z-index:-100; position: absolute;">
+                              <img src="<?=base_url('/public/gambar/memekumpulan.jpg') ?>" alt="">
+                            </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="img/categories/cat-2.jpg">
+                            <h5><a href="#">Dried Fruit</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="img/categories/cat-3.jpg">
+                            <h5><a href="#">Vegetables</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="img/categories/cat-4.jpg">
+                            <h5><a href="#">drink fruits</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="img/categories/cat-5.jpg">
+                            <h5><a href="#">drink fruits</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <!-- <div class="slideshow-container" style="max-width:70%">
 
   <div class="mySlides fade">
     <div class="numbertext">1 / 3</div>
@@ -177,32 +214,26 @@
   <a class="prev" onclick="plusSlides(-1)">❮</a>
   <a class="next" onclick="plusSlides(1)">❯</a>
 
-  </div>
+  </div> -->
   <br>
-  <div style="text-align:center">
+  <!-- <div style="text-align:center">
     <span class="dot" onclick="currentSlide(1)"></span>
     <span class="dot" onclick="currentSlide(2)"></span>
     <span class="dot" onclick="currentSlide(3)"></span>
-  </div>
+  </div> -->
   <hr>
   <?php foreach($postingan as $p) : ?>
   <div class="row">
-      <div class="col-1">
-      </div>
-      <div class="col-10" style="">
+    <div class="col-lg-11" style="">
         <div class="row">
         <!-- <text > <a href="#"style="color:white"><?=$p['Username'] ?></a> </text> -->
-        <h4 style="color:white"><b><?= $p['Judul'] ?></b></h4>
-        <div class="col-1" style="background-color: black">
-        </div>
-        <div class="col-10" style="background-color: black">
-
+        <div class="col-lg-10" style="border: 2px solid black;border-radius: 20px;">
           <?php $tipefile = explode(".",$p['Nama_Gambar']) ?>
           <?php $tipefile_ext = end($tipefile)  ?>
           <?php if ($tipefile_ext == "mp4"): ?>
             <div class="pt-4">
             </div>
-            <div id="example">
+            <div id="vidio">
                 <div class="demo-section wide" style="max-width: 644px;">
                     <div id="mediaplayer" style="height:360px"></div>
                 </div>
@@ -227,48 +258,50 @@
             </div>
           <?php endif; ?>
           <br>
+        </div>
+        <div class="col-lg-2" style="background-color:">
+          <h4 style="color:"><b><?= $p['Judul'] ?></b></h4>
+          <a class="btn btn-outline-light m-1" href="<?=base_url('/public/Pages/getPostKategori/'.$p['ID_Kategori']) ?>" style="background:grey; border:none; border-radius:10px; padding:1px">#<?=$p['Nama_Kategori'] ?></a>
+          <div class="section-button-like" style="">
+            <div class="container-button-like" style="display:inline-block">
+                <button class="btn-like k-button" data-id=<?= $p['ID_Postingan'] ?> style="padding: 5px 13px;border: 2px solid black;border-radius: 20px;background-color: #969798;">
+                  <?php if (!isset($p["Like"])): ?>
+                    <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
+                  <?php else: ?>
+                    <img src="<?= base_url('public/gambar/sudahlike2.png') ?>" style="height:20px;weight:20px;">
+                  <?php endif; ?>
+                  <text>
+                    <?= $p['Suka'] ?>
+                  </text>
+                </button>
+            </div>
+            <div class="container-button-dislike" style="display:inline-block">
+                <button id="" class="btn-dislike k-button btn-outline-light" style="padding: 5px 13px;border: 2px solid black;border-radius: 20px;background-color: #969798;" data-id=<?= $p['ID_Postingan'] ?>>
+                  <?php if (!isset($p["Dislike"])): ?>
+                    <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
+                  <?php else: ?>
+                    <img src="<?= base_url('public/gambar/sudahdislike2.png') ?>" style="height:20px;weight:20px;">
+                  <?php endif; ?>
+                  <text>
+                    <?= $p['Tidak_Suka'] ?>
+                  </text>
+                </button>
+            </div>
+            <div class="" style="display:inline-block">
+              <a href="<?= base_url('public/Pages/Komentar?slug='.$p['Slug'])?>">
+                <button class="comment k-button btn-outline-light btn-block" style="padding: 5px 13px;border: 2px solid black;border-radius: 20px;background-color: #969798;">
+                  <img src="<?= base_url('public/gambar/komentarhitam.png') ?>" style="height:20px;weight:20px;">
+                </button>
+              </a>
+            </div>
+          </div>
 
         </div>
-        <div class="col-1" style="background-color: black">
-        </div>
-        <a class="btn btn-outline-light m-1" href="<?=base_url('/public/Pages/getPostKategori/'.$p['ID_Kategori']) ?>" style="background:grey; border:none; border-radius:10px ;width: 100px;height:100%; padding:1px">#<?=$p['Nama_Kategori'] ?></a>
-        <div class="section-button-like" style="">
-          <div class="container-button-like" style="display:inline-block">
-              <button class="btn-like " data-id=<?= $p['ID_Postingan'] ?> style="padding: 5px 13px;border: 1px solid white;border-radius: 20px;background-color: #969798;">
-                <?php if (!isset($p["Like"])): ?>
-                  <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
-                <?php else: ?>
-                  <img src="<?= base_url('public/gambar/sudahlike2.png') ?>" style="height:20px;weight:20px;">
-                <?php endif; ?>
-                <text>
-                  <?= $p['Suka'] ?>
-                </text>
-              </button>
-          </div>
-          <div class="container-button-dislike" style="display:inline-block">
-              <button id="" class="btn-dislike k-button btn-outline-light" style="padding: 5px 13px;border: 1px solid white;border-radius: 20px;background-color: #969798;" data-id=<?= $p['ID_Postingan'] ?>>
-                <?php if (!isset($p["Dislike"])): ?>
-                  <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
-                <?php else: ?>
-                  <img src="<?= base_url('public/gambar/sudahdislike2.png') ?>" style="height:20px;weight:20px;">
-                <?php endif; ?>
-                <text>
-                  <?= $p['Tidak_Suka'] ?>
-                </text>
-              </button>
-          </div>
-          <div class="" style="display:inline-block">
-            <a href="<?= base_url('public/Pages/Komentar?slug='.$p['Slug'])?>">
-              <button class="comment k-button btn-outline-light btn-block" style="padding: 5px 13px;border: 1px solid white;border-radius: 20px;background-color: #969798;">
-                <img src="<?= base_url('public/gambar/komentarhitam.png') ?>" style="height:20px;weight:20px;">
-              </button>
-            </a>
-          </div>
-        </div>
+
         </div>
       </div>
-      <div class="col-1">
-        <div class="pt-5" style="">
+      <div class="col-lg-1">
+        <div class="" style="">
           <div class="dropdown">
             <button class="dropbtn">!</button>
             <div class="dropdown-content">
@@ -287,6 +320,7 @@
           <button class="btn btn-outline-light">Tidak Masuk Akal</button> -->
         </div>
       </div>
+
     </div>
     <hr>
   <?php endforeach; ?>
@@ -294,9 +328,7 @@
 <script>
 $(document).ready(function () {
   //$("#option1").kendoDropDownList();
-
   $(".btn-dislike").click(function(){
-    //alert("test");
     let id_post = $(this).data("id");
     let t = $(this);
     $.ajax({
@@ -326,6 +358,7 @@ $(document).ready(function () {
   });
 
   $(".btn-like").click(function(){
+    //alert("suka");
     let id_post = $(this).data("id");
     let t = $(this);
     $.ajax({

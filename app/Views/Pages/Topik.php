@@ -33,7 +33,6 @@
               <div class="" style="bottom:20px ;height:100%; width:100%; ">
                 <form action="<?=base_url('public/LikeKomen/submitKomentarTopik?ID_Topik='.$topik["ID_Topik"])?>" method="post" enctype="multipart/form-data">
                   <textarea id="isikomen" class="k-textarea mt-3 mb-3"  style="height:50px;width: 100%;" required name="Isi_KomentarTopik"></textarea>
-
                   <input type="submit" class="k-button btn-outline-light" name="" value="Send" id="btnSend">
                   <button id="cancel" class="k-button btn-outline-light" style="position: relative; right: auto;">Cancel</button>
                 </form>

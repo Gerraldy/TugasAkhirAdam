@@ -5,6 +5,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+      <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="<?= base_url('public/cssbaru/bootstrap.min.css'); ?>" type="text/css">
+    <link rel="stylesheet" href="<?= base_url('public/cssbaru/font-awesome.min.css'); ?>" type="text/css">
+    <link rel="stylesheet" href="<?= base_url('public/cssbaru/elegant-icons.css'); ?>" type="text/css">
+    <link rel="stylesheet" href="<?= base_url('public/cssbaru/nice-select.css'); ?>" type="text/css">
+    <link rel="stylesheet" href="<?= base_url('public/cssbaru/jquery-ui.min.css'); ?>" type="text/css">
+    <link rel="stylesheet" href="<?= base_url('public/cssbaru/owl.carousel.min.css'); ?>" type="text/css">
+    <link rel="stylesheet" href="<?= base_url('public/cssbaru/slicknav.min.css'); ?>" type="text/css">
+    <link rel="stylesheet" href="<?= base_url('public/cssbaru/style.css'); ?>" type="text/css">
+
+    <!-- Js Plugins -->
+    <script src="<?= base_url('public/jsbaru/jquery-3.3.1.min.js'); ?>"></script>
+    <script src="<?= base_url('public/jsbaru/bootstrap.min.js'); ?>"></script>
+    <script src="<?= base_url('public/jsbaru/jquery.nice-select.min.js'); ?>"></script>
+    <script src="<?= base_url('public/jsbaru/jquery-ui.min.js'); ?>"></script>
+    <script src="<?= base_url('public/jsbaru/jquery.slicknav.js'); ?>"></script>
+    <script src="<?= base_url('public/jsbaru/mixitup.min.js'); ?>"></script>
+    <script src="<?= base_url('public/jsbaru/owl.carousel.min.js'); ?>"></script>
+    <script src="<?= base_url('public/jsbaru/main.js'); ?>"></script>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?= base_url('public/kendoStyle/kendo.common.min.css'); ?>" >
     <link rel="stylesheet" href="<?= base_url('public/kendoStyle/kendo.default.min.css'); ?>" >
@@ -14,7 +37,7 @@
     <link href="<?=base_url('public/css/jquery-ui.min.css')?>" rel="stylesheet" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 
-    <link href="<?=base_url('public/navbar/css/styles.css') ?>" rel="stylesheet" />
+    <!-- <link href="<?=base_url('public/navbar/css/styles.css') ?>" rel="stylesheet" /> -->
     <script src="<?=base_url('public/navbar/js/scripts.js') ?>"></script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -39,20 +62,25 @@
 
         $( function() {
             var tag = [
-              "ngakak",
-              "game",
-              "anime",
-              "hewan",
-              "sport",
-              "jodoh",
-              "art",
-              "NSFW"
+              "Ngakak",
+              "Permainan",
+              "Anime",
+              "Hewan",
+              "Olahraga",
+              "Jodoh",
+              "Seni",
+              "Meme",
+              "Mobil",
+              "Random",
+              "Film",
+              "Wallpapper"
             ];
             $( "#search" ).autocomplete({
               source: tag
             });
           } );
     </script>
+
     <title><?=$title ?></title>
   </head>
   <body style="height: 100%;">
@@ -73,7 +101,118 @@
     </style>
     <!-- d-flex -->
     <div class="" id="wrapper" style="">
-               <nav class="navbar navbar-expand-lg navbar-dark fixed-top p-1" id="mainNav">
+      <!-- Header Section Begin -->
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__left">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__right">
+                            <div class="header__top__right__social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                            </div>
+                              <?php if (session()->get('user') != null): ?>
+                                <div class="header__top__right__language">
+                                    <div>Akun</div>
+                                    <span class="arrow_carrot-down"></span>
+                                    <ul>
+                                        <li><a  href="<?= base_url('/public/Pages/MyProfile') ?>"> Profil</a></li>
+                                        <li><a  id="setting" href="<?=base_url('/public/Pages/SettingProfile') ?>">Setting</a></li>
+                                        <li><a  href="<?= base_url('/public/Auth/Logout') ?>">Logout</a></li>
+                                    </ul>
+                                </div>
+                              <?php else: ?>
+                                <div class="header__top__right__auth">
+                                  <a href="<?= base_url('/public/Pages/Login') ?>" class="fa fa-user" style=""> Login</a>
+                                </div>
+                              <?php endif; ?>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo">
+                      <a class="navbar-nav" href="<?= base_url('/public') ?>">
+                        <img src="<?= base_url('/public/gambar/Logo.png') ?>" alt="Avatar" class="avatar" style="width: 80%;">
+                      </a>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <nav class="header__menu">
+                        <ul>
+                            <li class=""><a href="<?= base_url('/public') ?>">Home</a></li>
+                            <li class="nav-item"><a href="<?= base_url('/public/Pages/Toko') ?>">TOKO</a></li>
+                            <li><a href="#">Pages</a>
+                                <ul class="header__menu__dropdown">
+                                    <li><a href="./shop-details.html">Shop Details</a></li>
+                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+                                    <li><a href="./checkout.html">Check Out</a></li>
+                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                             <li class=""><a class="" href="#" id="meme">BUAT MEME</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Hero Section Begin -->
+    <section class="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3" >
+                    <div class="hero__categories" style="">
+                        <ul>
+                          <?php foreach ($kategori as $k): ?>
+                                <li><a class="btn-outline-light" href="<?=base_url('/public/Pages/getPostKategori/'.$k['ID_Kategori']) ?>" style=""><img src="<?= base_url('public/gambar/'.$k['url_gambar']) ?>" style="height:20px;weight:20px;"><?=$k['Nama_Kategori']?> </a></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form class="" id="formSearch" action="<?= base_url('/public/Pages/Cari') ?>" method="get">
+                                <input type="text" id="search" name="cari" placeholder="Cari Meme?">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="hero__item set-bg" data-setbg="<?=base_url('/public/gambar/memekumpulan.jpg') ?>">
+                        <div class="hero__text" style="z-index:100; position: relative;position: relative; background-color:white">
+                            <span>Langganan</span>
+                            <h2>Tanpa Iklan <br />100% Real</h2>
+                            <!-- <p>Free Pickup and Delivery Available</p> -->
+                            <a href="<?= base_url('/public/Pages/LanggananPro') ?>" class="primary-btn">Langganan Sekarang</a>
+                        </div>
+                        <div class="backgrouniklan" style="z-index:-100; position: absolute;">
+                          <img src="<?=base_url('/public/gambar/memekumpulan.jpg') ?>" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+               <!-- <nav class="navbar navbar-expand-lg navbar-dark fixed-top p-1" id="mainNav">
                    <div class="container">
                      <a class="navbar-nav" href="<?= base_url('/public') ?>">
                        <img src="<?= base_url('/public/gambar/Logo.png') ?>" alt="Avatar" class="avatar" style="width: 150px; border-radius: 10%;">
@@ -84,7 +223,7 @@
                        </button>
                        <div class="collapse navbar-collapse" id="navbarResponsive">
                            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                               <li class="nav-item"><a href="<?= base_url('/public/Pages/Midtrans') ?>" class="nav-link">SUBSCRIBE</a></li>
+                               <li class="nav-item"><a href="<?= base_url('/public/Payment/index') ?>" class="nav-link">SUBSCRIBE</a></li>
                                <li class="nav-item"><a href="<?= base_url('/public/Pages/Toko') ?>" class="nav-link">TOKO</a></li>
                                <li class="nav-item"><a class="nav-link" href="#" id="meme">BUAT MEME</a></li>
                                <?php if (session()->get('user') != null): ?>
@@ -106,26 +245,21 @@
 
                    </div>
                    <hr>
-               </nav>
+               </nav> -->
 
                <!-- Page content-->
-               <div class="container-fluid pt-5" style="margin:auto; background-color:#232222">
+              <section class="featured spad">
+               <div class="container" style="">
                  <div class="row">
-                   <div class="col-2" style="">
-                     <div class="mt-4" style="position:; width:auto">
-                       <?php foreach ($kategori as $k): ?>
-                         <a class="btn btn-outline-light" href="<?=base_url('/public/Pages/getPostKategori/'.$k['ID_Kategori']) ?>" style="margin:auto; background:transparent; border:none; width: 200px;height:100%"><img src="<?= base_url('public/gambar/'.$k['url_gambar']) ?>" style="height:20px;weight:20px;"> <?=$k['Nama_Kategori']?> </a> <hr>
-                       <?php endforeach; ?>
-                     </div>
-                   </div>
-                   <div class="col-8" style="height: 100%;">
+                   <div class="col-10 " style="height: 100%;">
                      <?= $this->renderSection('content'); ?>
                    </div>
-                   <div class="col-1">
-                         <h2>IKLAN</h2>
+                   <div class="col-2">
+                     <h2>IKLAN</h2>
                    </div>
                  </div>
                </div>
+              </section>
            </div>
        </div>
 
@@ -238,10 +372,5 @@
                   });
               });
           </script>
-          <style >
-
-          </style>
-        </div>
-
       </body>
 </html>

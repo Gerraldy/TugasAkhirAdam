@@ -20,6 +20,16 @@
 	margin:0px;
 	position:relative;
 }
+#watermarktext {
+	position:absolute;
+	bottom:0;
+	right:0;
+	padding:10px;
+	min-width:100px;
+	text-align:left;
+	cursor:move;
+  font-size:17px;
+}
 .meme-txt-area {
 	border:#FFF 1px dotted;
 	position:absolute;
@@ -106,6 +116,7 @@ div#meme-canvas-container {
     <div class="col-7">
       <div id="meme-bg-target">
           <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>" id="img-meme-bg" class="img-meme-bg" />
+					<div id='watermarktext' contentEditable='false' class='' style='background: rgba(0, 0, 0, 0);'>Dibuat Oleh: <?=$user['Email'] ?></div>
       </div>
       <div class="" style="">
         <canvas id="myCanvas" style="">
@@ -115,49 +126,31 @@ div#meme-canvas-container {
     </div>
     <div class="col-5">
       <div class="">
-        <button id="subscribe" class="subscribe k-button w-100">SUBSCRIBE</button>
         <input type="file" name="meme_bg" value="Upload MEME Image" class="choose-file" onChange="showPreview(this);" />
         <!-- <button id="upload" type="file" accept="image/*" class="upload k-button w-100 mt-2" >Upload Meme</button> -->
-        <input type="button" id="buattext" name="add_text" value="Add Text" class="btn-add" onClick="createTextArea()" />
+        <input type="button" id="buattext" name="add_text" value="Add Text" class="btn-add mt-3" onClick="createTextArea()" />
         <div class="mt-2">
            <div id="carousel">
-            <div class="slide">
-                <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>"/>
-            </div>
+						 <?php foreach ($memepolos as $m): ?>
+							 <div class="slide">
+ 	                <img src="<?= base_url('public/gambar/memepolos/'. $m['Gambar_Meme']) ?>"/>
+ 	            </div>
+						 <?php endforeach; ?>
 
-            <div class="slide">
-                <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>"/>
-            </div>
-
-            <div class="slide">
-                <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>"/>
-            </div>
-
-            <div class="slide">
-                <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>"/>
-            </div>
-
-            <div class="slide">
-                <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>"/>
-            </div>
-
-            <div class="slide">
-                <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>"/>
-            </div>
         </div>
         </div>
         <br>
         <div class="box-col">
           <div class="row">
             <div class="col-12" id="editText">
-							<input type='color' id='colors' value='#000000' />
-
+							<!-- <input id="fontsize" type="number" title="fontsize" value="20" min="0" max="100"/> -->
+							<br>
             </div>
           </div>
         </div>
 
         <div>
-          <input type="checkbox" id="eq2" class="k-checkbox" disabled="disabled">
+          <input type="checkbox" id="eq2" class="k-checkbox">
           <label class="k-checkbox-label" for="eq2">Hapus Watermark</label>
           <br>
           <p>Edit Watermark </p>
@@ -182,6 +175,36 @@ div#meme-canvas-container {
   </div>
 </div>
 <script>
+$("#editor").kendoEditor();
+
+$(document).ready(function() {
+	$('#change').change(function(){ // <-- use change event
+  	$('p').css('background-color', $(this).val());
+        });
+
+});
+
+
+var colors;
+var defaultColor = "#000000";
+window.addEventListener("load", startup, false);
+for (var i = 0; i < 50; i++) {
+	function startup() {
+			colors = document.querySelector("#colors"+count);
+			colors.value = defaultColor;
+			colors.addEventListener("input", updateFirst, false);
+			colors.select();
+	}
+	function updateFirst(event)
+	{
+			var p = document.querySelector("#textedit"+count);
+			if (p)
+			{
+					p.style.color = event.target.value;
+			}
+	}
+}
+
 
 
 // html2canvas($('#meme-bg-target'), {
@@ -220,45 +243,30 @@ function showPreview(objFileInput)
 }
 
 $( function() {
-	var count = 0;
+	var count = 1;
   $('#buattext').click(function(){
-		var txtAreaHTML = "<p id='textedit' contentEditable='true' class='meme-txt-area'></p>";
-		var editTxt = "<img src='<?= base_url('public/gambar/gearhitam.png') ?>' class='img-fluid' style='width:10%'><br>"
+		var txtAreaHTML = "<div id='textedit"+count+"' contentEditable='true' class='meme-txt-area' style='background: rgba(0, 0, 0, 0);'></div>";
+		var warna = "<input type='color' id='colors"+count+"' value='#000000' /><br>";
+		var hapus = '<button id="hapus'+count+'" class="k-button w-100" onclick="hapus()">Hapus</button>';
 		$("#meme-bg-target").append(txtAreaHTML);
-		$("#editText").append(editTxt);
+		$("#editText").append(warna);
+		$("#editText").append(hapus);
 		$(".meme-txt-area").draggable();
 		$(".meme-txt-area").focus();
+		$("#textedit"+count).kendoEditor();
+
     count++;
   });
 
+
+
 } );
 
-	var colors;
-	var defaultColor = "#000000";
-	window.addEventListener("load", startup, false);
-	function startup() {
-			colors = document.querySelector("#colors");
-			colors.value = defaultColor;
-			colors.addEventListener("input", updateFirst, false);
-			colors.select();
-	}
-	function updateFirst(event)
-	{
-			var p = document.querySelector("#textedit");
-			if (p)
-			{
-					p.style.color = event.target.value;
-			}
-	}
+	$("#reset").click(function () {
+		$("#editText > *").css('display','none');
+		$(".meme-txt-area").hide();
+	});
 
-  function createTextArea()
-    {
-
-    }
-
-		$("#reset").click(function () {
-    	$(".meme-txt-area").hide();
-		});
 
   let imgInput = document.getElementById('upload');
   imgInput.addEventListener('change', function(e) {
