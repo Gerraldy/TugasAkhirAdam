@@ -1,21 +1,16 @@
 <?php
-
 namespace App\Controllers;
-
 use App\Models\MemersModel;
-
-
+use App\Models\MemersBanModel;
 class Auth extends BaseController
 {
   protected $MemersModel;
-
-
+  protected $MemersBanModel;
   public function __construct()
   {
     $this->MemersModel = new MemersModel();
-
+    $this->MemersBanModel = new MemersBanModel();
   }
-
   public function register()
   {
     $session = \Config\Services::session();
@@ -23,7 +18,6 @@ class Auth extends BaseController
     $email =  $this->request->getVar('email');
     $username =  $this->request->getVar('username');
     $user = $this->MemersModel->where('email',$email)->orWhere('username',$username)->first();
-
     if ($user!=null) {
       $session->setFlashdata('gagal-registrasi',"1");
     }else{
@@ -41,8 +35,14 @@ class Auth extends BaseController
     }
     //----
     return redirect()->to(base_url('public/Pages/Login'));
-    //return view('Pages/Login');
+  }
 
+  public function Login()
+  {
+    $data = [
+      'title' => "Login!"
+    ];
+    return view('Pages/Login', $data);
   }
   public function tes(){
       $session->set([
@@ -57,14 +57,21 @@ class Auth extends BaseController
     $email =  $this->request->getVar('email');
     $password =  $this->request->getVar('password');
     $user = $this->MemersModel->where('Email',$email)->orWhere('Password', $password)->first();
+    $userban = $this->MemersBanModel->Where('Email', $email)->first();
     if ($user != null) {
-      $session->setFlashdata('sukses-masuk',"1");
-      $session->set([
-        'user' => $user['ID_Memers'],
-        'status' => $user['Status']
-      ]);
-      //dd($user['Username']);
-      return redirect()->to(base_url('public/'));
+      if ($userban != null) {
+        $message = "Akun Anda Telah Diban!";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+        return redirect()->to(base_url('public/Auth/Login'));
+      }else {
+        $session->setFlashdata('sukses-masuk',"1");
+        $session->set([
+          'user' => $user['ID_Memers'],
+          'status' => $user['Status']
+        ]);
+      // dd($userban);
+        return redirect()->to(base_url('public/'));
+      }
     }elseif ($email=='admin' && $password=='admin') {
       //dd($data['laporanpost']);
        echo view('Pages/Admin/AdminDashboard');

@@ -641,7 +641,7 @@ ol {
 .hero__search__form {
 	width: 610px;
 	height: 50px;
-	border: 1px solid #ebebeb;
+	/* border: 1px solid #ebebeb; */
 	position: relative;
 	float: left;
 }
@@ -730,7 +730,7 @@ ol {
 	height: 431px;
 	display: flex;
 	align-items: center;
-	padding-left: 75px;
+  padding-left: 20px;
 }
 
 .hero__text span {

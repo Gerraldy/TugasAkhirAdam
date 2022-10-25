@@ -36,6 +36,8 @@
     <link rel="stylesheet" href="<?= base_url('public/css/cssdropdown.css'); ?>">
     <link href="<?=base_url('public/css/jquery-ui.min.css')?>" rel="stylesheet" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
     <!-- <link href="<?=base_url('public/navbar/css/styles.css') ?>" rel="stylesheet" /> -->
     <script src="<?=base_url('public/navbar/js/scripts.js') ?>"></script>
@@ -83,7 +85,7 @@
 
     <title><?=$title ?></title>
   </head>
-  <body style="height: 100%;">
+  <body style="height: 100%;" id="">
     <style media="screen">
       .mfp-bg{
         z-index: 1090 !important;
@@ -106,33 +108,33 @@
         <div class="header__top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-5 col-md-5">
                         <div class="header__top__left">
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-7 col-md-7">
                         <div class="header__top__right">
-                            <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                            </div>
-                              <?php if (session()->get('user') != null): ?>
-                                <div class="header__top__right__language">
-                                    <div>Akun</div>
-                                    <span class="arrow_carrot-down"></span>
-                                    <ul>
-                                        <li><a  href="<?= base_url('/public/Pages/MyProfile') ?>"> Profil</a></li>
-                                        <li><a  id="setting" href="<?=base_url('/public/Pages/SettingProfile') ?>">Setting</a></li>
-                                        <li><a  href="<?= base_url('/public/Auth/Logout') ?>">Logout</a></li>
-                                    </ul>
-                                </div>
-                              <?php else: ?>
-                                <div class="header__top__right__auth">
-                                  <a href="<?= base_url('/public/Pages/Login') ?>" class="fa fa-user" style=""> Login</a>
-                                </div>
-                              <?php endif; ?>
+                          <div class="theme" align="right">
+                            <img src="<?= base_url('/public/gambar/matahari.png') ?>"  id="btnLight"  onclick="setDarkMode(false)" class="is-hidden" style="max-width:3%; max-height:5%" alt="">
+                            <img src="<?= base_url('/public/gambar/bulan.png') ?>"  id="btnDark"  onclick="setDarkMode(true)" style="max-width:3%;  max-height:5%" alt="">
+                            <?php if (session()->get('user') != null): ?>
+                              <div class="header__top__right__language">
+                                  <div>Akun</div>
+                                  <span class="arrow_carrot-down"></span>
+                                  <ul>
+                                      <li><a  href="<?= base_url('/public/Pages/MyProfile') ?>"> Profil</a></li>
+                                      <li><a  id="setting" href="<?=base_url('/public/Pages/SettingProfile') ?>">Setting</a></li>
+                                      <li><a  href="<?= base_url('/public/Auth/Logout') ?>">Logout</a></li>
+                                  </ul>
+                              </div>
+                            <?php else: ?>
+                              <div class="header__top__right__auth">
+                                <a href="<?= base_url('/public/Auth/Login') ?>" class="fa fa-user" style=""> Login</a>
+                              </div>
+                            <?php endif; ?>
+                          </div>
+                              <!-- <input type="checkbox"  data-toggle="toggle" data-onstyle="info"> -->
+
 
                         </div>
                     </div>
@@ -153,14 +155,6 @@
                         <ul>
                             <li class=""><a href="<?= base_url('/public') ?>">Home</a></li>
                             <li class="nav-item"><a href="<?= base_url('/public/Pages/Toko') ?>">TOKO</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
                              <li class=""><a class="" href="#" id="meme">BUAT MEME</a></li>
                         </ul>
                     </nav>
@@ -181,7 +175,7 @@
                     <div class="hero__categories" style="">
                         <ul>
                           <?php foreach ($kategori as $k): ?>
-                                <li><a class="btn-outline-light" href="<?=base_url('/public/Pages/getPostKategori/'.$k['ID_Kategori']) ?>" style=""><img src="<?= base_url('public/gambar/'.$k['url_gambar']) ?>" style="height:20px;weight:20px;"><?=$k['Nama_Kategori']?> </a></li>
+                                <li><a class="btn-outline-light" href="<?=base_url('/public/Pages/getPostKategori/'.$k['ID_Kategori']) ?>" style=""><img src="<?= base_url('public/gambar/'.$k['url_gambar']) ?>" style="height:20px;weight:20px;">  <b style="font-size:18px"><?=$k['Nama_Kategori']?></b> </a></li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
@@ -190,21 +184,20 @@
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form class="" id="formSearch" action="<?= base_url('/public/Pages/Cari') ?>" method="get">
-                                <input type="text" id="search" name="cari" placeholder="Cari Meme?">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                <input type="text" id="search" name="cari" placeholder="Cari Meme?" style="border:1px solid black">
+                                <button type="submit" class="site-btn" style="position:relative; left:0px">SEARCH</button>
                             </form>
                         </div>
-
                     </div>
-                    <div class="hero__item set-bg" data-setbg="<?=base_url('/public/gambar/memekumpulan.jpg') ?>">
-                        <div class="hero__text" style="z-index:100; position: relative;position: relative; background-color:white">
+                    <div class="hero__item" data-setbg="<?=base_url('/public/gambar/memekumpulan.jpg') ?>" style="">
+                        <div class="hero__text" style="z-index:100;position: relative; background-color:white">
                             <span>Langganan</span>
                             <h2>Tanpa Iklan <br />100% Real</h2>
                             <!-- <p>Free Pickup and Delivery Available</p> -->
                             <a href="<?= base_url('/public/Pages/LanggananPro') ?>" class="primary-btn">Langganan Sekarang</a>
                         </div>
-                        <div class="backgrouniklan" style="z-index:-100; position: absolute;">
-                          <img src="<?=base_url('/public/gambar/memekumpulan.jpg') ?>" alt="">
+                        <div class="backgrouniklan" style="z-index:-100; position: absolute; left:15px; bottom:20px">
+                          <img src="<?=base_url('/public/gambar/memekumpulan.jpg') ?>" alt="" style="max-width:90%">
                         </div>
                     </div>
                 </div>
@@ -248,7 +241,7 @@
                </nav> -->
 
                <!-- Page content-->
-              <section class="featured spad">
+              <section class="featured spad ">
                <div class="container" style="">
                  <div class="row">
                    <div class="col-10 " style="height: 100%;">
@@ -313,7 +306,63 @@
 
     </div>
   </div>
+  <style>
+    .is-hidden{
+      display: none;
+    }
+
+    #darkmode {
+      background: #191919;
+      color: white;
+    }
+    #darkmode a{
+      background:#191919;
+      color: white;
+    }
+    #darkmode li{
+      background: #191919;
+      color: white;
+    }
+    #darkmode button{
+      background: #191919;
+      color: white;
+      border:2px solid white;
+    }
+    #darkmode text{
+      background: #191919;
+      color: white;
+    }
+    /* #darkmode a .topik{
+      background: #191919;
+      color: white;
+      border:2px solid white;
+    } */
+    /* #darkmode .dropdown-content{
+      background: white;
+      color:black;
+    } */
+  </style>
           <script>
+          if (localStorage.getItem('theme') == 'dark') {
+            setDarkMode(true)
+          }
+          function setDarkMode(isDark) {
+            var btnDark = document.getElementById('btnDark')
+            var btnLight = document.getElementById('btnLight')
+            if (isDark) {
+              document.body.setAttribute('id', 'darkmode')
+              localStorage.setItem('theme', 'dark')
+              btnLight.style.display = "inline-block"
+              btnDark.style.display = "none"
+            }else {
+              document.body.setAttribute('id', '')
+              localStorage.removeItem('theme')
+              btnLight.style.display = "none"
+              btnDark.style.display = "inline-block"
+            }
+
+          }
+
             function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();

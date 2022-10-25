@@ -11,10 +11,10 @@
       <?php endif; ?>
     </div>
     <div class="col-10">
-      <p style="color:white; top:10px;font-size:20px"><?=$profile['Username'] ?></p>
+      <p style="color:; top:10px;font-size:20px"><?=$profile['Username'] ?></p>
       <!-- <hr style="height:3px;border-width:0;color:black;background-color:black"> -->
-      <text style="color:white; top:10px;font-size:13px">Follower : <?=$follower ?></text> ||
-      <text style="color:white;font-size:13px">Following : <?=$following?></text>
+      <text style="color:; top:10px;font-size:13px">Follower : <?=$follower ?></text> ||
+      <text style="color:;font-size:13px">Following : <?=$following?></text>
     </div>
   </div>
   <div class="row pt-2">
@@ -24,53 +24,56 @@
   </div>
   <div class="row" style="position:relative; top:10px">
     <div class="col-1">
-      <button class="k-button btn-outline-light" id="showHome" name="button" style="width:70px">Home</button>
+      <button class="k-button btn-outline-dark" id="showPost" name="button" style="width:70px">Postingan</button>
     </div>
     <div class="col-1">
-      <button class="k-button btn-outline-light" id="showPost" name="button" style="width:70px">Post</button>
+      <button class="k-button btn-outline-dark" id="showLike" name="button" style="width:70px">Disukai</button>
     </div>
     <div class="col-9">
-      <button class="k-button btn-outline-light" id="showSave" name="button" style="width:70px">Save</button>
+      <button class="k-button btn-outline-dark" id="showSave" name="button" style="width:70px">Simpan</button>
     </div>
     <div class="col-1" style="">
       <div class="dropdown">
         <button class="dropbtn k-button btn-outline-light"><img src="<?= base_url('/public/gambar/3dotbiru.png') ?>" alt="" style="height:15px;weight:15px;"></button>
         <div class="dropdown-content">
           <?php if ($follow != null): ?>
-              <a href="<?=base_url('public/Pages/FollowAkun?idakun='.$profile['ID_Memers']) ?>" style="color:black; text-decoration: none;">Unfollow</a>
+              <a href="<?=base_url('public/Pages/FollowAkun?idakun='.$profile['ID_Memers']) ?>" style="color:; text-decoration: none;">Unfollow</a>
             <?php else: ?>
-              <a href="<?=base_url('public/Pages/FollowAkun?idakun='.$profile['ID_Memers']) ?>" style="color:black; text-decoration: none;">Follow</a>
+              <a href="<?=base_url('public/Pages/FollowAkun?idakun='.$profile['ID_Memers']) ?>" style="color:; text-decoration: none;">Follow</a>
           <?php endif; ?>
-          <a href="<?=base_url('public/Pages/LaporAkun?idakun='.$profile['ID_Memers']) ?>" style="color:black; text-decoration: none;">Lapor</a>
+          <a href="<?=base_url('public/Pages/LaporAkun?idakun='.$profile['ID_Memers']) ?>" style="color:; text-decoration: none;">Lapor</a>
+          <a href="<?=base_url('public/Pages/BlockAkun?idakun='.$profile['ID_Memers']) ?>" style="color:; text-decoration: none;">Block</a>
         </div>
       </div>
     </div>
   </div>
   <hr style="height:3px;color:black;background-color:white">
-  <div class="row" id="home">
+  <div class="row" id="post">
     <div class="col">
       <div class="" style="height:250px">
         <div class="container" style="max-width:800px; margin:auto">
-          <?php foreach($postingan as $p) : ?>
-          <div class="row">
-                  <h4 style="color:white ;"><b><?= $p['Judul'] ?></b></h4>
-                  <div class="col-2" style="background-color: black">
-                  </div>
-                  <div class="col-8" style="background-color: black">
+          <?php foreach($mypostingan as $p) : ?>
+            <div class="row">
+              <div class="col-lg-11" style="">
+                  <div class="row">
+                  <div class="col-lg-10 border" style="border: 2px solid ;border-radius: 20px;">
                     <?php $tipefile = explode(".",$p['Nama_Gambar']) ?>
                     <?php $tipefile_ext = end($tipefile)  ?>
                     <?php if ($tipefile_ext == "mp4"): ?>
-                      <div id="example">
+                      <div class="pt-3">
+                        <a href="#"style="color:"><?=$p['Username'] ?></a>
+                      </div>
+                      <div id="vidio">
                           <div class="demo-section wide" style="max-width: 644px;">
-                              <div id="mediaplayer" style="height:360px"></div>
+                              <div id="mediaplayer<?=$p['ID_Postingan'] ?>" style="height:360px"></div>
                           </div>
                           <script type="text/javascript">
                               $(document).ready(function () {
-                                  $("#mediaplayer").kendoMediaPlayer({
+                                  $("#mediaplayer<?=$p['ID_Postingan'] ?>").kendoMediaPlayer({
                                       autoPlay: false,
-                                      navigatable: true,
+                                      navigatable: false,
                                       media: {
-                                          title: "ProgressNEXT 2019 Highlights",
+                                          title: "  ",
                                           source: "<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>"
                                       }
                                   });
@@ -78,242 +81,99 @@
                           </script>
                       </div>
                     <?php else: ?>
-                    <div class="section-foto" style="position:relative;">
-                      <img src="<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>" class="img-fluid">
-                    </div>
-                  <?php endif; ?>
-                  </div>
-                  <div class="col-2" style="background-color: black">
-                  </div>
 
-                  <br>
-                  <a class="btn btn-outline-light" href="<?=base_url('/public/Pages/getPostKategori/'.$p['ID_Kategori']) ?>" style="background:grey; border:none; border-radius:10px ;width: 100px;height:100%; padding:1px">#<?=$p['Nama_Kategori'] ?></a>
-                  <div class="section-button-like" style="">
-                    <div class="container-button-like" style="display:inline-block">
-                        <button class="btn-like btn k-button" data-id=<?= $p['ID_Postingan'] ?> style="padding: 5px 13px;border: 1px solid white;border-radius: 20px;background-color: #969798;">
-                          <?php if (!isset($p["Like"])): ?>
-                            <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
-                          <?php else: ?>
-                            <img src="<?= base_url('public/gambar/sudahlike2.png') ?>" style="height:20px;weight:20px;">
-                          <?php endif; ?>
-                          <text>
-                            <?= $p['Suka'] ?>
-                          </text>
-                        </button>
+                      <div class="pt-3">
+                        <a href="#"style="color:"><?=$p['Username'] ?></a>
+                      </div>
+
+                      <div class="section-foto" style="display: flex;justify-content: center;">
+
+                        <img src="<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>" class="img-fluid">
+                      </div>
+                    <?php endif; ?>
+                    <br>
+
+                  </div>
+                  <div class="col-lg-2" style="background-color:">
+                    <h4 style="color:"><b><?= $p['Judul'] ?></b></h4>
+                    <a class="btn btn-outline-light m-1" href="<?=base_url('/public/Pages/getPostKategori/'.$p['ID_Kategori']) ?>" style="background:grey; border:none; border-radius:10px; padding:1px">#<?=$p['Nama_Kategori'] ?></a>
+                    <div class="section-button-like pt-2" style="">
+                      <div class="container-button-like" style="display:inline-block">
+                          <button class="btn-like k-button btn btn-outline-dark" data-id=<?= $p['ID_Postingan'] ?> style="padding: 5px 13px;border: 2px solid ;border-radius: 20px;background-color: ;">
+                            <?php if (!isset($p["Like"])): ?>
+                              <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
+                            <?php else: ?>
+                              <img src="<?= base_url('public/gambar/sudahlike2.png') ?>" style="height:20px;weight:20px;">
+                            <?php endif; ?>
+                            <text>
+                              <?= $p['Suka'] ?>
+                            </text>
+                          </button>
+                      </div>
+
+                      <div class="container-button-dislike pt-2" style="display:inline-block">
+                          <button id="" class="btn-dislike k-button btn-outline-dark" style="padding: 5px 13px;border: 2px solid ;border-radius: 20px;background-color:;" data-id=<?= $p['ID_Postingan'] ?>>
+                            <?php if (!isset($p["Dislike"])): ?>
+                              <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
+                            <?php else: ?>
+                              <img src="<?= base_url('public/gambar/sudahdislike2.png') ?>" style="height:20px;weight:20px;">
+                            <?php endif; ?>
+                            <text>
+                              <?= $p['Tidak_Suka'] ?>
+                            </text>
+                          </button>
+                      </div>
+                      <br>
+                      <div class="pt-2" style="display:inline-block">
+                        <a href="<?= base_url('public/Pages/Komentar?slug='.$p['Slug'])?>">
+                          <button class="comment k-button btn-outline-dark btn-block" style="padding: 5px 13px;border: 2px solid ;border-radius: 20px;background-color: ;">
+                            <img src="<?= base_url('public/gambar/komentarhitam.png') ?>" style="height:20px;weight:20px;">
+                          </button>
+                        </a>
+                     </div>
                     </div>
-                    <div class="container-button-dislike" style="display:inline-block">
-                        <button id="" class="btn k-button btn-dislike" data-id=<?= $p['ID_Postingan'] ?> style="padding: 5px 13px;border: 1px solid white;border-radius: 20px;background-color: #969798;">
-                          <?php if (!isset($p["Dislike"])): ?>
-                            <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
-                          <?php else: ?>
-                            <img src="<?= base_url('public/gambar/sudahdislike2.png') ?>" style="height:20px;weight:20px;">
-                          <?php endif; ?>
-                          <text>
-                            <?= $p['Tidak_Suka'] ?>
-                          </text>
-                        </button>
-                    </div>
-                    <div class="" style="display:inline-block">
-                      <a href="<?= base_url('public/Pages/Komentar?slug='.$p['Slug'])?>">
-                        <button class="comment btn k-button btn-block" style="padding: 5px 13px;border: 1px solid white;border-radius: 20px;background-color: #969798;">
-                          <img src="<?= base_url('public/gambar/komentarhitam.png') ?>" style="height:20px;weight:20px;">
-                        </button>
-                      </a>
+                   </div>
+                  </div>
+                </div>
+                <div class="col-lg-1">
+                  <div class="" style="">
+                    <div class="dropdown">
+                      <button class="dropbtn">!</button>
+                      <div class="dropdown-content">
+                        <a href="<?= base_url('public/Pages/SavePost?slug='.$p['Slug']) ?>" style="color:; text-decoration: none; ">Save</a>
+                        <a href="<?= base_url('public/Pages/LaporPost?slug='.$p['Slug']) ?>" style="color:; text-decoration: none;">Lapor</a>
+                        <a href="<?= base_url('public/Pages/TidakMasukAkal?slug='.$p['Slug']) ?>" style="color:; text-decoration: none; ">Tidak Masuk Akal</a>
+                      </div>
                     </div>
                   </div>
-            </div>
+                </div>
+
+              </div>
             <hr>
             <?php endforeach; ?>
           </div>
       </div>
     </div>
   </div>
-
-  <div class="row" id="postingan">
-    <div class="col">
-      <div class="" style="height:250px">
-        <div class="container" style="max-width:800px; margin:auto">
-          <?php foreach($mypostingan as $p) : ?>
-          <div class="row">
-            <div class="col-2" style="background-color: black">
-            </div>
-            <div class="col-8" style="background-color: black">
-
-              <?php if ($tipefile_ext == "mp4"): ?>
-                <div id="example">
-                    <div class="demo-section wide" style="max-width: 644px;">
-                        <div id="mediaplayer" style="height:360px"></div>
-                    </div>
-                    <script type="text/javascript">
-                        $(document).ready(function () {
-                            $("#mediaplayer").kendoMediaPlayer({
-                                autoPlay: true,
-                                navigatable: true,
-                                media: {
-                                    title: "ProgressNEXT 2019 Highlights",
-                                    source: "<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>"
-                                }
-                            });
-                        });
-                    </script>
-                </div>
-              <?php else: ?>
-              <div class="section-foto" style="position:relative;">
-                <img src="<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>" class="img-fluid">
-              </div>
-            <?php endif; ?>
-            </div>
-            <div class="col-2" style="background-color: black">
-            </div>
-
-                  <br>
-                  <a class="btn btn-outline-light" href="<?=base_url('/public/Pages/getPostKategori/'.$p['ID_Kategori']) ?>" style="background:grey; border:none; border-radius:10px ;width: 100px;height:100%; padding:1px">#<?=$p['Nama_Kategori'] ?></a>
-                  <div class="section-button-like" style="">
-                    <div class="container-button-like" style="display:inline-block">
-                        <button class="btn-like btn btn-block" data-id=<?= $p['ID_Postingan'] ?>>
-                          <?php if (!isset($p["Like"])): ?>
-                            <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
-                          <?php else: ?>
-                            <img src="<?= base_url('public/gambar/sudahlike2.png') ?>" style="height:20px;weight:20px;">
-                          <?php endif; ?>
-                          <text>
-                            <?= $p['Suka'] ?>
-                          </text>
-                        </button>
-                    </div>
-                    <div class="container-button-dislike" style="display:inline-block">
-                        <button id="" class="btn btn-block btn-dislike" data-id=<?= $p['ID_Postingan'] ?>>
-                          <?php if (!isset($p["Dislike"])): ?>
-                            <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
-                          <?php else: ?>
-                            <img src="<?= base_url('public/gambar/sudahdislike2.png') ?>" style="height:20px;weight:20px;">
-                          <?php endif; ?>
-                          <text>
-                            <?= $p['Tidak_Suka'] ?>
-                          </text>
-                        </button>
-
-                    </div>
-                    <div class="" style="display:inline-block">
-                      <a href="<?= base_url('public/Pages/Komentar?slug='.$p['Slug']."&id_kategori=".$p['ID_Kategori']."&id_postingan=".$p['ID_Postingan'])?>">
-                        <button class="comment btn btn-block">
-                          <img src="<?= base_url('public/gambar/komentarhitam.png') ?>" style="height:20px;weight:20px;">
-                        </button>
-                      </a>
-                    </div>
-                  </div>
-
-            </div>
-            <hr>
-            <?php endforeach; ?>
-          </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row" id="save">
-    <div class="col">
-      <div class="" style="height:250px">
-        <div class="container" style="max-width:800px; margin:auto">
-          <?php foreach($savepost as $p) : ?>
-          <div class="row">
-            <div class="col-2" style="background-color: black">
-            </div>
-            <div class="col-8" style="background-color: black">
-
-              <?php if ($tipefile_ext == "mp4"): ?>
-                <div id="example">
-                    <div class="demo-section wide" style="max-width: 644px;">
-                        <div id="mediaplayer" style="height:360px"></div>
-                    </div>
-                    <script type="text/javascript">
-                        $(document).ready(function () {
-                            $("#mediaplayer").kendoMediaPlayer({
-                                autoPlay: false,
-                                navigatable: true,
-                                media: {
-                                    title: "ProgressNEXT 2019 Highlights",
-                                    source: "<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>"
-                                }
-                            });
-                        });
-                    </script>
-                </div>
-              <?php else: ?>
-              <div class="section-foto" style="position:relative;">
-                <img src="<?= base_url('public/uploads/gambar_post/'.$p['Nama_Gambar']) ?>" class="img-fluid">
-              </div>
-            <?php endif; ?>
-            </div>
-            <div class="col-2" style="background-color: black">
-            </div>
-
-                  <br>
-                  <a class="btn btn-outline-light" href="<?=base_url('/public/Pages/getPostKategori/'.$p['ID_Kategori']) ?>" style="background:grey; border:none; border-radius:10px ;width: 100px;height:100%; padding:1px">#<?=$p['Nama_Kategori'] ?></a>
-                  <div class="section-button-like" style="">
-                    <div class="container-button-like" style="display:inline-block">
-                        <button class="btn-like btn btn-block" data-id=<?= $p['ID_Postingan'] ?>>
-                          <?php if (!isset($p["Like"])): ?>
-                            <img src="<?= base_url('public/gambar/likehitam.png') ?>" style="height:20px;weight:20px;">
-                          <?php else: ?>
-                            <img src="<?= base_url('public/gambar/sudahlike2.png') ?>" style="height:20px;weight:20px;">
-                          <?php endif; ?>
-                          <text>
-                            <?= $p['Suka'] ?>
-                          </text>
-                        </button>
-                    </div>
-                    <div class="container-button-dislike" style="display:inline-block">
-                        <button id="" class="btn btn-block btn-dislike" data-id=<?= $p['ID_Postingan'] ?>>
-                          <?php if (!isset($p["Dislike"])): ?>
-                            <img src="<?= base_url('public/gambar/dislikeputih.png') ?>" style="height:21px;weight:21px;">
-                          <?php else: ?>
-                            <img src="<?= base_url('public/gambar/sudahdislike2.png') ?>" style="height:20px;weight:20px;">
-                          <?php endif; ?>
-                          <text>
-                            <?= $p['Tidak_Suka'] ?>
-                          </text>
-                        </button>
-
-                    </div>
-                    <div class="" style="display:inline-block">
-                      <a href="<?= base_url('public/Pages/Komentar?slug='.$p['Slug']."&id_kategori=".$p['ID_Kategori']."&id_postingan=".$p['ID_Postingan'])?>">
-                        <button class="comment btn btn-block">
-                          <img src="<?= base_url('public/gambar/komentarhitam.png') ?>" style="height:20px;weight:20px;">
-                        </button>
-                      </a>
-                    </div>
-                  </div>
-
-            </div>
-            <hr>
-            <?php endforeach; ?>
-          </div>
-      </div>
-    </div>
-</div>
-
-
-
 </div>
 <script>
 $(document).ready(function () {
   $('#save').css('display', 'none');
-  $('#postingan').css('display', 'none');
+  $('#Like').css('display', 'none');
 
-  $("#showPost").click(function(){
-    $("#home").hide();
-    $("#postingan").show();
+  $("#showLike").click(function(){
+    $("#post").hide();
+    $("#like").show();
     $("#save").hide();
   });
-  $("#showHome").click(function(){
-    $("#home").show();
-    $("#postingan").hide();
+  $("#showPost").click(function(){
+    $("#post").show();
+    $("#like").hide();
     $("#save").hide();
   });
   $("#showSave").click(function(){
-    $("#home").hide();
-    $("#postingan").hide();
+    $("#posy").hide();
+    $("#like").hide();
     $("#save").show();
   });
 

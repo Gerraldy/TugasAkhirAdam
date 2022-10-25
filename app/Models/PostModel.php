@@ -54,7 +54,7 @@ class PostModel extends Model
       $session = session();
       $id_user = $session->get('user');
       // $sql= "SELECT p.*,k.Nama_Kategori, CASE WHEN p.ID_Postingan = t.ID_Postingan AND t.ID_Memers = 50 THEN '1' ELSE '0' END as 'Dislike' from postingan p, Tidak_Suka t, kategori k WHERE p.ID_Kategori = k.ID_Kategori ORDER BY Tgl_Upload";
-      $sql = "SELECT p.*,k.Nama_Kategori from postingan p, kategori k WHERE p.ID_Kategori = k.ID_Kategori ORDER BY Tgl_Upload DESC";
+      $sql = "SELECT p.*,k.Nama_Kategori, m.Nama from postingan p, kategori k, memers m WHERE p.ID_Memers = m.ID_Memers AND p.ID_Kategori = k.ID_Kategori ORDER BY Tgl_Upload DESC";
         return $this->db->query($sql)->getResultArray();
     }
     public function getKategori($idkategori)

@@ -5,7 +5,7 @@
 <div class="container"  style="max-width:1000px; margin:auto">
   <div class="row">
     <div class="col">
-      <h3>TOKO MEME PERTAMA DI DAERAH SAYA!</h1>
+      <h3>TOKO MEME PERTAMA DI DAERAH SAYA!</h3>
     </div>
   </div>
   <div class="row">

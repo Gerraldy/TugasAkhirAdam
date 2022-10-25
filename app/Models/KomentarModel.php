@@ -10,7 +10,7 @@ class KomentarModel extends Model
 {
   protected $table = 'komentar';
   protected $primaryKey = "ID_Komentar";
-  protected $allowedFields = ['ID_Komentar','ID_Postingan','ID_Memers','Isi_Komentar', 'Jml_Like'];
+  protected $allowedFields = ['ID_Komentar','ID_Postingan','ID_Memers','Isi_Komentar'];
 
 
   public function getKomentar($idpostingan)

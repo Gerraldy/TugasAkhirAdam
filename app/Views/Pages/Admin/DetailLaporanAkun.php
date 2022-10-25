@@ -20,7 +20,7 @@
                         <tr>
                             <th>Nomor Laporan</th>
                             <th>ID Pelapor</th>
-                            <th>ID Postingan</th>
+                            <th>ID Pelanggar</th>
                             <th>Alasan</th>
                             <th>Action</th>
                         </tr>
@@ -36,12 +36,12 @@
                     <tbody>
 
                           <tr>
-                            <td><?=$detailakun['ID_Memers'] ?></td>
-                            <td><?=$detailakun['Email'] ?></td>
-                            <td><?=$detailakun['Username'] ?></td>
-                            <td><?=$detailakun['url_foto'] ?></td>
+                            <td><?=$detailakun['ID_Laporan_Akun'] ?></td>
+                            <td><?=$detailakun['ID_Akun_Pelapor'] ?></td>
+                            <td><?=$detailakun['ID_Pelanggar'] ?></td>
+                            <td><?=$detailakun['Alasan'] ?></td>
                               <td>
-                                <form class="" action="<?=base_url('public/Admin/HapusAkun?idakun='.$detailakun['ID_Memers']) ?>" method="post">
+                                <form class="" action="<?=base_url('public/Admin/HapusAkun?idakun='.$detailakun['ID_Pelanggar']) ?>" method="post">
                                   <?= csrf_field(); ?>
                                   <input type="hidden" name="_method" value="DELETE">
                                   <button class="btn btn-danger btn-circle"> <i class="fas fa-exclamation-triangle"></i></button>

@@ -6,12 +6,12 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Master Memers</h1>
+    <h1 class="h3 mb-2 text-gray-800">Memers Ban</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Master Memers</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Memers Ban</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -27,13 +27,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                      <?php foreach ($mastermemers as $m): ?>
+                      <?php foreach ($banakun as $b): ?>
                         <tr>
-                            <td><?=$m['Nama'] ?></td>
-                            <td><?=$m['Email'] ?></td>
-                            <th><?=$m['Username'] ?></th>
-                            <td><img src="<?= base_url('public/uploads/gambar_profile/'.$m['url_foto']) ?>" class="img-fluid" style="height:100px;weight:100px; object-fit: cover;display: flex;justify-content: center;align-items: center;"></td>
-                            <td><a onclick="return confirm('Yakin Ban Akun?')" href="<?= base_url('public/Admin/HapusAkun?idakun='.$m['ID_Memers']) ?>"><button class="btn btn-danger btn-circle"> <i class="fas fa-exclamation-triangle"></i> </button> </a> </td>
+                            <td><?=$b['ID_Memers'] ?></td>
+                          
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

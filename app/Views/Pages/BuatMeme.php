@@ -102,21 +102,19 @@ div#meme-canvas-container {
 }
 </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-	  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.js"></script>
 
 <div class="container"  style="background-color:#777">
   <div class="row pt-3">
-    <div class="col-6">
-
-        <button id="stiker" class="stiker k-button " style="position: relative; left:150px">Stiker</button>
-        <button id="addgambar" class="addgambar k-button" style="position: relative; left:200px">Tambah Gambar</button>
+    <div class="col-6" style="display: flex;justify-content: center;">
+        <input type="file" id="addgambar" class="btn-add k-button choose-file" style="" value="Tambah Gambar" onchange="addimage();"/>
     </div>
   </div>
   <div class="row mt-3">
     <div class="col-7">
       <div id="meme-bg-target">
-          <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>" id="img-meme-bg" class="img-meme-bg" />
-					<div id='watermarktext' contentEditable='false' class='' style='background: rgba(0, 0, 0, 0);'>Dibuat Oleh: <?=$user['Email'] ?></div>
+          <img src="<?= base_url('public/gambar/memepolos/drakepolos.png') ?>" id="img-meme-bg" class="img-meme-bg" style=""/>
+					<div id='watermarktext' contentEditable='false' class='' style='background: rgba(0, 0, 0, 0); color:black'>Dibuat Oleh: <?=$user['Email'] ?></div>
       </div>
       <div class="" style="">
         <canvas id="myCanvas" style="">
@@ -128,6 +126,7 @@ div#meme-canvas-container {
       <div class="">
         <input type="file" name="meme_bg" value="Upload MEME Image" class="choose-file" onChange="showPreview(this);" />
         <!-- <button id="upload" type="file" accept="image/*" class="upload k-button w-100 mt-2" >Upload Meme</button> -->
+
         <input type="button" id="buattext" name="add_text" value="Add Text" class="btn-add mt-3" onClick="createTextArea()" />
         <div class="mt-2">
            <div id="carousel">
@@ -144,6 +143,7 @@ div#meme-canvas-container {
           <div class="row">
             <div class="col-12" id="editText">
 							<!-- <input id="fontsize" type="number" title="fontsize" value="20" min="0" max="100"/> -->
+								<!-- <input type='color' id='colorsPicker'   /> -->
 							<br>
             </div>
           </div>
@@ -177,34 +177,52 @@ div#meme-canvas-container {
 <script>
 $("#editor").kendoEditor();
 
-$(document).ready(function() {
-	$('#change').change(function(){ // <-- use change event
-  	$('p').css('background-color', $(this).val());
-        });
+function addimage() {
+  var img = document.createElement("img");
+  img.src = $("#addgambar").val();
+  img.height = 150;
+  img.width = 150;
+  //alert($("#gambar").val());
+  var class_name = "GambarBaru";
+  img.setAttribute("class", class_name);
 
-});
-
-
-var colors;
-var defaultColor = "#000000";
-window.addEventListener("load", startup, false);
-for (var i = 0; i < 50; i++) {
-	function startup() {
-			colors = document.querySelector("#colors"+count);
-			colors.value = defaultColor;
-			colors.addEventListener("input", updateFirst, false);
-			colors.select();
-	}
-	function updateFirst(event)
-	{
-			var p = document.querySelector("#textedit"+count);
-			if (p)
-			{
-					p.style.color = event.target.value;
-			}
-	}
+  document.getElementById("meme-bg-target").appendChild(img);
+   $(img).draggable();
 }
 
+
+// $('#colorsPicker').on('change',function(){
+// 	console.log(this.value);
+// 				console.log("change status clicktab");
+// });
+
+
+// $(document).ready(function() {
+// 	$('#change').change(function(){ // <-- use change event
+//   	$('p').css('background-color', $(this).val());
+//         });
+// });
+
+let colorWell;
+ const defaultColor = "#000000";
+ window.addEventListener("load", startup, false);
+ function startup() {
+ colorWell = document.querySelector("#colorsPicker");
+ colorWell.value = defaultColor;
+ colorWell.addEventListener("input", updateFirst, false);
+ colorWell.select();
+}
+
+function updateFirst(event) {
+ const p = document.querySelector(".textedit");
+ if (p) {
+	 p.style.color = event.target.value;
+ }
+}
+
+	// function hapus(){
+	// 	console.log('test');
+	// }
 
 
 // html2canvas($('#meme-bg-target'), {
@@ -243,23 +261,17 @@ function showPreview(objFileInput)
 }
 
 $( function() {
-	var count = 1;
   $('#buattext').click(function(){
-		var txtAreaHTML = "<div id='textedit"+count+"' contentEditable='true' class='meme-txt-area' style='background: rgba(0, 0, 0, 0);'></div>";
-		var warna = "<input type='color' id='colors"+count+"' value='#000000' /><br>";
-		var hapus = '<button id="hapus'+count+'" class="k-button w-100" onclick="hapus()">Hapus</button>';
+		var txtAreaHTML = "<div id='textedit' contentEditable='true' class='meme-txt-area textedit' style='background: rgba(0, 0, 0, 0);'></div>";
+		var warna = "<input type='color' id='colorsPicker' class='colors'/><br>";
+		var hapus = '<button id="hapus" class="k-button w-100" onclick="hapus()">Hapus</button>';
 		$("#meme-bg-target").append(txtAreaHTML);
 		$("#editText").append(warna);
 		$("#editText").append(hapus);
 		$(".meme-txt-area").draggable();
 		$(".meme-txt-area").focus();
-		$("#textedit"+count).kendoEditor();
-
-    count++;
+		$(".textedit").kendoEditor();
   });
-
-
-
 } );
 
 	$("#reset").click(function () {

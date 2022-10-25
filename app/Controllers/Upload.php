@@ -47,7 +47,4 @@ class Upload extends BaseController
     return redirect()->to(base_url('public/'));
 		// return view('welcome_message');
 	}
-
-	//--------------------------------------------------------------------
-
 }

@@ -95,8 +95,8 @@
     </div>
     <div class="col-2">
       <div class="pt-5" style="">
-        <button class="k-button btn btn-block">Save</button>
-        <button class="k-button btn btn-block">Lapor</button>
+        <a href="<?= base_url('public/Pages/SavePost?slug='.$slug['Slug']) ?>"> <button class="k-button btn btn-block">Save</button></a>
+        <a href="<?= base_url('public/Pages/LaporPost?slug='.$slug['Slug']) ?>"> <button class="k-button btn btn-block">Lapor</button></a>
         <button class="k-button btn btn-block">Tidak Masuk Akal</button>
       </div>
     </div>

@@ -44,7 +44,6 @@ class LikeKomen extends BaseController
     $post['ID_Postingan'] = $id_post;
     $post['ID_Memers'] = $id_user;
     $post['Isi_Komentar'] = $isi_komentar;
-    $post['Jml_Like'] = "0";
     // dd($post);
 
     $postingan = $this->PostModel->where("ID_Postingan",$id_post)->first();
@@ -59,6 +58,7 @@ class LikeKomen extends BaseController
 		$id_user = session()->get("user");
     $id_topik = $this->request->getGet("ID_Topik");
     $post = $this->request->getVar();
+
     $post['ID_Memers'] = $id_user;
     $post['ID_Topik'] = $id_topik;
     //dd($post);

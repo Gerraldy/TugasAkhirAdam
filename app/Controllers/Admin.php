@@ -7,6 +7,7 @@ use App\Models\PostModel;
 use App\Models\MemersModel;
 use App\Models\TokoModel;
 use App\Models\TopikModel;
+use App\Models\MemersBanModel;
 
 
 class Admin extends BaseController
@@ -16,6 +17,7 @@ class Admin extends BaseController
   protected $LaporanTokoModel;
   protected $PostModel;
   protected $MemersModel;
+  protected $MemersBanModel;
   protected $TokoModel;
   protected $TopikModel;
 
@@ -26,6 +28,7 @@ class Admin extends BaseController
     $this->LaporanTokoModel = new LaporanTokoModel();
     $this->PostModel = new PostModel();
     $this->MemersModel = new MemersModel();
+    $this->MemersBanModel = new MemersBanModel();
     $this->TokoModel = new TokoModel();
     $this->TopikModel = new TopikModel();
   }
@@ -127,7 +130,7 @@ public function HapusPostingan()
 public function DetailLaporanAkun()
 {
   $idakun = $this->request->getGet("idakun");
-  $detailakun = $this->MemersModel->where("ID_Memers", $idakun)->first();
+  $detailakun = $this->LaporanAkunModel->where("ID_Pelanggar", $idakun)->first();
   //dd($detailakun);
   $data = [
     'title' => 'Detail Akun!',
@@ -140,9 +143,15 @@ public function DetailLaporanAkun()
 public function HapusAkun()
 {
   $idakun = $this->request->getGet("idakun");
-  $this->MemersModel->delete($idakun);
-  $this->LaporanAkunModel->where("ID_Memers", $idakun)->delete();
-  return redirect()->to(base_url('public/Admin/TabelAkun'));
+  $akun = $this->MemersModel->where('ID_Memers', $idakun)->first();
+
+  $akunban['ID_Memers'] = $akun['ID_Memers'];
+  $akunban['Email'] = $akun['Email'];
+
+  $this->MemersBanModel->save($akunban);
+  $this->LaporanAkunModel->where("ID_Pelanggar", $idakun)->delete();
+  //dd($akun['Email']);
+  return redirect()->to(base_url('public/Admin/LaporanBanAkun'));
 }
 
 public function DetailLaporanToko()
@@ -164,6 +173,17 @@ public function HapusToko()
   $this->TokoModel->delete($idtoko);
   $this->LaporanTokoModel->where("ID_Toko", $idtoko)->delete();
   return redirect()->to(base_url('public/Admin/TabelToko'));
+}
+
+public function LaporanBanAkun()
+{
+  $data = [
+    'banakun' => $this->MemersBanModel->findAll(),
+
+  ];
+  //dd($data['mastermemers']);
+  echo view('Pages/Admin/MemersBan', $data);
+
 }
 
 	//--------------------------------------------------------------------

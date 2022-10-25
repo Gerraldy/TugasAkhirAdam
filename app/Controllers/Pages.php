@@ -20,6 +20,10 @@ use App\Models\LaporanPostModel;
 use App\Models\LaporanAkunModel;
 use App\Models\LaporanTokoModel;
 
+
+use App\Models\TMKModel;
+use App\Models\BlockAkunModel;
+
 use App\Models\TopikModel;
 use App\Models\TopikKomentarModel;
 
@@ -45,6 +49,9 @@ class Pages extends BaseController
 	protected $LaporanPostModel;
 	protected $LaporanAkunModel;
 	protected $LaporanTokoModel;
+
+	protected $TMKModel;
+	protected $BlockAkunModel;
 
 	protected $TopikModel;
 	protected $TopiKomentarkModel;
@@ -72,6 +79,9 @@ class Pages extends BaseController
 		$this->LaporanAkunModel = new LaporanAkunModel();
 		$this->LaporanTokoModel = new LaporanTokoModel();
 
+		$this->TMKModel = new TMKModel();
+		$this->BlockAkunModel = new BlockAkunModel();
+
 		$this->TopikModel = new TopikModel();
 		$this->TopikKomentarModel = new TopikKomentarModel();
 
@@ -87,11 +97,11 @@ class Pages extends BaseController
 		$session = session();
 		$user = $session->get("user");
 		$status = $session->get("status");
-
 		//$post = $posting->findAll();
 		$unlike = $this->UnlikeModel->findAll();
 		$like = $this->LikeModel->findAll();
 		$topik = $this->TopikModel->orderBy("ID_Topik", "DESC")->findAll();
+		$tmk = $this->TMKModel->where('ID_Memers', $user)->findAll();
 		$postingan = $this->PostModel->getPostAndDetail();
 		// dd($unlike);
 		for ($i=0; $i < count($postingan); $i++) {
@@ -107,17 +117,18 @@ class Pages extends BaseController
 				}
 			}
 		}
-
 		 //dd($postingan);
 		$data = [
       'title' => 'Home!',
       'postingan' => $postingan,
+			'user' => $user,
 			'status' => $status,
+			'tmk' => $tmk,
 			'topik' => $topik,
 			'toko' => $this->TokoModel->where("ID_Memers", $user)->first(),
 			'kategori' => $this->KategoriModel->namaKategori()
  		 ];
-		   //dd($data['toko']);
+		   // dd($tmk);
 		echo view('Pages/Home', $data);
 	}
 
@@ -146,8 +157,10 @@ class Pages extends BaseController
 	public function getPostKategori($idKategoriPost)
 	{
 		// dd($idKategoriPost);
+		$topik = $this->TopikModel->orderBy("ID_Topik", "DESC")->findAll();
 		$data = [
 			'title' => 'Apa nih?!',
+			'topik' => $topik,
 			'postinganKategori' => $this->PostModel->getPostKategori($idKategoriPost),
 			'nama_kategori' => $this->PostModel->getNamaKategori($idKategoriPost),
 			'kategori' => $this->KategoriModel->namaKategori()
@@ -223,6 +236,20 @@ class Pages extends BaseController
 		return redirect()->to(base_url('public/'));
 	}
 
+	public function TidakMasukAkal()
+	{
+		$iduser = session()->get("user");
+		$slug = $this->request->getGet("slug");
+		$postingan = $this->PostModel->where("slug", $slug)->first();
+
+		$post['ID_Postingan'] = $postingan['ID_Postingan'];
+		$post['ID_Memers'] = $iduser;
+
+		$this->TMKModel->save($post);
+
+		return redirect()->to(base_url('public/'));
+	}
+
 	public function LaporPost()
 	{
 		$slug = $this->request->getGet("slug");
@@ -260,14 +287,7 @@ class Pages extends BaseController
 		// dd($data['kategori']);
 		echo view('Pages/Kategori', $data);
 	}
-	public function Login()
-	{
-    $data = [
-			'title' => "Login!",
-			'kategori' => $this->KategoriModel->namaKategori()
-		];
-    return view('Pages/Login', $data);
-	}
+
   public function Topik()
   {
 		$idtopik = $this->request->getGet("ID_Topik");
@@ -415,6 +435,19 @@ class Pages extends BaseController
 		$laporan['ID_Pelanggar'] = $idakun;
 		$this->LaporanAkunModel->save($laporan);
 		//dd($laporan);
+		return redirect()->to(base_url('public/Pages/Profile?name='.$getuser['Nama']));
+	}
+
+	public function BlockAkun()
+	{
+		$iduser = session()->get("user");
+		$idakun = $this->request->getGet("idakun");
+		$getuser = $this->MemersModel->where("ID_Memers", $idakun)->first();
+
+		$blok['ID_Memers_Block'] = $idakun;
+		$blok['ID_Memers'] = $iduser;
+		//dd($blok);
+		$this->BlockAkunModel->save($blok);
 		return redirect()->to(base_url('public/Pages/Profile?name='.$getuser['Nama']));
 	}
 
